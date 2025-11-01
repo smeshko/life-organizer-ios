@@ -1,0 +1,16 @@
+# Place reusable UI components here
+
+Recommended structure:
+```
+CoreUI/
+├── Components/
+│   ├── Buttons/
+│   ├── Cards/
+│   ├── Forms/
+│   └── Layout/
+├── DesignSystem/
+│   ├── Colors.swift
+│   ├── Typography.swift
+│   └── Spacing.swift
+└── Styles/
+```

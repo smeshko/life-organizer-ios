@@ -1,0 +1,17 @@
+# Place tests here
+
+Test organization:
+```
+Tests/
+├── YourFeatureTests/
+│   ├── Domain/
+│   ├── Infrastructure/
+│   ├── Integration/
+│   └── Presentation/
+└── YourServiceTests/
+    ├── Helpers/
+    ├── {Method}Tests.swift
+    └── ErrorHandlingTests.swift
+```
+
+See docs/development/service-test-creation-template.md for comprehensive testing guidance.

@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xcodebuild test:*)",
+      "Bash(xcodebuild:*)",
+      "Bash([ -f Package.swift ])",
+      "Bash([ -f *.xcodeproj/project.pbxproj ])",
+      "Bash(bash:*)",
+      "Bash(mkdir:*)",
+      "Bash(git add:*)",
+      "Bash(git worktree:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(gh pr list:*)",
+      "Bash(swift build:*)",
+      "Bash(ln:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Read(//Users/*/.claude/**)",
+      "Skill(ios-build)",
+      "Skill(ios-feature-creator)",
+      "Skill(ios-service-creator)",
+      "Skill(ios-service-test-creator)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
