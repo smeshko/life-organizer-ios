@@ -1,6 +1,37 @@
 import Foundation
 @preconcurrency import Speech
 
+/// Authorization status for speech recognition.
+public enum AuthorizationStatus: Sendable, Equatable {
+    /// The user has not yet been asked for permission.
+    case notDetermined
+
+    /// The user has denied permission.
+    case denied
+
+    /// The user has granted permission.
+    case authorized
+
+    /// Speech recognition is restricted (e.g., by parental controls).
+    case restricted
+
+    /// Creates an AuthorizationStatus from SFSpeechRecognizerAuthorizationStatus.
+    init(from status: SFSpeechRecognizerAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            self = .notDetermined
+        case .denied:
+            self = .denied
+        case .authorized:
+            self = .authorized
+        case .restricted:
+            self = .restricted
+        @unknown default:
+            self = .notDetermined
+        }
+    }
+}
+
 /// Protocol defining the speech-to-text conversion interface.
 ///
 /// `SpeechToTextServiceProtocol` provides a clean abstraction over Apple's Speech framework,
@@ -36,7 +67,7 @@ public protocol SpeechToTextServiceProtocol: Sendable {
     /// Returns the current speech recognition authorization status.
     ///
     /// - Returns: The authorization status for speech recognition
-    func authorizationStatus() -> SFSpeechRecognizerAuthorizationStatus
+    func authorizationStatus() -> AuthorizationStatus
 
     /// Requests authorization for speech recognition.
     ///
@@ -45,7 +76,7 @@ public protocol SpeechToTextServiceProtocol: Sendable {
     ///
     /// - Returns: The authorization status after the request completes
     /// - Throws: `AppError` if authorization fails or is denied
-    func requestAuthorization() async throws -> SFSpeechRecognizerAuthorizationStatus
+    func requestAuthorization() async throws -> AuthorizationStatus
 
     /// Recognizes speech from an audio file.
     ///
@@ -71,41 +102,4 @@ public protocol SpeechToTextServiceProtocol: Sendable {
     /// - Returns: An async stream of recognition results
     /// - Throws: `AppError` if recognition fails or authorization is denied
     func recognizeFromMicrophone() -> AsyncThrowingStream<RecognitionResult, Error>
-
-    /// Recognizes speech from an audio buffer request.
-    ///
-    /// Provides real-time recognition from a custom audio buffer source.
-    /// This is useful for advanced use cases where you're managing audio capture
-    /// yourself or need fine-grained control over the audio input.
-    ///
-    /// - Parameter request: The speech recognition request with audio buffer
-    /// - Returns: An async stream of recognition results
-    /// - Throws: `AppError` if recognition fails or authorization is denied
-    func recognize(request: SFSpeechAudioBufferRecognitionRequest) -> AsyncThrowingStream<RecognitionResult, Error>
-}
-
-/// Represents a speech recognition result.
-///
-/// Contains the transcribed text and metadata about whether this is
-/// a final or partial result.
-public struct RecognitionResult: Sendable, Equatable {
-    /// The transcribed text from the speech recognition.
-    public let text: String
-
-    /// Indicates whether this is the final result for the current utterance.
-    ///
-    /// When `true`, the recognition for this utterance is complete and the
-    /// text will not change. When `false`, the text may be updated as more
-    /// audio is processed.
-    public let isFinal: Bool
-
-    /// Creates a new recognition result.
-    ///
-    /// - Parameters:
-    ///   - text: The recognized text
-    ///   - isFinal: Whether this is the final result
-    public init(text: String, isFinal: Bool) {
-        self.text = text
-        self.isFinal = isFinal
-    }
 }

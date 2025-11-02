@@ -1,5 +1,4 @@
 import Foundation
-@preconcurrency import Speech
 import Framework
 
 /// Mock implementation of SpeechToTextServiceProtocol for testing.
@@ -10,7 +9,7 @@ public struct MockSpeechToTextService: SpeechToTextServiceProtocol, Sendable {
     // MARK: - Configuration
 
     /// The authorization status to return
-    public let authorizationStatusToReturn: SFSpeechRecognizerAuthorizationStatus
+    public let authorizationStatusToReturn: AuthorizationStatus
 
     /// The text to return for successful recognition
     public let recognizedText: String
@@ -27,7 +26,7 @@ public struct MockSpeechToTextService: SpeechToTextServiceProtocol, Sendable {
     // MARK: - Initialization
 
     public init(
-        authorizationStatus: SFSpeechRecognizerAuthorizationStatus = .authorized,
+        authorizationStatus: AuthorizationStatus = .authorized,
         recognizedText: String = "Mock recognized text",
         shouldSimulateError: Bool = false,
         errorToThrow: AppError? = nil,
@@ -42,11 +41,11 @@ public struct MockSpeechToTextService: SpeechToTextServiceProtocol, Sendable {
 
     // MARK: - SpeechToTextServiceProtocol
 
-    public func authorizationStatus() -> SFSpeechRecognizerAuthorizationStatus {
+    public func authorizationStatus() -> AuthorizationStatus {
         return authorizationStatusToReturn
     }
 
-    public func requestAuthorization() async throws -> SFSpeechRecognizerAuthorizationStatus {
+    public func requestAuthorization() async throws -> AuthorizationStatus {
         // Simulate async delay
         try await Task.sleep(nanoseconds: simulatedDelay)
 
@@ -74,42 +73,6 @@ public struct MockSpeechToTextService: SpeechToTextServiceProtocol, Sendable {
     }
 
     public func recognizeFromMicrophone() -> AsyncThrowingStream<RecognitionResult, Error> {
-        return AsyncThrowingStream { continuation in
-            Task {
-                // Simulate initial delay
-                try await Task.sleep(nanoseconds: simulatedDelay)
-
-                // Check authorization
-                guard authorizationStatusToReturn == .authorized else {
-                    continuation.finish(throwing: AppError.speechRecognition(.notAuthorized))
-                    return
-                }
-
-                if shouldSimulateError, let error = errorToThrow {
-                    continuation.finish(throwing: error)
-                    return
-                }
-
-                // Simulate partial results
-                let words = recognizedText.split(separator: " ")
-                for (index, word) in words.enumerated() {
-                    let partialText = words[0...index].joined(separator: " ")
-                    let isFinal = index == words.count - 1
-
-                    continuation.yield(RecognitionResult(text: partialText, isFinal: isFinal))
-
-                    // Small delay between partial results
-                    if !isFinal {
-                        try await Task.sleep(nanoseconds: 50_000_000)
-                    }
-                }
-
-                continuation.finish()
-            }
-        }
-    }
-
-    public func recognize(request: SFSpeechAudioBufferRecognitionRequest) -> AsyncThrowingStream<RecognitionResult, Error> {
         return AsyncThrowingStream { continuation in
             Task {
                 // Simulate initial delay
