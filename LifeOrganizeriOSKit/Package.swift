@@ -136,6 +136,7 @@ let package = Package(
 
         // Services
         .library(name: "NetworkService", targets: ["NetworkService"]),
+        .library(name: "SpeechToTextService", targets: ["SpeechToTextService"]),
 
         // Add your features and services here as you create them
         // Example:
@@ -174,7 +175,7 @@ let package = Package(
         // MARK: - Features
         .target(
             name: "AppFeature",
-            dependencies: ["Framework", Dependencies.tca, "CoreUI"],
+            dependencies: ["Framework", Dependencies.tca, "CoreUI", "SpeechToTextService"],
             path: "Sources/AppFeature",
             swiftSettings: BuildSettings.standard
         ),
@@ -184,6 +185,12 @@ let package = Package(
             name: "NetworkService",
             dependencies: ["Framework", Dependencies.dependencies],
             path: "Sources/Services/NetworkService",
+            swiftSettings: BuildSettings.standard
+        ),
+        .target(
+            name: "SpeechToTextService",
+            dependencies: ["Framework", Dependencies.dependencies],
+            path: "Sources/Services/SpeechToTextService",
             swiftSettings: BuildSettings.standard
         ),
 
@@ -199,6 +206,12 @@ let package = Package(
         .testTarget(
             name: "FrameworkTests",
             dependencies: ["Framework"],
+            swiftSettings: BuildSettings.testing
+        ),
+        .testTarget(
+            name: "SpeechToTextServiceTests",
+            dependencies: ["SpeechToTextService", "Framework"],
+            path: "Tests/SpeechToTextServiceTests",
             swiftSettings: BuildSettings.testing
         ),
     ]
