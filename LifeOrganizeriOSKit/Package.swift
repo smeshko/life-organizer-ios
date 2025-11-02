@@ -175,7 +175,7 @@ let package = Package(
         // MARK: - Features
         .target(
             name: "AppFeature",
-            dependencies: ["Framework", Dependencies.tca, "CoreUI"],
+            dependencies: ["Framework", Dependencies.tca, "CoreUI", "SpeechToTextService"],
             path: "Sources/AppFeature",
             swiftSettings: BuildSettings.standard
         ),
