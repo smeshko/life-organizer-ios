@@ -4,6 +4,12 @@ import Foundation
 import Framework
 
 public struct SpeechToTextService: SpeechToTextServiceProtocol, Sendable {
+    /// The speech recognizer instance used for all recognition tasks.
+    ///
+    /// Marked as `nonisolated(unsafe)` because:
+    /// - `SFSpeechRecognizer` is immutable after initialization
+    /// - All operations are thread-safe as per Apple's documentation
+    /// - The recognizer is created once during init and never modified
     private nonisolated(unsafe) let recognizer: SFSpeechRecognizer?
 
     public init(locale: Locale = .current) {
@@ -66,15 +72,17 @@ public struct SpeechToTextService: SpeechToTextServiceProtocol, Sendable {
                     return
                 }
 
-                // Request microphone permission
+                // Configure audio session (iOS only)
+                #if !os(macOS)
                 let audioSession = AVAudioSession.sharedInstance()
                 do {
                     try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
                     try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
                 } catch {
-                    continuation.finish(throwing: AppError.speechRecognition(.audioEngineUnavailable))
+                    continuation.finish(throwing: AppError.speechRecognition(.audioSessionFailed(error.localizedDescription)))
                     return
                 }
+                #endif
 
                 let audioEngine = AVAudioEngine()
                 let request = SFSpeechAudioBufferRecognitionRequest()
@@ -101,6 +109,9 @@ public struct SpeechToTextService: SpeechToTextServiceProtocol, Sendable {
                         audioEngine.stop()
                         inputNode.removeTap(onBus: 0)
                         request.endAudio()
+                        #if !os(macOS)
+                        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+                        #endif
                         continuation.finish(throwing: AppError.speechRecognition(.recognitionFailed(error.localizedDescription)))
                         return
                     }
@@ -116,6 +127,9 @@ public struct SpeechToTextService: SpeechToTextServiceProtocol, Sendable {
                             audioEngine.stop()
                             inputNode.removeTap(onBus: 0)
                             request.endAudio()
+                            #if !os(macOS)
+                            try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+                            #endif
                             continuation.finish()
                         }
                     }
@@ -126,6 +140,9 @@ public struct SpeechToTextService: SpeechToTextServiceProtocol, Sendable {
                     audioEngine.stop()
                     inputNode.removeTap(onBus: 0)
                     request.endAudio()
+                    #if !os(macOS)
+                    try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+                    #endif
                 }
             }
         }

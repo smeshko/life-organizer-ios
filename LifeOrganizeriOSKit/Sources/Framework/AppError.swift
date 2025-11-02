@@ -79,6 +79,7 @@ public enum SpeechRecognitionError: Error, Equatable {
     case authorizationRestricted
     case recognizerUnavailable
     case audioEngineUnavailable
+    case audioSessionFailed(String)
     case recognitionFailed(String)
     case invalidAudioFile
     case microphoneAccessDenied
@@ -97,6 +98,8 @@ extension SpeechRecognitionError: LocalizedError {
             return "Speech recognizer unavailable"
         case .audioEngineUnavailable:
             return "Audio engine unavailable"
+        case .audioSessionFailed(let message):
+            return "Audio session configuration failed: \(message)"
         case .recognitionFailed(let message):
             return "Speech recognition failed: \(message)"
         case .invalidAudioFile:
