@@ -84,3 +84,4 @@ docs/planning/work/
 .vscode/
 .specify/
 .worktrees/
+.claude/
