@@ -4,6 +4,7 @@ import Foundation
 public enum AppError: Error, Equatable {
     case network(NetworkError)
     case persistence(PersistenceError)
+    case speechRecognition(SpeechRecognitionError)
     // Add your custom service errors here
     // case yourService(YourServiceError)
 
@@ -71,6 +72,41 @@ extension PersistenceError: LocalizedError {
     }
 }
 
+// MARK: - Speech Recognition Errors
+public enum SpeechRecognitionError: Error, Equatable {
+    case notAuthorized
+    case authorizationDenied
+    case authorizationRestricted
+    case recognizerUnavailable
+    case audioEngineUnavailable
+    case recognitionFailed(String)
+    case invalidAudioFile
+    case microphoneAccessDenied
+}
+
+extension SpeechRecognitionError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .notAuthorized:
+            return "Speech recognition not authorized"
+        case .authorizationDenied:
+            return "Speech recognition authorization denied by user"
+        case .authorizationRestricted:
+            return "Speech recognition restricted on this device"
+        case .recognizerUnavailable:
+            return "Speech recognizer unavailable"
+        case .audioEngineUnavailable:
+            return "Audio engine unavailable"
+        case .recognitionFailed(let message):
+            return "Speech recognition failed: \(message)"
+        case .invalidAudioFile:
+            return "Invalid audio file"
+        case .microphoneAccessDenied:
+            return "Microphone access denied"
+        }
+    }
+}
+
 // MARK: - LocalizedError Conformance
 extension AppError: LocalizedError {
     public var errorDescription: String? {
@@ -78,6 +114,8 @@ extension AppError: LocalizedError {
         case .network(let error):
             return error.errorDescription
         case .persistence(let error):
+            return error.errorDescription
+        case .speechRecognition(let error):
             return error.errorDescription
         case .unknown(let message):
             return "Unknown error: \(message)"
