@@ -169,6 +169,9 @@ let package = Package(
             name: "CoreUI",
             dependencies: ["Framework"],
             path: "Sources/CoreUI",
+            resources: [
+                .process("Resources")
+            ],
             swiftSettings: BuildSettings.standard
         ),
 
@@ -212,6 +215,12 @@ let package = Package(
             name: "SpeechToTextServiceTests",
             dependencies: ["SpeechToTextService", "Framework"],
             path: "Tests/SpeechToTextServiceTests",
+            swiftSettings: BuildSettings.testing
+        ),
+        .testTarget(
+            name: "CoreUITests",
+            dependencies: ["CoreUI"],
+            path: "Tests/CoreUITests",
             swiftSettings: BuildSettings.testing
         ),
     ]
