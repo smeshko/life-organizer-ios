@@ -9,6 +9,7 @@ enum PackageVersion {
     static let dependencies = Version("1.9.0")
     static let grdb = Version("6.0.0")
     static let sharing = Version("1.0.5")
+    static let zipFoundation = Version("0.9.20")
 }
 
 // MARK: - Package URLs
@@ -17,6 +18,7 @@ enum PackageURL {
     static let dependencies = "https://github.com/pointfreeco/swift-dependencies"
     static let grdb = "https://github.com/groue/GRDB.swift"
     static let sharing = "https://github.com/pointfreeco/swift-sharing"
+    static let zipFoundation = "https://github.com/weichsel/ZIPFoundation"
 }
 
 // MARK: - Dependency References
@@ -36,6 +38,10 @@ enum Dependencies {
     static let sharing = Target.Dependency.product(
         name: "Sharing",
         package: "swift-sharing"
+    )
+    static let zipFoundation = Target.Dependency.product(
+        name: "ZIPFoundation",
+        package: "zipfoundation"
     )
 }
 
@@ -137,6 +143,7 @@ let package = Package(
         // Services
         .library(name: "NetworkService", targets: ["NetworkService"]),
         .library(name: "SpeechToTextService", targets: ["SpeechToTextService"]),
+        .library(name: "XLSXAppendService", targets: ["XLSXAppendService"]),
 
         // Add your features and services here as you create them
         // Example:
@@ -145,7 +152,8 @@ let package = Package(
     dependencies: [
         .package(url: PackageURL.tca, from: PackageVersion.tca),
         .package(url: PackageURL.dependencies, from: PackageVersion.dependencies),
-        .package(url: PackageURL.sharing, from: PackageVersion.sharing)
+        .package(url: PackageURL.sharing, from: PackageVersion.sharing),
+        .package(url: PackageURL.zipFoundation, from: PackageVersion.zipFoundation)
         // Add GRDB when you need local persistence:
         // .package(url: PackageURL.grdb, from: PackageVersion.grdb),
     ],
@@ -196,6 +204,10 @@ let package = Package(
             path: "Sources/Services/SpeechToTextService",
             swiftSettings: BuildSettings.standard
         ),
+        .service(
+            "XLSXAppendService",
+            dependencies: [Dependencies.zipFoundation]
+        ),
 
         // MARK: - Add Your Services Here
         // Example:
@@ -221,6 +233,15 @@ let package = Package(
             name: "CoreUITests",
             dependencies: ["CoreUI"],
             path: "Tests/CoreUITests",
+            swiftSettings: BuildSettings.testing
+        ),
+        .testTarget(
+            name: "XLSXAppendServiceTests",
+            dependencies: ["XLSXAppendService", "Framework"],
+            path: "Tests/XLSXAppendServiceTests",
+            resources: [
+                .copy("Resources/TestWorkbook.xlsx")
+            ],
             swiftSettings: BuildSettings.testing
         ),
     ]
