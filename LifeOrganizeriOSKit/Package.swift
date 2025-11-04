@@ -240,7 +240,8 @@ let package = Package(
             dependencies: ["XLSXAppendService", "Framework"],
             path: "Tests/XLSXAppendServiceTests",
             resources: [
-                .copy("Resources/TestWorkbook.xlsx")
+                .copy("Resources/TestWorkbook.xlsx"),
+                .copy("Resources/BudgetTemplate.xlsx")
             ],
             swiftSettings: BuildSettings.testing
         ),

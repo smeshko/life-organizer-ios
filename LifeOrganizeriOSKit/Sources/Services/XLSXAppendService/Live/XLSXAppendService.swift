@@ -148,8 +148,24 @@ public struct XLSXAppendService: XLSXAppendServiceProtocol, Sendable {
         let lastRowIndex = try findLastRowIndex(in: worksheetXML)
         let newRowIndex = lastRowIndex + 1
 
-        // Generate new row XML
-        let rowXML = generateRowXML(rowIndex: newRowIndex, values: values)
+        // Check if worksheet has tables and get table info
+        let tableInfo = try findTableReferences(
+            worksheetURL: worksheetURL,
+            worksheetXML: worksheetXML
+        )
+
+        // Generate new row XML (table-aware if needed)
+        let rowXML: String
+        if let table = tableInfo {
+            // Generate row with proper column count and calculated columns
+            rowXML = try generateTableRowXML(
+                rowIndex: newRowIndex,
+                values: values,
+                tableInfo: table
+            )
+        } else {
+            rowXML = generateRowXML(rowIndex: newRowIndex, values: values)
+        }
 
         // Insert row into worksheet
         let modifiedXML = try appendRowToWorksheet(
@@ -159,6 +175,270 @@ public struct XLSXAppendService: XLSXAppendServiceProtocol, Sendable {
 
         // Write back to file
         try modifiedXML.write(to: worksheetURL, atomically: true, encoding: .utf8)
+
+        // Update table definition if this worksheet has tables
+        if let table = tableInfo {
+            try updateTableDefinition(
+                tableURL: table.tableURL,
+                newLastRow: newRowIndex,
+                currentRef: table.ref
+            )
+        }
+    }
+
+    // MARK: - Table Handling
+
+    /// Information about an Excel Table
+    private struct TableInfo {
+        let tableURL: URL
+        let ref: String // e.g., "C11:I1334"
+        let columns: [TableColumn]
+        let startColumn: String // e.g., "C"
+        let startRow: Int // e.g., 11 (header row)
+    }
+
+    /// Information about a table column
+    private struct TableColumn {
+        let name: String
+        let isCalculated: Bool
+        let formula: String? // The calculated formula if isCalculated is true
+    }
+
+    /// Finds table references for the given worksheet
+    /// - Parameters:
+    ///   - worksheetURL: URL to the worksheet file
+    ///   - worksheetXML: The worksheet XML content
+    /// - Returns: TableInfo if worksheet contains a table, nil otherwise
+    private func findTableReferences(
+        worksheetURL: URL,
+        worksheetXML: String
+    ) throws -> TableInfo? {
+        // Check for tableParts in worksheet XML
+        guard worksheetXML.contains("<tableParts") || worksheetXML.contains("<tablePart") else {
+            return nil // No tables in this worksheet
+        }
+
+        // Find worksheet relationships file
+        let worksheetDir = worksheetURL.deletingLastPathComponent()
+        let worksheetName = worksheetURL.deletingPathExtension().lastPathComponent
+        let relsURL = worksheetDir
+            .appendingPathComponent("_rels")
+            .appendingPathComponent("\(worksheetName).xml.rels")
+
+        // Check if rels file exists
+        guard FileManager.default.fileExists(atPath: relsURL.path) else {
+            return nil
+        }
+
+        let relsXML = try String(contentsOf: relsURL, encoding: .utf8)
+
+        // Find table relationship
+        let tablePattern = #"<Relationship[^>]*Type="[^"]*table"[^>]*Target="([^"]+)""#
+        let tableRegex = try NSRegularExpression(pattern: tablePattern)
+        let tableMatches = tableRegex.matches(
+            in: relsXML,
+            range: NSRange(relsXML.startIndex..., in: relsXML)
+        )
+
+        guard let firstMatch = tableMatches.first,
+              let range = Range(firstMatch.range(at: 1), in: relsXML) else {
+            return nil
+        }
+
+        let tablePath = String(relsXML[range])
+        let tableURL = worksheetDir.appendingPathComponent(tablePath)
+
+        // Read table definition
+        let tableXML = try String(contentsOf: tableURL, encoding: .utf8)
+
+        // Extract table ref (e.g., ref="C11:I1334")
+        guard let refMatch = try NSRegularExpression(pattern: #"<table[^>]*ref="([^"]+)""#)
+            .firstMatch(in: tableXML, range: NSRange(tableXML.startIndex..., in: tableXML)),
+              let refRange = Range(refMatch.range(at: 1), in: tableXML) else {
+            throw AppError.xlsx(.xmlParsingFailed("Could not find table ref"))
+        }
+
+        let ref = String(tableXML[refRange])
+
+        // Parse ref to get start column and row (e.g., "C11:I1334" -> startColumn="C", startRow=11)
+        let refComponents = ref.split(separator: ":")
+        guard refComponents.count == 2 else {
+            throw AppError.xlsx(.xmlParsingFailed("Invalid table ref format"))
+        }
+
+        let startCell = String(refComponents[0])
+        let startColumn = String(startCell.prefix(while: { $0.isLetter }))
+        let startRow = Int(startCell.dropFirst(startColumn.count)) ?? 0
+
+        // Extract columns info
+        let columns = try parseTableColumns(from: tableXML)
+
+        return TableInfo(
+            tableURL: tableURL,
+            ref: ref,
+            columns: columns,
+            startColumn: startColumn,
+            startRow: startRow
+        )
+    }
+
+    /// Parses table column definitions from table XML
+    private func parseTableColumns(from tableXML: String) throws -> [TableColumn] {
+        var columns: [TableColumn] = []
+
+        // Split approach: find each <tableColumn...> or <tableColumn.../> tag
+        // Match the full tag including the closing
+        // Important: Use \s to ensure we don't match <tableColumns> (with 's')
+        let pattern = #"<tableColumn\s[^/>]+(/>|>)"#
+        let regex = try NSRegularExpression(pattern: pattern)
+        let matches = regex.matches(
+            in: tableXML,
+            range: NSRange(tableXML.startIndex..., in: tableXML)
+        )
+
+        for match in matches {
+            guard let tagRange = Range(match.range, in: tableXML),
+                  let closingRange = Range(match.range(at: 1), in: tableXML) else {
+                continue
+            }
+
+            let tag = String(tableXML[tagRange])
+            let closing = String(tableXML[closingRange])
+
+            // Extract name attribute from the tag
+            guard let nameMatch = try NSRegularExpression(pattern: #"name="([^"]+)""#)
+                .firstMatch(in: tag, range: NSRange(tag.startIndex..., in: tag)),
+                  let nameRange = Range(nameMatch.range(at: 1), in: tag) else {
+                continue
+            }
+
+            let name = String(tag[nameRange])
+
+            // Check if this column has calculated formula
+            let isCalculated: Bool
+            if closing == "/>" {
+                // Self-closing tag - not calculated
+                isCalculated = false
+            } else {
+                // Has content - search for calculatedColumnFormula after this tag
+                let searchStart = match.range.upperBound
+                let remainingXML = String(tableXML[tableXML.index(tableXML.startIndex, offsetBy: searchStart)...])
+
+                if let endTag = remainingXML.range(of: "</tableColumn>") {
+                    let columnContent = String(remainingXML[..<endTag.lowerBound])
+                    // Search for calculatedColumnFormula (without <, since we're already past the opening tag)
+                    isCalculated = columnContent.contains("calculatedColumnFormula")
+                } else {
+                    isCalculated = false
+                }
+            }
+
+            // Extract formula if needed (for now we'll just mark it as calculated)
+            // Excel will recalculate these automatically
+            let formula: String? = nil
+
+            columns.append(TableColumn(name: name, isCalculated: isCalculated, formula: formula))
+        }
+
+        return columns
+    }
+
+    /// Generates XML for a table row with proper handling of calculated columns
+    private func generateTableRowXML(
+        rowIndex: Int,
+        values: [String],
+        tableInfo: TableInfo
+    ) throws -> String {
+        var rowXML = #"    <row r="\#(rowIndex)">"# + "\n"
+
+        // Get starting column index
+        let startColIndex = columnIndex(from: tableInfo.startColumn)
+
+        // Add cells for each table column
+        for (index, column) in tableInfo.columns.enumerated() {
+            let columnLetter = columnLetter(for: startColIndex + index)
+
+            if column.isCalculated {
+                // For calculated columns, create empty cell (Excel will calculate)
+                rowXML += #"      <c r="\#(columnLetter)\#(rowIndex)"/>"# + "\n"
+            } else {
+                // For regular columns, use provided value or empty
+                let value = index < values.count ? values[index] : ""
+                if !value.isEmpty {
+                    rowXML += "      " + generateCellXML(column: columnLetter, row: rowIndex, value: value) + "\n"
+                } else {
+                    rowXML += #"      <c r="\#(columnLetter)\#(rowIndex)"/>"# + "\n"
+                }
+            }
+        }
+
+        rowXML += "    </row>"
+        return rowXML
+    }
+
+    /// Converts column letter to zero-based index (inverse of columnLetter)
+    private func columnIndex(from letter: String) -> Int {
+        var index = 0
+        for char in letter.uppercased() {
+            guard let ascii = char.asciiValue, ascii >= 65, ascii <= 90 else {
+                continue
+            }
+            index = index * 26 + Int(ascii - 64)
+        }
+        return index - 1
+    }
+
+    /// Updates the table definition to extend the range
+    private func updateTableDefinition(
+        tableURL: URL,
+        newLastRow: Int,
+        currentRef: String
+    ) throws {
+        // Read table XML
+        var tableXML = try String(contentsOf: tableURL, encoding: .utf8)
+
+        // Parse current ref to get start and end
+        let refComponents = currentRef.split(separator: ":")
+        guard refComponents.count == 2 else {
+            throw AppError.xlsx(.xmlParsingFailed("Invalid table ref format"))
+        }
+
+        let startCell = String(refComponents[0])
+        let endCell = String(refComponents[1])
+
+        // Extract end column from end cell (e.g., "I1334" -> "I")
+        let endColumn = String(endCell.prefix(while: { $0.isLetter }))
+
+        // Create new ref with updated last row
+        let newRef = "\(startCell):\(endColumn)\(newLastRow)"
+
+        // Update all occurrences of the ref in table XML
+        // Update main table ref attribute
+        tableXML = tableXML.replacingOccurrences(
+            of: #"ref="\#(currentRef)""#,
+            with: #"ref="\#(newRef)""#
+        )
+
+        // Update autoFilter ref if present
+        tableXML = tableXML.replacingOccurrences(
+            of: #"<autoFilter ref="\#(currentRef)""#,
+            with: #"<autoFilter ref="\#(newRef)""#
+        )
+
+        // Update sortState ref if present (needs to adjust data range, excluding header)
+        let startRow = Int(startCell.dropFirst(startCell.prefix(while: { $0.isLetter }).count)) ?? 0
+        let dataStartRow = startRow + 1 // First row after header
+        let dataSortRef = "\(startCell.prefix(while: { $0.isLetter }))\(dataStartRow):\(endColumn)\(newLastRow)"
+
+        // Match sortState with the old ref pattern
+        let oldDataRef = "\(startCell.prefix(while: { $0.isLetter }))\(dataStartRow):\(endCell)"
+        tableXML = tableXML.replacingOccurrences(
+            of: #"<sortState ref="\#(oldDataRef)""#,
+            with: #"<sortState ref="\#(dataSortRef)""#
+        )
+
+        // Write back to file
+        try tableXML.write(to: tableURL, atomically: true, encoding: .utf8)
     }
 }
 
