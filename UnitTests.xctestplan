@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "F8499F02-127A-4308-AD98-987B3A5D32D5",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:LifeOrganizeriOSKit",
+        "identifier" : "XLSXAppendServiceTests",
+        "name" : "XLSXAppendServiceTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LifeOrganizeriOSKit",
+        "identifier" : "SpeechToTextServiceTests",
+        "name" : "SpeechToTextServiceTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LifeOrganizeriOSKit",
+        "identifier" : "FrameworkTests",
+        "name" : "FrameworkTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LifeOrganizeriOSKit",
+        "identifier" : "CoreUITests",
+        "name" : "CoreUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
