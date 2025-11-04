@@ -43,6 +43,150 @@ struct XLSXAppendServiceTests {
 
     // MARK: - Integration Tests
 
+    /// Returns the highest row index that contains user-provided data in the Tracking table columns.
+    func lastFilledTrackingRow(in worksheetXML: String) -> Int {
+        let rowPattern = #"<row[^>]*r="(\d+)"[^>]*>.*?</row>"#
+        guard let regex = try? NSRegularExpression(
+            pattern: rowPattern,
+            options: [.dotMatchesLineSeparators]
+        ) else {
+            return 0
+        }
+
+        let nsRange = NSRange(worksheetXML.startIndex..., in: worksheetXML)
+        var lastRow = 0
+        regex.enumerateMatches(in: worksheetXML, range: nsRange) { match, _, _ in
+            guard
+                let match = match,
+                let rowRange = Range(match.range, in: worksheetXML),
+                let indexRange = Range(match.range(at: 1), in: worksheetXML),
+                let rowIndex = Int(worksheetXML[indexRange])
+            else { return }
+
+            let rowXML = String(worksheetXML[rowRange])
+            if rowHasTrackingData(rowXML, rowIndex: rowIndex) {
+                lastRow = rowIndex
+            }
+        }
+        return lastRow
+    }
+
+    /// Determines whether a row contains data for any Tracking table entry columns (C through G).
+    func rowHasTrackingData(_ rowXML: String, rowIndex: Int) -> Bool {
+        let dataColumns = ["C", "D", "E", "F", "G"]
+        for column in dataColumns {
+            if cellHasValue(in: rowXML, column: column, rowIndex: rowIndex) {
+                return true
+            }
+        }
+        return false
+    }
+
+    /// Checks whether a specific cell has a value.
+    func cellHasValue(in rowXML: String, column: String, rowIndex: Int) -> Bool {
+        guard let cellXML = extractCellXML(from: rowXML, column: column, rowIndex: rowIndex) else {
+            return false
+        }
+
+        if cellXML.contains("<v>") {
+            return true
+        }
+
+        guard
+            let textStart = cellXML.range(of: "<t>"),
+            let textEnd = cellXML.range(of: "</t>", range: textStart.upperBound..<cellXML.endIndex)
+        else {
+            return false
+        }
+
+        let value = cellXML[textStart.upperBound..<textEnd.lowerBound]
+        return !value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    /// Extracts the XML for a specific cell inside a row.
+    func extractCellXML(from rowXML: String, column: String, rowIndex: Int) -> String? {
+        let pattern = #"<c[^>]*r="\#(column)\#(rowIndex)"[^>]*/>|<c[^>]*r="\#(column)\#(rowIndex)"[^>]*>.*?</c>"#
+        guard
+            let regex = try? NSRegularExpression(
+                pattern: pattern,
+                options: [.dotMatchesLineSeparators]
+            ),
+            let match = regex.firstMatch(
+                in: rowXML,
+                range: NSRange(rowXML.startIndex..., in: rowXML)
+            ),
+            let range = Range(match.range, in: rowXML)
+        else {
+            return nil
+        }
+
+        return String(rowXML[range])
+    }
+
+    /// Finds the worksheet row index that contains a specific inline string.
+    func findRowIndex(in worksheetXML: String, containing text: String) -> Int? {
+        let rowPattern = #"<row[^>]*r="(\d+)"[^>]*>.*?</row>"#
+        guard let regex = try? NSRegularExpression(
+            pattern: rowPattern,
+            options: [.dotMatchesLineSeparators]
+        ) else {
+            return nil
+        }
+
+        let nsRange = NSRange(worksheetXML.startIndex..., in: worksheetXML)
+        var foundRow: Int?
+        regex.enumerateMatches(in: worksheetXML, range: nsRange) { match, _, stop in
+            guard
+                let match = match,
+                let rowRange = Range(match.range, in: worksheetXML),
+                let indexRange = Range(match.range(at: 1), in: worksheetXML),
+                let rowIndex = Int(worksheetXML[indexRange])
+            else { return }
+
+            let rowXML = String(worksheetXML[rowRange])
+            if rowXML.contains(text) {
+                foundRow = rowIndex
+                stop.pointee = true
+            }
+        }
+        return foundRow
+    }
+
+    /// Extracts the XML for a specific row.
+    func rowXML(in worksheetXML: String, rowIndex: Int) -> String? {
+        let rowPattern = #"<row[^>]*r="\#(rowIndex)"[^>]*>.*?</row>"#
+        guard
+            let regex = try? NSRegularExpression(
+                pattern: rowPattern,
+                options: [.dotMatchesLineSeparators]
+            ),
+            let match = regex.firstMatch(
+                in: worksheetXML,
+                range: NSRange(worksheetXML.startIndex..., in: worksheetXML)
+            ),
+            let range = Range(match.range, in: worksheetXML)
+        else {
+            return nil
+        }
+        return String(worksheetXML[range])
+    }
+
+    /// Reads the end row index from the table definition.
+    func tableEndRow(from tableXML: String) -> Int? {
+        let pattern = #"ref="[^:]+:[A-Z]+(\d+)""#
+        guard
+            let regex = try? NSRegularExpression(pattern: pattern),
+            let match = regex.firstMatch(
+                in: tableXML,
+                range: NSRange(tableXML.startIndex..., in: tableXML)
+            ),
+            let range = Range(match.range(at: 1), in: tableXML)
+        else {
+            return nil
+        }
+        return Int(tableXML[range])
+    }
+
     @Test("Basic row append succeeds")
     func basicRowAppend() async throws {
         let service = XLSXAppendService()
@@ -279,9 +423,7 @@ struct XLSXAppendServiceTests {
             return resultURLs
         }
 
-        defer {
-            results.forEach { try? FileManager.default.removeItem(at: $0) }
-        }
+        results.forEach { try? FileManager.default.removeItem(at: $0) }
     }
 
     @Test("Special characters are properly escaped")
@@ -352,6 +494,19 @@ struct XLSXAppendServiceTests {
         let testFileURL = try createBudgetTemplateFile()
         defer { try? FileManager.default.removeItem(at: testFileURL) }
 
+        // Capture the last filled row before appending
+        let baselineDir = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: baselineDir) }
+        try FileManager.default.unzipItem(at: testFileURL, to: baselineDir)
+
+        let baselineWorksheetURL = baselineDir
+            .appendingPathComponent("xl")
+            .appendingPathComponent("worksheets")
+            .appendingPathComponent("sheet4.xml")
+        let baselineWorksheetXML = try String(contentsOf: baselineWorksheetURL, encoding: .utf8)
+        let baselineLastRow = lastFilledTrackingRow(in: baselineWorksheetXML)
+
         // Append a new expense row to the Budget Tracking sheet
         // The Tracking table has 7 columns: Date, Type, Category, Amount, Details, Balance (calc), Effective Date (calc)
         let result = try await service.appendRow(
@@ -363,7 +518,7 @@ struct XLSXAppendServiceTests {
                 "Groceries",       // Category
                 "125.50",          // Amount
                 "Weekly shopping"  // Details
-                // Balance and Effective Date are calculated columns - will be left empty
+                // Balance and Effective Date are calculated columns populated via formulas
             ]
         )
         defer { try? FileManager.default.removeItem(at: result) }
@@ -382,14 +537,39 @@ struct XLSXAppendServiceTests {
 
         try FileManager.default.unzipItem(at: result, to: tempDir)
 
+        let worksheetURL = tempDir
+            .appendingPathComponent("xl")
+            .appendingPathComponent("worksheets")
+            .appendingPathComponent("sheet4.xml")
+        let worksheetXML = try String(contentsOf: worksheetURL, encoding: .utf8)
+
+        guard let insertedRow = findRowIndex(in: worksheetXML, containing: "Weekly shopping") else {
+            Issue.record("Expected to find inserted row containing Weekly shopping")
+            return
+        }
+
+        #expect(insertedRow == baselineLastRow + 1)
+
+        if let insertedRowXML = rowXML(in: worksheetXML, rowIndex: insertedRow) {
+            let balanceCell = extractCellXML(from: insertedRowXML, column: "H", rowIndex: insertedRow)
+            let effectiveCell = extractCellXML(from: insertedRowXML, column: "I", rowIndex: insertedRow)
+            #expect(balanceCell?.contains("<f") == true)
+            #expect(effectiveCell?.contains("<f") == true)
+        } else {
+            Issue.record("Unable to load XML for inserted row \(insertedRow)")
+        }
+
         let tableURL = tempDir
             .appendingPathComponent("xl")
             .appendingPathComponent("tables")
             .appendingPathComponent("table4.xml")
 
         let tableXML = try String(contentsOf: tableURL, encoding: .utf8)
-        // Table should now end at row 1335 (was 1334)
-        #expect(tableXML.contains("1335"))
+        if let endRow = tableEndRow(from: tableXML) {
+            #expect(endRow >= insertedRow)
+        } else {
+            Issue.record("Unable to determine table end row")
+        }
     }
 
     @Test("Budget Template - Table definition is updated")
@@ -397,6 +577,25 @@ struct XLSXAppendServiceTests {
         let service = XLSXAppendService()
         let testFileURL = try createBudgetTemplateFile()
         defer { try? FileManager.default.removeItem(at: testFileURL) }
+
+        let baselineDir = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: baselineDir) }
+        try FileManager.default.unzipItem(at: testFileURL, to: baselineDir)
+
+        let baselineTableURL = baselineDir
+            .appendingPathComponent("xl")
+            .appendingPathComponent("tables")
+            .appendingPathComponent("table4.xml")
+        let baselineTableXML = try String(contentsOf: baselineTableURL, encoding: .utf8)
+        let baselineEndRow = tableEndRow(from: baselineTableXML) ?? 0
+
+        let baselineWorksheetURL = baselineDir
+            .appendingPathComponent("xl")
+            .appendingPathComponent("worksheets")
+            .appendingPathComponent("sheet4.xml")
+        let baselineWorksheetXML = try String(contentsOf: baselineWorksheetURL, encoding: .utf8)
+        let baselineLastDataRow = lastFilledTrackingRow(in: baselineWorksheetXML)
 
         let result = try await service.appendRow(
             to: testFileURL,
@@ -419,10 +618,20 @@ struct XLSXAppendServiceTests {
             .appendingPathComponent("table4.xml")
 
         let tableXML = try String(contentsOf: tableURL, encoding: .utf8)
+        let updatedEndRow = tableEndRow(from: tableXML) ?? baselineEndRow
 
-        // The table ref should have been updated to include the new row
-        // Original ref was "C11:I1334", new should be "C11:I1335"
-        #expect(tableXML.contains("C11:I1335") || tableXML.contains("ref=\"C11:I"))
+        let worksheetURL = tempDir
+            .appendingPathComponent("xl")
+            .appendingPathComponent("worksheets")
+            .appendingPathComponent("sheet4.xml")
+        let worksheetXML = try String(contentsOf: worksheetURL, encoding: .utf8)
+
+        if let insertedRow = findRowIndex(in: worksheetXML, containing: "Monthly salary") {
+            #expect(insertedRow == baselineLastDataRow + 1)
+            #expect(updatedEndRow >= max(baselineEndRow, insertedRow))
+        } else {
+            Issue.record("Expected to find inserted Monthly salary row")
+        }
     }
 
     @Test("Budget Template - Multiple sequential appends")
@@ -430,6 +639,25 @@ struct XLSXAppendServiceTests {
         let service = XLSXAppendService()
         let testFileURL = try createBudgetTemplateFile()
         defer { try? FileManager.default.removeItem(at: testFileURL) }
+
+        let baselineDir = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: baselineDir) }
+        try FileManager.default.unzipItem(at: testFileURL, to: baselineDir)
+
+        let baselineWorksheetURL = baselineDir
+            .appendingPathComponent("xl")
+            .appendingPathComponent("worksheets")
+            .appendingPathComponent("sheet4.xml")
+        let baselineWorksheetXML = try String(contentsOf: baselineWorksheetURL, encoding: .utf8)
+        let baselineLastDataRow = lastFilledTrackingRow(in: baselineWorksheetXML)
+
+        let baselineTableURL = baselineDir
+            .appendingPathComponent("xl")
+            .appendingPathComponent("tables")
+            .appendingPathComponent("table4.xml")
+        let baselineTableXML = try String(contentsOf: baselineTableURL, encoding: .utf8)
+        let baselineEndRow = tableEndRow(from: baselineTableXML) ?? 0
 
         // First append
         let result1 = try await service.appendRow(
@@ -464,12 +692,28 @@ struct XLSXAppendServiceTests {
             .appendingPathComponent("table4.xml")
 
         let tableXML = try String(contentsOf: tableURL, encoding: .utf8)
-        // After two appends, table should now end at row 1336 (was 1334)
-        #expect(tableXML.contains("1336"))
+        let updatedEndRow = tableEndRow(from: tableXML) ?? baselineEndRow
+
+        let worksheetURL = tempDir
+            .appendingPathComponent("xl")
+            .appendingPathComponent("worksheets")
+            .appendingPathComponent("sheet4.xml")
+        let worksheetXML = try String(contentsOf: worksheetURL, encoding: .utf8)
+
+        let firstInsertedRow = findRowIndex(in: worksheetXML, containing: "Food")
+        let secondInsertedRow = findRowIndex(in: worksheetXML, containing: "Fuel")
+
+        if let firstInsertedRow, let secondInsertedRow {
+            #expect(firstInsertedRow == baselineLastDataRow + 1)
+            #expect(secondInsertedRow == baselineLastDataRow + 2)
+            #expect(updatedEndRow >= max(baselineEndRow, secondInsertedRow))
+        } else {
+            Issue.record("Expected to find rows for Food and Fuel entries")
+        }
     }
 
-    @Test("Budget Template - Calculated columns remain empty")
-    func budgetTemplateCalculatedColumnsEmpty() async throws {
+    @Test("Budget Template - Calculated columns include formulas")
+    func budgetTemplateCalculatedColumnsIncludeFormulas() async throws {
         let service = XLSXAppendService()
         let testFileURL = try createBudgetTemplateFile()
         defer { try? FileManager.default.removeItem(at: testFileURL) }
@@ -496,8 +740,20 @@ struct XLSXAppendServiceTests {
 
         let worksheetXML = try String(contentsOf: worksheetURL, encoding: .utf8)
 
-        // The Balance and Effective Date columns should be empty cells (just <c r="..."/>)
-        // This allows Excel to recalculate them when the file is opened
-        #expect(worksheetXML.contains("<row r=\"1335\"")) // New row should be added
+        guard let insertedRow = findRowIndex(in: worksheetXML, containing: "Emergency Fund") else {
+            Issue.record("Expected to find inserted Emergency Fund row")
+            return
+        }
+
+        guard let insertedRowXML = rowXML(in: worksheetXML, rowIndex: insertedRow) else {
+            Issue.record("Unable to load XML for inserted row \(insertedRow)")
+            return
+        }
+
+        let balanceCell = extractCellXML(from: insertedRowXML, column: "H", rowIndex: insertedRow)
+        let effectiveCell = extractCellXML(from: insertedRowXML, column: "I", rowIndex: insertedRow)
+
+        #expect(balanceCell?.contains("<f") == true)
+        #expect(effectiveCell?.contains("<f") == true)
     }
 }

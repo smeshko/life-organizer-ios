@@ -144,45 +144,122 @@ public struct XLSXAppendService: XLSXAppendServiceProtocol, Sendable {
         // Read worksheet XML
         let worksheetXML = try String(contentsOf: worksheetURL, encoding: .utf8)
 
-        // Find last row index
-        let lastRowIndex = try findLastRowIndex(in: worksheetXML)
-        let newRowIndex = lastRowIndex + 1
-
         // Check if worksheet has tables and get table info
         let tableInfo = try findTableReferences(
             worksheetURL: worksheetURL,
             worksheetXML: worksheetXML
         )
 
-        // Generate new row XML (table-aware if needed)
-        let rowXML: String
+        let insertionResult: (xml: String, rowIndex: Int)
         if let table = tableInfo {
-            // Generate row with proper column count and calculated columns
-            rowXML = try generateTableRowXML(
-                rowIndex: newRowIndex,
+            insertionResult = try insertRowInTable(
+                worksheetXML: worksheetXML,
                 values: values,
                 tableInfo: table
             )
         } else {
-            rowXML = generateRowXML(rowIndex: newRowIndex, values: values)
+            insertionResult = try insertRowInPlainWorksheet(
+                worksheetXML: worksheetXML,
+                values: values
+            )
         }
 
-        // Insert row into worksheet
-        let modifiedXML = try appendRowToWorksheet(
-            worksheetXML: worksheetXML,
-            rowXML: rowXML
-        )
-
         // Write back to file
-        try modifiedXML.write(to: worksheetURL, atomically: true, encoding: .utf8)
+        try insertionResult.xml.write(to: worksheetURL, atomically: true, encoding: .utf8)
 
         // Update table definition if this worksheet has tables
         if let table = tableInfo {
             try updateTableDefinition(
                 tableURL: table.tableURL,
-                newLastRow: newRowIndex,
+                newLastRow: max(insertionResult.rowIndex, table.endRow),
                 currentRef: table.ref
             )
+        }
+    }
+
+    /// Inserts a row into a worksheet without table metadata
+    /// - Parameters:
+    ///   - worksheetXML: Original worksheet XML
+    ///   - values: Values to insert
+    /// - Returns: Tuple with modified XML and the row index used
+    private func insertRowInPlainWorksheet(
+        worksheetXML: String,
+        values: [String]
+    ) throws -> (xml: String, rowIndex: Int) {
+        let lastRowIndex = try findLastRowIndex(in: worksheetXML)
+        let newRowIndex = lastRowIndex + 1
+        let rowXML = generateRowXML(rowIndex: newRowIndex, values: values)
+        let modifiedXML = try appendRowToWorksheet(
+            worksheetXML: worksheetXML,
+            rowXML: rowXML
+        )
+        return (modifiedXML, newRowIndex)
+    }
+
+    /// Inserts or updates a row within a table-aware worksheet
+    /// - Parameters:
+    ///   - worksheetXML: Original worksheet XML
+    ///   - values: Values to insert
+    ///   - tableInfo: Table metadata
+    /// - Returns: Tuple with modified XML and the row index used
+    private func insertRowInTable(
+        worksheetXML: String,
+        values: [String],
+        tableInfo: TableInfo
+    ) throws -> (xml: String, rowIndex: Int) {
+        let rows = try extractWorksheetRows(from: worksheetXML)
+        var rowsByIndex: [Int: WorksheetRow] = [:]
+        rows.forEach { rowsByIndex[$0.index] = $0 }
+
+        let startColumnIndex = columnIndex(from: tableInfo.startColumn)
+        let columnLetters = tableInfo.columns.enumerated().map { index, _ in
+            columnLetter(for: startColumnIndex + index)
+        }
+        let dataColumns = tableInfo.columns.enumerated().compactMap { index, column -> String? in
+            guard !column.isCalculated else { return nil }
+            return columnLetter(for: startColumnIndex + index)
+        }
+
+        let dataStartRow = tableInfo.startRow + 1
+        let dataEndRow = tableInfo.endRow
+
+        var lastDataRowIndex = dataStartRow - 1
+        var lastDataRow: WorksheetRow?
+
+        for row in rows where row.index >= dataStartRow && row.index <= dataEndRow {
+            if rowHasUserData(row.xml, rowIndex: row.index, dataColumns: dataColumns) {
+                lastDataRowIndex = row.index
+                lastDataRow = row
+            }
+        }
+
+        let targetRowIndex = max(lastDataRowIndex + 1, dataStartRow)
+        let existingRow = rowsByIndex[targetRowIndex]
+        let templateRow = lastDataRow ?? existingRow
+
+        let rowXML = try buildTableRowXML(
+            rowIndex: targetRowIndex,
+            values: values,
+            tableInfo: tableInfo,
+            columnLetters: columnLetters,
+            dataColumns: dataColumns,
+            existingRow: existingRow,
+            templateRow: templateRow
+        )
+
+        if let existingRow = existingRow {
+            let replacement = replaceRow(
+                in: worksheetXML,
+                row: existingRow,
+                with: rowXML
+            )
+            return (replacement, targetRowIndex)
+        } else {
+            let modifiedXML = try appendRowToWorksheet(
+                worksheetXML: worksheetXML,
+                rowXML: rowXML
+            )
+            return (modifiedXML, targetRowIndex)
         }
     }
 
@@ -195,6 +272,8 @@ public struct XLSXAppendService: XLSXAppendServiceProtocol, Sendable {
         let columns: [TableColumn]
         let startColumn: String // e.g., "C"
         let startRow: Int // e.g., 11 (header row)
+        let endColumn: String // e.g., "I"
+        let endRow: Int // e.g., 1334
     }
 
     /// Information about a table column
@@ -202,6 +281,20 @@ public struct XLSXAppendService: XLSXAppendServiceProtocol, Sendable {
         let name: String
         let isCalculated: Bool
         let formula: String? // The calculated formula if isCalculated is true
+    }
+
+    /// Represents a worksheet row match within the XML
+    private struct WorksheetRow {
+        let index: Int
+        let range: Range<String.Index>
+        let xml: String
+    }
+
+    /// Captures information about a single cell
+    private struct CellContext {
+        var attributes: [String: String]
+        var innerXML: String?
+        var rowIndex: Int?
     }
 
     /// Finds table references for the given worksheet
@@ -270,6 +363,10 @@ public struct XLSXAppendService: XLSXAppendServiceProtocol, Sendable {
         let startColumn = String(startCell.prefix(while: { $0.isLetter }))
         let startRow = Int(startCell.dropFirst(startColumn.count)) ?? 0
 
+        let endCell = String(refComponents[1])
+        let endColumn = String(endCell.prefix(while: { $0.isLetter }))
+        let endRow = Int(endCell.dropFirst(endColumn.count)) ?? startRow
+
         // Extract columns info
         let columns = try parseTableColumns(from: tableXML)
 
@@ -278,7 +375,9 @@ public struct XLSXAppendService: XLSXAppendServiceProtocol, Sendable {
             ref: ref,
             columns: columns,
             startColumn: startColumn,
-            startRow: startRow
+            startRow: startRow,
+            endColumn: endColumn,
+            endRow: endRow
         )
     }
 
@@ -341,39 +440,6 @@ public struct XLSXAppendService: XLSXAppendServiceProtocol, Sendable {
         }
 
         return columns
-    }
-
-    /// Generates XML for a table row with proper handling of calculated columns
-    private func generateTableRowXML(
-        rowIndex: Int,
-        values: [String],
-        tableInfo: TableInfo
-    ) throws -> String {
-        var rowXML = #"    <row r="\#(rowIndex)">"# + "\n"
-
-        // Get starting column index
-        let startColIndex = columnIndex(from: tableInfo.startColumn)
-
-        // Add cells for each table column
-        for (index, column) in tableInfo.columns.enumerated() {
-            let columnLetter = columnLetter(for: startColIndex + index)
-
-            if column.isCalculated {
-                // For calculated columns, create empty cell (Excel will calculate)
-                rowXML += #"      <c r="\#(columnLetter)\#(rowIndex)"/>"# + "\n"
-            } else {
-                // For regular columns, use provided value or empty
-                let value = index < values.count ? values[index] : ""
-                if !value.isEmpty {
-                    rowXML += "      " + generateCellXML(column: columnLetter, row: rowIndex, value: value) + "\n"
-                } else {
-                    rowXML += #"      <c r="\#(columnLetter)\#(rowIndex)"/>"# + "\n"
-                }
-            }
-        }
-
-        rowXML += "    </row>"
-        return rowXML
     }
 
     /// Converts column letter to zero-based index (inverse of columnLetter)
@@ -439,6 +505,353 @@ public struct XLSXAppendService: XLSXAppendServiceProtocol, Sendable {
 
         // Write back to file
         try tableXML.write(to: tableURL, atomically: true, encoding: .utf8)
+    }
+}
+
+// MARK: - Row & Cell Helpers
+
+private extension XLSXAppendService {
+    private func extractWorksheetRows(from worksheetXML: String) throws -> [WorksheetRow] {
+        let pattern = #"<row[^>]*r="(\d+)"[^>]*>.*?</row>"#
+        let regex = try NSRegularExpression(pattern: pattern, options: [.dotMatchesLineSeparators])
+        let nsRange = NSRange(worksheetXML.startIndex..., in: worksheetXML)
+
+        return regex.matches(in: worksheetXML, range: nsRange).compactMap { match in
+            guard
+                let rowRange = Range(match.range, in: worksheetXML),
+                let indexRange = Range(match.range(at: 1), in: worksheetXML),
+                let rowIndex = Int(worksheetXML[indexRange])
+            else { return nil }
+
+            let rowXML = String(worksheetXML[rowRange])
+            return WorksheetRow(index: rowIndex, range: rowRange, xml: rowXML)
+        }
+    }
+
+    private func rowHasUserData(_ rowXML: String, rowIndex: Int, dataColumns: [String]) -> Bool {
+        let trimmedColumns = dataColumns
+        for column in trimmedColumns {
+            if let cell = extractCellContext(from: rowXML, column: column, rowIndex: rowIndex) {
+                if let inner = cell.innerXML {
+                    if inner.contains("<v>") {
+                        return true
+                    }
+                    if let textRange = inner.range(of: "<t>") {
+                        let closingRange = inner.range(of: "</t>", range: textRange.upperBound..<inner.endIndex)
+                        if let closingRange = closingRange {
+                            let value = inner[textRange.upperBound..<closingRange.lowerBound]
+                            if !value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false
+    }
+
+    private func buildTableRowXML(
+        rowIndex: Int,
+        values: [String],
+        tableInfo: TableInfo,
+        columnLetters: [String],
+        dataColumns: [String],
+        existingRow: WorksheetRow?,
+        templateRow: WorksheetRow?
+    ) throws -> String {
+        let dataColumnCount = tableInfo.columns.filter { !$0.isCalculated }.count
+        guard values.count <= dataColumnCount else {
+            throw AppError.xlsx(
+                .invalidInputParameters(
+                    "Received \(values.count) values but table supports only \(dataColumnCount) data columns"
+                )
+            )
+        }
+
+        var rowAttributes: [String: String] = [:]
+        if let existingRow = existingRow {
+            rowAttributes = parseRowAttributes(from: existingRow.xml)
+        } else if let templateRow = templateRow {
+            rowAttributes = parseRowAttributes(from: templateRow.xml)
+        }
+
+        if rowAttributes.isEmpty {
+            rowAttributes["spans"] = spanRangeString(
+                startColumn: tableInfo.startColumn,
+                columnCount: tableInfo.columns.count
+            )
+        }
+        rowAttributes["r"] = "\(rowIndex)"
+
+        var cellStrings: [String] = []
+        var valueCursor = 0
+
+        for (offset, tableColumn) in tableInfo.columns.enumerated() {
+            let columnLetter = columnLetters[offset]
+            let existingContext = existingRow.flatMap {
+                extractCellContext(from: $0.xml, column: columnLetter, rowIndex: rowIndex)
+            }
+            let templateContext = templateRow.flatMap {
+                extractCellContext(from: $0.xml, column: columnLetter, rowIndex: $0.index)
+            }
+
+            if tableColumn.isCalculated {
+                let cellString = buildCalculatedCell(
+                    column: columnLetter,
+                    rowIndex: rowIndex,
+                    baseContext: existingContext,
+                    fallbackContext: templateContext
+                )
+                cellStrings.append(cellString)
+            } else {
+                let value = valueCursor < values.count ? values[valueCursor] : ""
+                valueCursor += 1
+
+                let baseAttributes = existingContext?.attributes ?? templateContext?.attributes ?? [:]
+                let cellString = buildDataCell(
+                    tableColumn: tableColumn,
+                    baseAttributes: baseAttributes,
+                    column: columnLetter,
+                    rowIndex: rowIndex,
+                    value: value
+                )
+                cellStrings.append(cellString)
+            }
+        }
+
+        var rowXML = "    " + startTag(name: "row", attributes: rowAttributes) + "\n"
+        if !cellStrings.isEmpty {
+            rowXML += cellStrings.joined(separator: "\n") + "\n"
+        }
+        rowXML += "    </row>"
+        return rowXML
+    }
+
+    private func buildDataCell(
+        tableColumn: TableColumn,
+        baseAttributes: [String: String],
+        column: String,
+        rowIndex: Int,
+        value: String
+    ) -> String {
+        var attributes = baseAttributes
+        attributes["r"] = "\(column)\(rowIndex)"
+
+        let trimmedValue = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmedValue.isEmpty {
+            attributes.removeValue(forKey: "t")
+            return "      " + element(name: "c", attributes: attributes, innerXML: nil)
+        }
+
+        if let serialValue = excelSerialValue(for: trimmedValue, column: tableColumn) {
+            attributes.removeValue(forKey: "t")
+            let innerXML = "<v>\(serialValue)</v>"
+            return "      " + element(name: "c", attributes: attributes, innerXML: innerXML)
+        }
+
+        if Double(trimmedValue) != nil {
+            attributes.removeValue(forKey: "t")
+            let innerXML = "<v>\(trimmedValue)</v>"
+            return "      " + element(name: "c", attributes: attributes, innerXML: innerXML)
+        } else {
+            attributes["t"] = "inlineStr"
+            let escaped = xmlEscape(trimmedValue)
+            let innerXML = "<is><t>\(escaped)</t></is>"
+            return "      " + element(name: "c", attributes: attributes, innerXML: innerXML)
+        }
+    }
+
+    private func buildCalculatedCell(
+        column: String,
+        rowIndex: Int,
+        baseContext: CellContext?,
+        fallbackContext: CellContext?
+    ) -> String {
+        let context = baseContext ?? fallbackContext
+        var attributes = context?.attributes ?? [:]
+        attributes["r"] = "\(column)\(rowIndex)"
+
+        var innerXML = context?.innerXML
+        if
+            let originalRowIndex = context?.rowIndex,
+            originalRowIndex != rowIndex,
+            let existingInner = innerXML
+        {
+            innerXML = existingInner.replacingOccurrences(of: "\(column)\(originalRowIndex)", with: "\(column)\(rowIndex)")
+        }
+
+        if let inner = innerXML {
+            innerXML = removeCachedValue(from: inner)
+        }
+
+        return "      " + element(name: "c", attributes: attributes, innerXML: innerXML)
+    }
+
+    private func replaceRow(
+        in worksheetXML: String,
+        row: WorksheetRow,
+        with newRowXML: String
+    ) -> String {
+        let prefix = worksheetXML[..<row.range.lowerBound]
+        let suffix = worksheetXML[row.range.upperBound...]
+        return String(prefix) + newRowXML + String(suffix)
+    }
+
+    private func parseRowAttributes(from rowXML: String) -> [String: String] {
+        guard let attributeString = extractAttributeString(from: rowXML, tagName: "row") else {
+            return [:]
+        }
+        return parseAttributes(from: attributeString)
+    }
+
+    private func startTag(name: String, attributes: [String: String]) -> String {
+        let elements = attributes.sorted { $0.key < $1.key }.map { "\($0.key)=\"\($0.value)\"" }
+        if elements.isEmpty {
+            return "<\(name)>"
+        } else {
+            return "<\(name) \(elements.joined(separator: " "))>"
+        }
+    }
+
+    private func element(
+        name: String,
+        attributes: [String: String],
+        innerXML: String?
+    ) -> String {
+        let elements = attributes.sorted { $0.key < $1.key }.map { "\($0.key)=\"\($0.value)\"" }
+        let attributeSegment = elements.joined(separator: " ")
+        let spacing = attributeSegment.isEmpty ? "" : " "
+
+        if let innerXML = innerXML {
+            return "<\(name)\(spacing)\(attributeSegment)>\(innerXML)</\(name)>"
+        } else {
+            return "<\(name)\(spacing)\(attributeSegment)/>"
+        }
+    }
+
+    private func extractCellContext(
+        from rowXML: String,
+        column: String,
+        rowIndex: Int
+    ) -> CellContext? {
+        let pattern = #"<c[^>]*r="\#(column)\#(rowIndex)"[^>]*/>|<c[^>]*r="\#(column)\#(rowIndex)"[^>]*>.*?</c>"#
+        guard
+            let regex = try? NSRegularExpression(pattern: pattern, options: [.dotMatchesLineSeparators]),
+            let match = regex.firstMatch(
+                in: rowXML,
+                range: NSRange(rowXML.startIndex..., in: rowXML)
+            ),
+            let range = Range(match.range, in: rowXML)
+        else {
+            return nil
+        }
+
+        let cellXML = String(rowXML[range])
+        guard let attributeString = extractAttributeString(from: cellXML, tagName: "c") else {
+            return CellContext(attributes: [:], innerXML: nil, rowIndex: nil)
+        }
+
+        let attributes = parseAttributes(from: attributeString)
+
+        var innerXML: String?
+        if cellXML.contains("</c>"), let start = cellXML.firstIndex(of: ">"),
+           let closingRange = cellXML.range(of: "</c>", options: .backwards) {
+            let innerStart = cellXML.index(after: start)
+            innerXML = String(cellXML[innerStart..<closingRange.lowerBound])
+        }
+
+        let originalReference = attributes["r"]
+        let originalRowIndex = originalReference.flatMap { parseRowIndex(from: $0, column: column) }
+        return CellContext(attributes: attributes, innerXML: innerXML, rowIndex: originalRowIndex)
+    }
+
+    private func extractAttributeString(from element: String, tagName: String) -> String? {
+        let trimmed = element.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.hasPrefix("<\(tagName)") else { return nil }
+        guard let endIndex = trimmed.firstIndex(of: ">") else { return nil }
+
+        var attributeSubstring = trimmed[trimmed.index(trimmed.startIndex, offsetBy: tagName.count + 1)..<endIndex]
+        if attributeSubstring.hasSuffix("/") {
+            attributeSubstring = attributeSubstring.dropLast()
+        }
+        return String(attributeSubstring).trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private func parseAttributes(from attributeString: String) -> [String: String] {
+        var result: [String: String] = [:]
+        let regex = try? NSRegularExpression(pattern: #"([A-Za-z0-9:_-]+)="([^"]*)""#)
+        let nsRange = NSRange(attributeString.startIndex..., in: attributeString)
+        regex?.enumerateMatches(in: attributeString, range: nsRange) { match, _, _ in
+            guard
+                let match = match,
+                let keyRange = Range(match.range(at: 1), in: attributeString),
+                let valueRange = Range(match.range(at: 2), in: attributeString)
+            else { return }
+            let key = String(attributeString[keyRange])
+            let value = String(attributeString[valueRange])
+            result[key] = value
+        }
+        return result
+    }
+
+    private func parseRowIndex(from reference: String, column: String) -> Int? {
+        let digits = reference.filter { $0.isNumber }
+        return Int(digits)
+    }
+
+    private func spanRangeString(startColumn: String, columnCount: Int) -> String {
+        let start = columnIndex(from: startColumn) + 1
+        let end = start + columnCount - 1
+        return "\(start):\(end)"
+    }
+
+    private static let isoDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+
+    private static let utcCalendar: Calendar = {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        return calendar
+    }()
+
+    private static let excelBaseDate: Date = {
+        var components = DateComponents()
+        components.calendar = Calendar(identifier: .gregorian)
+        components.timeZone = TimeZone(secondsFromGMT: 0)
+        components.year = 1899
+        components.month = 12
+        components.day = 30
+        guard let date = components.date else {
+            return Date(timeIntervalSince1970: 0)
+        }
+        return date
+    }()
+
+    private func excelSerialValue(for value: String, column: TableColumn) -> String? {
+        guard column.name.lowercased() == "date" else { return nil }
+        guard let date = Self.isoDateFormatter.date(from: value) else { return nil }
+
+        let days = Self.utcCalendar.dateComponents(
+            [.day],
+            from: Self.excelBaseDate,
+            to: date
+        ).day ?? 0
+
+        return String(days)
+    }
+
+    private func removeCachedValue(from innerXML: String) -> String {
+        innerXML.replacingOccurrences(
+            of: #"<v>.*?</v>"#,
+            with: "",
+            options: .regularExpression
+        )
     }
 }
 
