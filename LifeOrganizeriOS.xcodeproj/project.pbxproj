@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		49160C212AD74369B18554A0 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A660EC53801E438DA5CDBA9A /* AppFeature */; };
+		C5C624AA2EBA265C006C3D98 /* AllTests.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = C5C624A92EBA265C006C3D98 /* AllTests.xctestplan */; };
 		DFDCD29000BC4E768F8A04D1 /* CONTRIBUTING.md in Resources */ = {isa = PBXBuildFile; fileRef = 91AAEA7AACF049908920FB6D /* CONTRIBUTING.md */; };
 /* End PBXBuildFile section */
 
@@ -15,6 +16,8 @@
 		56AB3C2776344B769272A135 /* LifeOrganizeriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeOrganizeriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E33E1C737E4007A8CBB642 /* LifeOrganizeriOSKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LifeOrganizeriOSKit; sourceTree = "<group>"; };
 		91AAEA7AACF049908920FB6D /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		C5C624A92EBA265C006C3D98 /* AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AllTests.xctestplan; sourceTree = "<group>"; };
+		C5DF82392EBA28D600B1E7AF /* UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTests.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -55,6 +58,8 @@
 		385C7FDA9A654D769F71E7EB = {
 			isa = PBXGroup;
 			children = (
+				C5DF82392EBA28D600B1E7AF /* UnitTests.xctestplan */,
+				C5C624A92EBA265C006C3D98 /* AllTests.xctestplan */,
 				91AAEA7AACF049908920FB6D /* CONTRIBUTING.md */,
 				84E33E1C737E4007A8CBB642 /* LifeOrganizeriOSKit */,
 				7BBD810BF53A4B2899C752D3 /* LifeOrganizeriOS */,
@@ -129,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFDCD29000BC4E768F8A04D1 /* CONTRIBUTING.md in Resources */,
+				C5C624AA2EBA265C006C3D98 /* AllTests.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

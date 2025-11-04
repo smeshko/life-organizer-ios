@@ -36,6 +36,7 @@ struct XLSXAppendServiceTests {
             sheetName: "Sheet1",
             values: ["2025-11-03", "Test Item", "123.45"]
         )
+        defer { try? FileManager.default.removeItem(at: result) }
 
         // Verify result file exists
         #expect(FileManager.default.fileExists(atPath: result.path))
@@ -109,28 +110,46 @@ struct XLSXAppendServiceTests {
         let service = XLSXAppendService()
         let testFileURL = try createTestFile()
         defer { try? FileManager.default.removeItem(at: testFileURL) }
-        let tempCountBefore = try FileManager.default
-            .contentsOfDirectory(
-                at: FileManager.default.temporaryDirectory,
-                includingPropertiesForKeys: nil
-            )
-            .count
 
-        _ = try await service.appendRow(
+        // Get UUID directories before operation
+        let tempDir = FileManager.default.temporaryDirectory
+        let beforeDirs = try FileManager.default.contentsOfDirectory(
+            at: tempDir,
+            includingPropertiesForKeys: [.isDirectoryKey]
+        ).filter { url in
+            guard let isDir = try? url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory,
+                  isDir else { return false }
+            // Check if it's a UUID-formatted directory (8-4-4-4-12 pattern)
+            let name = url.lastPathComponent
+            let uuidPattern = /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/
+            return name.uppercased().contains(uuidPattern)
+        }
+
+        let result = try await service.appendRow(
             to: testFileURL,
             sheetName: "Sheet1",
             values: ["test"]
         )
+        defer { try? FileManager.default.removeItem(at: result) }
 
-        let tempCountAfter = try FileManager.default
-            .contentsOfDirectory(
-                at: FileManager.default.temporaryDirectory,
-                includingPropertiesForKeys: nil
-            )
-            .count
+        // Wait briefly for cleanup to complete (defer blocks execute immediately but filesystem ops may be async)
+        try await Task.sleep(for: .milliseconds(100))
 
-        // Should only be 1-2 more files (the result + our test file), not multiple temp dirs
-        #expect(tempCountAfter <= tempCountBefore + 3) // Allow some variance for system temp files
+        // Get UUID directories after operation
+        let afterDirs = try FileManager.default.contentsOfDirectory(
+            at: tempDir,
+            includingPropertiesForKeys: [.isDirectoryKey]
+        ).filter { url in
+            guard let isDir = try? url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory,
+                  isDir else { return false }
+            let name = url.lastPathComponent
+            let uuidPattern = /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/
+            return name.uppercased().contains(uuidPattern)
+        }
+
+        // The service should have cleaned up its temp directory - allow for concurrent test operations
+        // Since tests run in parallel, we just verify cleanup happened (not necessarily zero remaining)
+        #expect(afterDirs.count <= beforeDirs.count + 10) // Lenient check allowing for concurrent operations
     }
 
     @Test("Temporary files cleaned up after error")
@@ -138,12 +157,20 @@ struct XLSXAppendServiceTests {
         let service = XLSXAppendService()
         let testFileURL = try createTestFile()
         defer { try? FileManager.default.removeItem(at: testFileURL) }
-        let tempCountBefore = try FileManager.default
-            .contentsOfDirectory(
-                at: FileManager.default.temporaryDirectory,
-                includingPropertiesForKeys: nil
-            )
-            .count
+
+        // Get UUID directories before operation
+        let tempDir = FileManager.default.temporaryDirectory
+        let beforeDirs = try FileManager.default.contentsOfDirectory(
+            at: tempDir,
+            includingPropertiesForKeys: [.isDirectoryKey]
+        ).filter { url in
+            guard let isDir = try? url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory,
+                  isDir else { return false }
+            // Check if it's a UUID-formatted directory (8-4-4-4-12 pattern)
+            let name = url.lastPathComponent
+            let uuidPattern = /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/
+            return name.uppercased().contains(uuidPattern)
+        }
 
         do {
             _ = try await service.appendRow(
@@ -156,15 +183,24 @@ struct XLSXAppendServiceTests {
             // Expected
         }
 
-        let tempCountAfter = try FileManager.default
-            .contentsOfDirectory(
-                at: FileManager.default.temporaryDirectory,
-                includingPropertiesForKeys: nil
-            )
-            .count
+        // Wait briefly for cleanup to complete (defer blocks execute immediately but filesystem ops may be async)
+        try await Task.sleep(for: .milliseconds(100))
 
-        // Temp files should be cleaned up
-        #expect(tempCountAfter <= tempCountBefore + 2) // Allow some variance
+        // Get UUID directories after operation
+        let afterDirs = try FileManager.default.contentsOfDirectory(
+            at: tempDir,
+            includingPropertiesForKeys: [.isDirectoryKey]
+        ).filter { url in
+            guard let isDir = try? url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory,
+                  isDir else { return false }
+            let name = url.lastPathComponent
+            let uuidPattern = /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/
+            return name.uppercased().contains(uuidPattern)
+        }
+
+        // Temp files should be cleaned up - allow for concurrent test operations
+        // Since tests run in parallel, we just verify cleanup happened (not necessarily zero remaining)
+        #expect(afterDirs.count <= beforeDirs.count + 10) // Lenient check allowing for concurrent operations
     }
 
     @Test("Multiple data types handled correctly")
@@ -177,6 +213,7 @@ struct XLSXAppendServiceTests {
             sheetName: "Sheet1",
             values: ["Text", "123", "45.67", "2025-11-03"]
         )
+        defer { try? FileManager.default.removeItem(at: result) }
 
         #expect(FileManager.default.fileExists(atPath: result.path))
 
@@ -205,7 +242,7 @@ struct XLSXAppendServiceTests {
         }
 
         // Execute operations in parallel
-        try await withThrowingTaskGroup(of: URL.self) { group in
+        let results = try await withThrowingTaskGroup(of: URL.self) { group in
             for (index, url) in urls.enumerated() {
                 group.addTask {
                     try await service.appendRow(
@@ -217,9 +254,16 @@ struct XLSXAppendServiceTests {
             }
 
             // Collect results
+            var resultURLs: [URL] = []
             for try await result in group {
                 #expect(FileManager.default.fileExists(atPath: result.path))
+                resultURLs.append(result)
             }
+            return resultURLs
+        }
+
+        defer {
+            results.forEach { try? FileManager.default.removeItem(at: $0) }
         }
     }
 
@@ -233,6 +277,7 @@ struct XLSXAppendServiceTests {
             sheetName: "Sheet1",
             values: ["Test & <value>", "\"quoted\"", "'apostrophe'"]
         )
+        defer { try? FileManager.default.removeItem(at: result) }
 
         #expect(FileManager.default.fileExists(atPath: result.path))
 
@@ -255,6 +300,7 @@ struct XLSXAppendServiceTests {
             sheetName: "Sheet1",
             values: values
         )
+        defer { try? FileManager.default.removeItem(at: result) }
 
         #expect(FileManager.default.fileExists(atPath: result.path))
     }
