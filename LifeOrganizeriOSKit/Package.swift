@@ -190,6 +190,12 @@ let package = Package(
             path: "Sources/AppFeature",
             swiftSettings: BuildSettings.standard
         ),
+        .target(
+            name: "ActionHandlerFeature",
+            dependencies: ["Framework", Dependencies.tca, "Entities", "NetworkService"],
+            path: "Sources/Features/ActionHandlerFeature",
+            swiftSettings: BuildSettings.standard
+        ),
 
         // MARK: - Services
         .target(
