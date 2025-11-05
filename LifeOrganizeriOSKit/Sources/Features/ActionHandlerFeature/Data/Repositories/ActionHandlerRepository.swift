@@ -6,9 +6,9 @@ import ComposableArchitecture
 /// Repository for action handler operations
 /// Orchestrates data access and transforms DTOs to domain entities
 public struct ActionHandlerRepository: ActionHandlerRepositoryProtocol {
-    private let remoteDataSource: ActionHandlerRemoteDataSourceProtocol
+    private let remoteDataSource: any ActionHandlerRemoteDataSourceProtocol
     
-    public init(remoteDataSource: ActionHandlerRemoteDataSourceProtocol = ActionHandlerRemoteDataSource()) {
+    public init(remoteDataSource: any ActionHandlerRemoteDataSourceProtocol = ActionHandlerRemoteDataSource()) {
         self.remoteDataSource = remoteDataSource
     }
     
