@@ -1,14 +1,14 @@
 #!/bin/bash
-# Build script for project-rulebook-ios
+# Build script for LifeOrganizeriOS
 # Automatically selects an appropriate iOS Simulator destination
 
 set -e
 
-SCHEME="project-rulebook-ios"
+SCHEME="LifeOrganizeriOS"
 
 # Default simulator - prefer newer iOS versions
 SIMULATOR="iPhone 16e"
-IOS_VERSION="26.0"
+IOS_VERSION="18.3.1"
 
 # Parse command line arguments
 BUILD_TYPE="build"
