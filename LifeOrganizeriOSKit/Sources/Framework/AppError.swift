@@ -6,6 +6,7 @@ public enum AppError: Error, Equatable {
     case persistence(PersistenceError)
     case speechRecognition(SpeechRecognitionError)
     case xlsx(XLSXError)
+    case actionHandler(ActionHandlerError)
     // Add your custom service errors here
     // case yourService(YourServiceError)
 
@@ -111,6 +112,31 @@ extension SpeechRecognitionError: LocalizedError {
     }
 }
 
+// MARK: - Action Handler Errors
+
+/// Errors specific to action handler operations
+public enum ActionHandlerError: Error, Equatable {
+    case invalidAction(String)
+    case unknownProcessingResultType(String)
+    case executionFailed(String)
+    case handlerNotFound(String)
+}
+
+extension ActionHandlerError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .invalidAction(let message):
+            return "Invalid action: \(message)"
+        case .unknownProcessingResultType(let type):
+            return "Unknown processing result type: \(type)"
+        case .executionFailed(let message):
+            return "Action execution failed: \(message)"
+        case .handlerNotFound(let type):
+            return "No handler found for action type: \(type)"
+        }
+    }
+}
+
 // MARK: - XLSX Errors
 
 /// Errors that can occur during XLSX file operations
@@ -169,6 +195,8 @@ extension AppError: LocalizedError {
         case .speechRecognition(let error):
             return error.errorDescription
         case .xlsx(let error):
+            return error.errorDescription
+        case .actionHandler(let error):
             return error.errorDescription
         case .unknown(let message):
             return "Unknown error: \(message)"

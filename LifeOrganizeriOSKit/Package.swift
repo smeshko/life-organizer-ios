@@ -197,6 +197,12 @@ let package = Package(
 
         // MARK: - Features
         .feature("AppFeature", dependencies: ["SpeechToTextService"]),
+        .target(
+            name: "ActionHandlerFeature",
+            dependencies: ["Framework", Dependencies.tca, "Entities", "NetworkService"],
+            path: "Sources/Features/ActionHandlerFeature",
+            swiftSettings: BuildSettings.standard
+        ),
 
         // MARK: - Services
         .service("NetworkService"),
