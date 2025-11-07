@@ -9,21 +9,22 @@ struct ActionMapper {
     /// - Returns: Action domain entity
     /// - Throws: AppError.actionHandler if mapping fails
     static func toDomain(_ dto: ActionDTO) throws -> Action {
-        switch dto.type {
-        case "log_budget_entry":
-            guard let budgetData = dto.data else {
-                throw AppError.actionHandler(.invalidAction("Missing budget action data"))
-            }
+        switch dto {
+        case .logBudgetEntry(let budgetData):
             let budgetAction = try BudgetActionMapper.toDomain(budgetData)
             return .budget(budgetAction)
-            
-        // Future: Add calendar, reminder, task cases
-        // case "create_calendar_event":
-        //     guard let calendarData = dto.calendarData else { ... }
-        //     return .calendar(try CalendarActionMapper.toDomain(calendarData))
-            
-        default:
-            throw AppError.actionHandler(.handlerNotFound("Unknown action type: \(dto.type)"))
+
+        case .createReminder:
+            // TODO: Implement when reminder schema is finalized
+            throw AppError.actionHandler(.handlerNotFound("Reminder actions not yet implemented"))
+
+        case .addToShoppingList:
+            // TODO: Implement when shopping list schema is finalized
+            throw AppError.actionHandler(.handlerNotFound("Shopping list actions not yet implemented"))
+
+        case .createCalendarEvent:
+            // TODO: Implement when calendar event schema is finalized
+            throw AppError.actionHandler(.handlerNotFound("Calendar event actions not yet implemented"))
         }
     }
 }

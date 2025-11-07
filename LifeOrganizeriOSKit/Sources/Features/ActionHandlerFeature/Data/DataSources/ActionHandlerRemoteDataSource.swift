@@ -12,8 +12,13 @@ public struct ActionHandlerRemoteDataSource: ActionHandlerRemoteDataSourceProtoc
     
     public func processAction(input: String) async throws -> ActionResultDTO {
         let request = ProcessActionRequestDTO(input: input)
-        let endpoint = ActionHandlerEndpoints.processAction(request)
-        
+
+        // Encode the request to Data
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(request)
+
+        let endpoint = ActionHandlerEndpoints.processAction(data)
+
         let response: ActionResultDTO = try await networkService.sendRequest(to: endpoint)
         return response
     }

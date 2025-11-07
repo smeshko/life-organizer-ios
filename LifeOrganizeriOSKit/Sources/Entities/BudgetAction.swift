@@ -5,14 +5,14 @@ public struct BudgetAction: Sendable, Equatable, Codable {
     public let amount: Double
     public let date: Date
     public let transactionType: TransactionType
-    public let category: String?
+    public let category: BudgetCategory
     public let details: String?
-    
+
     public init(
         amount: Double,
         date: Date,
         transactionType: TransactionType,
-        category: String? = nil,
+        category: BudgetCategory,
         details: String? = nil
     ) {
         self.amount = amount

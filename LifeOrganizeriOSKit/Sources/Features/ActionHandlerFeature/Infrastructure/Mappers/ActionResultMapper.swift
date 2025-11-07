@@ -15,7 +15,7 @@ struct ActionResultMapper {
         }
         
         // Map nested action if present
-        let action: Action? = try dto.action.map { actionDTO in
+        let action: Action? = try dto.appAction.map { actionDTO in
             try ActionMapper.toDomain(actionDTO)
         }
         

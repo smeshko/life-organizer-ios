@@ -1,6 +1,8 @@
 import Foundation
 import Entities
 import Framework
+import ComposableArchitecture
+import Dependencies
 
 /// Coordinates action routing to appropriate handlers
 ///
@@ -10,7 +12,7 @@ import Framework
 ///
 /// **Usage**:
 /// ```swift
-/// let coordinator = ActionHandlerCoordinator()
+/// @Dependency(\.actionHandlerCoordinator) var coordinator
 /// let action = Action.budget(budgetAction)
 /// let result = try await coordinator.route(action)
 /// ```
@@ -20,17 +22,13 @@ import Framework
 /// 1. Add handler property (e.g., `calendarHandler`)
 /// 2. Add parameter to initializer
 /// 3. Add new case to `route()` switch statement
-public actor ActionHandlerCoordinator {
-    private let budgetHandler: BudgetActionHandler
-    // Future: private let calendarHandler: CalendarActionHandler
-    // Future: private let reminderHandler: ReminderActionHandler
-    
-    /// Initialize coordinator with handler instances
-    /// - Parameter budgetHandler: Handler for budget actions (default: BudgetActionHandler())
-    public init(budgetHandler: BudgetActionHandler = BudgetActionHandler()) {
-        self.budgetHandler = budgetHandler
-    }
-    
+public struct ActionHandlerCoordinator: ActionHandlerCoordinatorProtocol {
+    @Dependency(\.budgetActionHandler) var budgetHandler
+    // Future: @Dependency(\.calendarActionHandler) var calendarHandler
+    // Future: @Dependency(\.reminderActionHandler) var reminderHandler
+
+    public init() {}
+
     /// Routes action to appropriate handler
     /// - Parameter action: The action to execute
     /// - Returns: Result of action execution
@@ -39,7 +37,7 @@ public actor ActionHandlerCoordinator {
         switch action {
         case .budget(let budgetAction):
             return try await budgetHandler.handle(budgetAction)
-        
+
         // Future action type cases:
         // case .calendar(let calendarAction):
         //     return try await calendarHandler.handle(calendarAction)

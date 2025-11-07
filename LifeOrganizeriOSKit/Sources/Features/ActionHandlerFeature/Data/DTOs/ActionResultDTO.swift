@@ -2,14 +2,27 @@ import Foundation
 
 /// Response DTO from POST /api/v1/process
 public struct ActionResultDTO: Codable, Sendable {
+    /// Whether the action was successful
+    let success: Bool
+
+    /// Type of action (backend_handled, app_action_required, confirmation_needed)
     let actionType: String
-    let action: ActionDTO?
+
+    /// Human-readable message about the result
     let message: String
-    
+
+    /// Optional app action (when action_type is app_action_required)
+    let appAction: ActionDTO?
+
+    /// Optional confirmation data (when action_type is confirmation_needed)
+    let confirmation: ConfirmationDataDTO?
+
     enum CodingKeys: String, CodingKey {
+        case success
         case actionType = "action_type"
-        case action
         case message
+        case appAction = "app_action"
+        case confirmation
     }
 }
 

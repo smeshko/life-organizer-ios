@@ -29,7 +29,7 @@ public struct MockActionHandlerRepository: ActionHandlerRepositoryProtocol {
                 amount: 100.0,
                 date: Date(),
                 transactionType: .expense,
-                category: "Test Category",
+                category: .groceries,
                 details: "Test details"
             )),
             message: "Mock action processed successfully"

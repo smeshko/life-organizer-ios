@@ -13,7 +13,7 @@ import Entities
 ///
 /// **Dependencies**:
 /// - `actionHandlerRepository`: For backend communication
-/// - `ActionHandlerCoordinator`: For action execution
+/// - `actionHandlerCoordinator`: For action execution
 ///
 /// **Usage**:
 /// ```swift
@@ -24,8 +24,9 @@ import Entities
 @Reducer
 public struct ActionHandlerFeature {
     public init() {}
-    
+
     @Dependency(\.actionHandlerRepository) var repository
+    @Dependency(\.actionHandlerCoordinator) var coordinator
     
     @ObservableState
     public struct State: Equatable {
@@ -63,20 +64,19 @@ public struct ActionHandlerFeature {
                 
                 let input = state.input
                 let repository = self.repository
-                
+                let coordinator = self.coordinator
+
                 return .run { send in
                     do {
                         // Step 1: Process input through repository
                         let actionResult = try await repository.processAction(input: input)
-                        
+
                         // Step 2: Execute action through coordinator (if needed)
                         if actionResult.processingResultType == .appActionRequired,
                            let action = actionResult.action {
-                            // Create coordinator with default handlers
-                            let coordinator = ActionHandlerCoordinator()
                             _ = try await coordinator.route(action)
                         }
-                        
+
                         // Step 3: Send result back to reducer
                         await send(.actionResultReceived(actionResult))
                     } catch {
