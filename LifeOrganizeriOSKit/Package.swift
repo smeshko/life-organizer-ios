@@ -175,10 +175,10 @@ let package = Package(
         .core("Entities"),
         .core("Shared", dependencies: [Dependencies.dependencies]),
         .core("Framework", dependencies: [Dependencies.tca, "Shared", Dependencies.sharing]),
-        .core("CoreUI", dependencies: ["Framework"], path: "Sources/CoreUI"),
+        .core("CoreUI", dependencies: ["Framework"]),
 
         // MARK: - Features
-        .feature("AppFeature", path: "Sources/AppFeature", dependencies: ["SpeechToTextService"]),
+        .feature("AppFeature", dependencies: ["SpeechToTextService"]),
 
         // MARK: - Services
         .service("NetworkService"),
