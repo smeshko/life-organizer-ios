@@ -7,8 +7,7 @@ import Dependencies
 /// Coordinates action routing to appropriate handlers
 ///
 /// The coordinator manages handler instances and routes actions based on their type.
-/// This provides a single entry point for action execution and simplifies adding new
-/// action types in the future.
+/// This provides a single entry point for action execution.
 ///
 /// **Usage**:
 /// ```swift
@@ -16,16 +15,8 @@ import Dependencies
 /// let action = Action.budget(budgetAction)
 /// let result = try await coordinator.route(action)
 /// ```
-///
-/// **Future Extension**:
-/// To add a new action type:
-/// 1. Add handler property (e.g., `calendarHandler`)
-/// 2. Add parameter to initializer
-/// 3. Add new case to `route()` switch statement
 public struct ActionHandlerCoordinator: ActionHandlerCoordinatorProtocol {
     @Dependency(\.budgetActionHandler) var budgetHandler
-    // Future: @Dependency(\.calendarActionHandler) var calendarHandler
-    // Future: @Dependency(\.reminderActionHandler) var reminderHandler
 
     public init() {}
 
@@ -37,12 +28,6 @@ public struct ActionHandlerCoordinator: ActionHandlerCoordinatorProtocol {
         switch action {
         case .budget(let budgetAction):
             return try await budgetHandler.handle(budgetAction)
-
-        // Future action type cases:
-        // case .calendar(let calendarAction):
-        //     return try await calendarHandler.handle(calendarAction)
-        // case .reminder(let reminderAction):
-        //     return try await reminderHandler.handle(reminderAction)
         }
     }
 }
