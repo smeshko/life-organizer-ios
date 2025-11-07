@@ -137,12 +137,14 @@ extension Target {
     /// Creates a test target with standard testing configuration
     static func test(
         _ targetName: String,
-        additionalDependencies: [Target.Dependency] = []
+        additionalDependencies: [Target.Dependency] = [],
+        resources: [Resource]? = nil
     ) -> Target {
         return .testTarget(
             name: "\(targetName)Tests",
             dependencies: [.target(name: targetName)] + additionalDependencies,
             path: "Tests/\(targetName)Tests",
+            resources: resources,
             swiftSettings: BuildSettings.testing
         )
     }
@@ -213,15 +215,13 @@ let package = Package(
         .test("Framework"),
         .test("SpeechToTextService"),
         .test("CoreUI"),
-        .testTarget(
-            name: "XLSXAppendServiceTests",
-            dependencies: ["XLSXAppendService", "Framework"],
-            path: "Tests/XLSXAppendServiceTests",
+        .test(
+            "XLSXAppendService",
+            additionalDependencies: ["Framework"],
             resources: [
                 .copy("Resources/TestWorkbook.xlsx"),
                 .copy("Resources/BudgetTemplate.xlsx")
-            ],
-            swiftSettings: BuildSettings.testing
+            ]
         ),
     ]
 )
