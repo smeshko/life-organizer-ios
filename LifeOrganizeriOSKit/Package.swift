@@ -72,6 +72,21 @@ enum BuildSettings {
 
 // MARK: - Target Builders
 extension Target {
+    /// Creates a core module target with standard configuration
+    static func core(
+        _ name: String,
+        dependencies: [Target.Dependency] = [],
+        path: String? = nil,
+        swiftSettings: [SwiftSetting]? = nil
+    ) -> Target {
+        return .target(
+            name: name,
+            dependencies: dependencies,
+            path: path ?? "Sources/\(name)",
+            swiftSettings: swiftSettings ?? BuildSettings.standard
+        )
+    }
+
     /// Creates a feature target with standard dependencies and configuration
     static func feature(
         _ name: String,
@@ -94,14 +109,20 @@ extension Target {
     }
 
     /// Creates a service target with standard configuration
+    /// Automatically includes Framework and Dependencies as base dependencies
     static func service(
         _ name: String,
         dependencies: [Target.Dependency] = [],
         swiftSettings: [SwiftSetting]? = nil
     ) -> Target {
+        let baseDependencies: [Target.Dependency] = [
+            "Framework",
+            Dependencies.dependencies
+        ]
+
         return .target(
             name: name,
-            dependencies: ["Framework"] + dependencies,
+            dependencies: baseDependencies + dependencies,
             path: "Sources/Services/\(name)",
             swiftSettings: swiftSettings ?? BuildSettings.standard
         )
@@ -151,48 +172,17 @@ let package = Package(
     ],
     targets: [
         // MARK: - Core Modules
-        .target(
-            name: "Entities",
-            swiftSettings: BuildSettings.standard
-        ),
-        .target(
-            name: "Shared",
-            dependencies: [Dependencies.dependencies],
-            swiftSettings: BuildSettings.standard
-        ),
-        .target(
-            name: "Framework",
-            dependencies: [Dependencies.tca, "Shared", Dependencies.sharing],
-            swiftSettings: BuildSettings.standard
-        ),
-        .target(
-            name: "CoreUI",
-            dependencies: ["Framework"],
-            path: "Sources/CoreUI",
-            swiftSettings: BuildSettings.standard
-        ),
+        .core("Entities"),
+        .core("Shared", dependencies: [Dependencies.dependencies]),
+        .core("Framework", dependencies: [Dependencies.tca, "Shared", Dependencies.sharing]),
+        .core("CoreUI", dependencies: ["Framework"], path: "Sources/CoreUI"),
 
         // MARK: - Features
-        .target(
-            name: "AppFeature",
-            dependencies: ["Framework", Dependencies.tca, "CoreUI", "SpeechToTextService"],
-            path: "Sources/AppFeature",
-            swiftSettings: BuildSettings.standard
-        ),
+        .feature("AppFeature", path: "Sources/AppFeature", dependencies: ["SpeechToTextService"]),
 
         // MARK: - Services
-        .target(
-            name: "NetworkService",
-            dependencies: ["Framework", Dependencies.dependencies],
-            path: "Sources/Services/NetworkService",
-            swiftSettings: BuildSettings.standard
-        ),
-        .target(
-            name: "SpeechToTextService",
-            dependencies: ["Framework", Dependencies.dependencies],
-            path: "Sources/Services/SpeechToTextService",
-            swiftSettings: BuildSettings.standard
-        ),
+        .service("NetworkService"),
+        .service("SpeechToTextService"),
 
         // MARK: - Add Your Services Here
         // Example:
@@ -203,16 +193,7 @@ let package = Package(
         // .feature("SettingsFeature"),
 
         // MARK: - Test Targets
-        .testTarget(
-            name: "FrameworkTests",
-            dependencies: ["Framework"],
-            swiftSettings: BuildSettings.testing
-        ),
-        .testTarget(
-            name: "SpeechToTextServiceTests",
-            dependencies: ["SpeechToTextService", "Framework"],
-            path: "Tests/SpeechToTextServiceTests",
-            swiftSettings: BuildSettings.testing
-        ),
+        .test("Framework"),
+        .test("SpeechToTextService"),
     ]
 )
