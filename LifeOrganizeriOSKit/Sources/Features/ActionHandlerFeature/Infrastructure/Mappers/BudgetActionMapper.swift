@@ -1,4 +1,6 @@
 import Foundation
+import Entities
+import Framework
 
 /// Maps BudgetActionDTO (API primitives) to BudgetAction (domain entity)
 struct BudgetActionMapper {

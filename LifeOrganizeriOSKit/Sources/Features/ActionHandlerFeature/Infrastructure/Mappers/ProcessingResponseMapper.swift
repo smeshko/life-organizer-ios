@@ -1,4 +1,6 @@
 import Foundation
+import Entities
+import Framework
 
 /// Maps ProcessingResponseDTO to ProcessingResponse entity
 struct ProcessingResponseMapper {

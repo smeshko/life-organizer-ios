@@ -1,4 +1,6 @@
 import Foundation
+import Entities
+import Framework
 
 /// Maps polymorphic ActionDTO to Action entity enum
 struct ActionMapper {

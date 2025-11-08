@@ -1,19 +1,19 @@
 import Foundation
+import Entities
 
-/// Mock repository for testing
-public struct MockActionHandlerRepository: ActionHandlerRepositoryProtocol {
-    public var mockResponse: ProcessingResponse?
-    public var mockError: Error?
+actor MockActionHandlerRepository: ActionHandlerRepositoryProtocol {
+    var mockResponse: ProcessingResponse?
+    var mockError: (any Error)?
 
-    public init(
+    init(
         mockResponse: ProcessingResponse? = nil,
-        mockError: Error? = nil
+        mockError: (any Error)? = nil
     ) {
         self.mockResponse = mockResponse
         self.mockError = mockError
     }
 
-    public func processAction(input: String) async throws -> ProcessingResponse {
+    func processAction(input: String) async throws -> ProcessingResponse {
         if let error = mockError {
             throw error
         }

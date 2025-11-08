@@ -27,11 +27,15 @@ Sources/Features/{FeatureName}Feature/
 │       └── {Feature}RemoteDataSourceProtocol.swift
 ├── Infrastructure/
 │   ├── Analytics/               # Feature-specific analytics
-│   │   └── {Feature}Analytics.swift
-│   ├── Endpoints.swift         # API endpoints (optional) 
-│   ├── {Entity}Mapper.swift    # DTO to Entity mapping (optional)
+│   │   └── {Feature}AnalyticsService.swift
+│   ├── Endpoints.swift         # API endpoints (optional)
+│   ├── Mappers/                # DTO to Entity mapping (optional)
+│   │   └── {Entity}Mapper.swift
 │   └── Mocks/                  # Mock implementations for testing
-│       └── Mock{Feature}Repository.swift
+│       ├── Mock{Feature}Repository.swift
+│       ├── Mock{Feature}LocalDataSource.swift
+│       ├── Mock{Feature}RemoteDataSource.swift
+│       └── Mock{Feature}AnalyticsService.swift
 └── Presentation/
     ├── {Feature}Feature.swift  # Main TCA reducer
     └── Views/                  # SwiftUI views (if feature includes views)
@@ -218,29 +222,29 @@ public protocol {Feature}RepositoryProtocol: Sendable {
 }
 ```
 
-### Step 8: Create Entity Mapper
+### Step 8: Create Entity Mapper (Optional)
 
 ```swift
-// Sources/Features/{Feature}Feature/Infrastructure/{Entity}Mapper.swift
+// Sources/Features/{Feature}Feature/Infrastructure/Mappers/{Entity}Mapper.swift
 import Foundation
 import Entities
 
-public protocol {Entity}Mapping {
+protocol {Entity}Mapping {
     func toDomain(_ dto: {Entity}DTO) -> {Entity}
     func toDTO(_ entity: {Entity}) -> {Entity}DTO
 }
 
-public struct {Entity}Mapper: {Entity}Mapping {
-    public init() {}
-    
-    public func toDomain(_ dto: {Entity}DTO) -> {Entity} {
+struct {Entity}Mapper: {Entity}Mapping {
+    init() {}
+
+    func toDomain(_ dto: {Entity}DTO) -> {Entity} {
         {Entity}(
             title: dto.title
             // ... map other properties with any necessary transformations
         )
     }
-    
-    public func toDTO(_ entity: {Entity}) -> {Entity}DTO {
+
+    func toDTO(_ entity: {Entity}) -> {Entity}DTO {
         {Entity}DTO(
             title: entity.title
             // ... map other properties
@@ -258,24 +262,38 @@ import PersistenceService
 import Dependencies
 import Entities
 
-public actor {Feature}LocalDataSource: {Feature}LocalDataSourceProtocol {
+actor {Feature}LocalDataSource: {Feature}LocalDataSourceProtocol {
     @Dependency(\.persistenceService) private var persistenceService
-    
-    public init() {}
-    
-    public func fetch(id: String) async throws -> {Entity} {
+
+    init() {}
+
+    func fetch(id: String) async throws -> {Entity} {
         guard let loaded = try await persistenceService.load({Entity}.self, forKey: id) else {
             throw {Feature}Error.notFound
         }
         return loaded
     }
-    
-    public func save(_ entity: {Entity}) async throws {
+
+    func save(_ entity: {Entity}) async throws {
         try await persistenceService.save(entity, forKey: entity.id.uuidString)
     }
-    
-    public func delete(id: String) async throws {
+
+    func delete(id: String) async throws {
         try await persistenceService.deleteData(forKey: id)
+    }
+}
+
+// MARK: - Dependency Key
+struct {Feature}LocalDataSourceKey: DependencyKey {
+    static let liveValue: any {Feature}LocalDataSourceProtocol = {Feature}LocalDataSource()
+    static let testValue: any {Feature}LocalDataSourceProtocol = Mock{Feature}LocalDataSource()
+    static let previewValue: any {Feature}LocalDataSourceProtocol = Mock{Feature}LocalDataSource()
+}
+
+extension DependencyValues {
+    var {feature}LocalDataSource: any {Feature}LocalDataSourceProtocol {
+        get { self[{Feature}LocalDataSourceKey.self] }
+        set { self[{Feature}LocalDataSourceKey.self] = newValue }
     }
 }
 ```
@@ -287,32 +305,46 @@ import Dependencies
 import Entities
 import NetworkService
 
-public actor {Feature}RemoteDataSource: {Feature}RemoteDataSourceProtocol {
+actor {Feature}RemoteDataSource: {Feature}RemoteDataSourceProtocol {
     @Dependency(\.networkService) private var networkService
-    
-    public init() {}
-    
-    public func fetch(id: String) async throws -> {Entity} {
+
+    init() {}
+
+    func fetch(id: String) async throws -> {Entity} {
         let dto: {Entity}DTO = try await networkService.sendRequest(
             to: {Feature}Endpoint.get{Entity}(id)
         )
         return {Entity}Mapper().toDomain(dto)
     }
-    
-    public func create(_ entity: {Entity}) async throws -> {Entity} {
+
+    func create(_ entity: {Entity}) async throws -> {Entity} {
         let dto = {Entity}Mapper().toDTO(entity)
         let responseDTO: {Entity}DTO = try await networkService.sendRequest(
             to: {Feature}Endpoint.create{Entity}(dto)
         )
         return {Entity}Mapper().toDomain(responseDTO)
     }
-    
-    public func update(_ entity: {Entity}) async throws -> {Entity} {
+
+    func update(_ entity: {Entity}) async throws -> {Entity} {
         let dto = {Entity}Mapper().toDTO(entity)
         let responseDTO: {Entity}DTO = try await networkService.sendRequest(
             to: {Feature}Endpoint.update{Entity}(entity.id.uuidString, dto)
         )
         return {Entity}Mapper().toDomain(responseDTO)
+    }
+}
+
+// MARK: - Dependency Key
+struct {Feature}RemoteDataSourceKey: DependencyKey {
+    static let liveValue: any {Feature}RemoteDataSourceProtocol = {Feature}RemoteDataSource()
+    static let testValue: any {Feature}RemoteDataSourceProtocol = Mock{Feature}RemoteDataSource()
+    static let previewValue: any {Feature}RemoteDataSourceProtocol = Mock{Feature}RemoteDataSource()
+}
+
+extension DependencyValues {
+    var {feature}RemoteDataSource: any {Feature}RemoteDataSourceProtocol {
+        get { self[{Feature}RemoteDataSourceKey.self] }
+        set { self[{Feature}RemoteDataSourceKey.self] = newValue }
     }
 }
 ```
@@ -325,46 +357,38 @@ import Foundation
 import Dependencies
 import Entities
 
-public actor {Feature}Repository: {Feature}RepositoryProtocol {
-    private let localDataSource: {Feature}LocalDataSourceProtocol
-    private let remoteDataSource: {Feature}RemoteDataSourceProtocol
-    
-    public init(
-        localDataSource: {Feature}LocalDataSourceProtocol,
-        remoteDataSource: {Feature}RemoteDataSourceProtocol
-    ) {
-        self.localDataSource = localDataSource
-        self.remoteDataSource = remoteDataSource
-    }
-    
-    public func fetchLocal(id: String) async throws -> {Entity} {
+actor {Feature}Repository: {Feature}RepositoryProtocol {
+    @Dependency(\.{feature}LocalDataSource) private var localDataSource
+    @Dependency(\.{feature}RemoteDataSource) private var remoteDataSource
+
+    func fetchLocal(id: String) async throws -> {Entity} {
         try await localDataSource.fetch(id: id)
     }
-    
-    public func fetchRemote(id: String) async throws -> {Entity} {
+
+    func fetchRemote(id: String) async throws -> {Entity} {
         let entity = try await remoteDataSource.fetch(id: id)
         // Cache in local storage
         try await localDataSource.save(entity)
         return entity
     }
-    
-    public func fetch(id: String) async throws -> {Entity} {
+
+    func fetch(id: String) async throws -> {Entity} {
         do {
             return try await fetchLocal(id: id)
         } catch {
             return try await fetchRemote(id: id)
         }
     }
-    
-    public func save(_ entity: {Entity}) async throws {
+
+    func save(_ entity: {Entity}) async throws {
         try await localDataSource.save(entity)
     }
-    
-    public func delete(id: String) async throws {
+
+    func delete(id: String) async throws {
         try await localDataSource.delete(id: id)
     }
-    
-    public func sync(id: String) async throws {
+
+    func sync(id: String) async throws {
         do {
             let entity = try await remoteDataSource.fetch(id: id)
             try await localDataSource.save(entity)
@@ -378,90 +402,131 @@ public actor {Feature}Repository: {Feature}RepositoryProtocol {
 }
 
 // MARK: - Dependency Key
-public struct {Feature}RepositoryKey: DependencyKey {
-    public static let liveValue: {Feature}RepositoryProtocol = {Feature}Repository(
-        localDataSource: {Feature}LocalDataSource(),
-        remoteDataSource: {Feature}RemoteDataSource()
-    )
-    
-    public static let testValue: {Feature}RepositoryProtocol = Mock{Feature}Repository()
+struct {Feature}RepositoryKey: DependencyKey {
+    static let liveValue: any {Feature}RepositoryProtocol = {Feature}Repository()
+    static let testValue: any {Feature}RepositoryProtocol = Mock{Feature}Repository()
+    static let previewValue: any {Feature}RepositoryProtocol = Mock{Feature}Repository()
 }
 
 extension DependencyValues {
-    public var {feature}Repository: {Feature}RepositoryProtocol {
+    var {feature}Repository: any {Feature}RepositoryProtocol {
         get { self[{Feature}RepositoryKey.self] }
         set { self[{Feature}RepositoryKey.self] = newValue }
     }
 }
 ```
 
-### Step 11: Create Mock Repository
+### Step 11: Create Mock Implementations
+
+```swift
+// Sources/Features/{Feature}Feature/Infrastructure/Mocks/Mock{Feature}LocalDataSource.swift
+import Foundation
+import Entities
+
+struct Mock{Feature}LocalDataSource: {Feature}LocalDataSourceProtocol {
+    func fetch(id: String) async throws -> {Entity} {
+        // Return mock entity
+        {Entity}.mock
+    }
+
+    func save(_ entity: {Entity}) async throws {
+        // No-op for mock
+    }
+
+    func delete(id: String) async throws {
+        // No-op for mock
+    }
+}
+```
+
+```swift
+// Sources/Features/{Feature}Feature/Infrastructure/Mocks/Mock{Feature}RemoteDataSource.swift
+import Foundation
+import Entities
+
+struct Mock{Feature}RemoteDataSource: {Feature}RemoteDataSourceProtocol {
+    func fetch(id: String) async throws -> {Entity} {
+        // Return mock entity
+        {Entity}.mock
+    }
+
+    func create(_ entity: {Entity}) async throws -> {Entity} {
+        // Return the same entity
+        entity
+    }
+
+    func update(_ entity: {Entity}) async throws -> {Entity} {
+        // Return the same entity
+        entity
+    }
+}
+```
 
 ```swift
 // Sources/Features/{Feature}Feature/Infrastructure/Mocks/Mock{Feature}Repository.swift
 import Foundation
 import Entities
 
-public actor Mock{Feature}Repository: {Feature}RepositoryProtocol {
+actor Mock{Feature}Repository: {Feature}RepositoryProtocol {
     private var stored{Entities}: [String: {Entity}] = [:]
-    public var shouldFail: Bool = false
-    public var delay: TimeInterval = 0
-    
-    public init() {}
-    
-    public func fetchLocal(id: String) async throws -> {Entity} {
+    var shouldFail: Bool = false
+    var delay: TimeInterval = 0
+
+    init() {}
+
+    func fetchLocal(id: String) async throws -> {Entity} {
         if shouldFail {
             throw {Feature}Error.notFound
         }
-        
+
         if delay > 0 {
             try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
         }
-        
+
         guard let entity = stored{Entities}[id] else {
             throw {Feature}Error.notFound
         }
-        
+
         return entity
     }
-    
-    public func fetchRemote(id: String) async throws -> {Entity} {
+
+    func fetchRemote(id: String) async throws -> {Entity} {
         if shouldFail {
             throw {Feature}Error.networkUnavailable
         }
-        
+
         if delay > 0 {
             try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
         }
-        
+
         let entity = createMock{Entity}(id: id)
         stored{Entities}[id] = entity
         return entity
     }
-    
-    public func fetch(id: String) async throws -> {Entity} {
+
+    func fetch(id: String) async throws -> {Entity} {
         try await fetchLocal(id: id)
     }
-    
-    public func save(_ entity: {Entity}) async throws {
+
+    func save(_ entity: {Entity}) async throws {
         if shouldFail {
             throw {Feature}Error.invalidData
         }
-        
+
         stored{Entities}[entity.id.uuidString] = entity
     }
-    
-    public func delete(id: String) async throws {
+
+    func delete(id: String) async throws {
         stored{Entities}.removeValue(forKey: id)
     }
-    
-    public func sync(id: String) async throws {
+
+    func sync(id: String) async throws {
         if !shouldFail {
             let entity = createMock{Entity}(id: id)
             stored{Entities}[id] = entity
         }
     }
-    
+
     private func createMock{Entity}(id: String) -> {Entity} {
         {Entity}(
             id: UUID(uuidString: id) ?? UUID(),
@@ -474,20 +539,28 @@ public actor Mock{Feature}Repository: {Feature}RepositoryProtocol {
 
 ### Step 12: Create Analytics Service
 ```swift
-public enum {Feature}AnalyticsEvent: AnalyticsEvent {
+// Sources/Features/{Feature}Feature/Infrastructure/Analytics/{Feature}AnalyticsService.swift
+import Foundation
+import Dependencies
+import AnalyticsService
+
+// MARK: - Analytics Events
+enum {Feature}AnalyticsEvent: AnalyticsEvent, Equatable, Sendable {
     case screenViewed
     case emptyStateShown
     case refreshRequested
-    
-    public var name: String {
+    case error(error: String, context: String)
+
+    var name: String {
         switch self {
         case .screenViewed: return "{feature}_screen_viewed"
         case .emptyStateShown: return "{feature}_empty_state_shown"
         case .refreshRequested: return "{feature}_refresh_requested"
+        case .error: return "error"
         }
     }
-    
-    public var properties: [String: String] {
+
+    var properties: [String: String] {
         switch self {
         case .screenViewed:
             return [:]
@@ -495,30 +568,76 @@ public enum {Feature}AnalyticsEvent: AnalyticsEvent {
             return [:]
         case .refreshRequested:
             return [:]
+        case let .error(error, context):
+            return ["error": error, "context": context]
         }
     }
 }
 
-public struct {Feature}Analytics: Sendable {
-    @Dependency(\.analyticsService) private var analyticsService
-    
-    public init() {}
-    
-    public func track(_ event: {Feature}AnalyticsEvent) async {
+protocol {Feature}AnalyticsProtocol: Sendable {
+    func track(_ event: {Feature}AnalyticsEvent) async
+}
+
+// MARK: - Analytics Service
+actor {Feature}AnalyticsService: {Feature}AnalyticsProtocol, Sendable {
+    private var events: [{Feature}AnalyticsEvent] = []
+
+    init() {}
+
+    func track(_ event: {Feature}AnalyticsEvent) async {
+        events.append(event)
+
+        // Only use external analytics service in live/production mode
+        // In preview/test mode, just store the event locally
+        #if !DEBUG
+        @Dependency(\.analyticsService) var analyticsService
         await analyticsService.track(event)
+        #endif
+    }
+
+    func getEvents() -> [{Feature}AnalyticsEvent] {
+        events
+    }
+
+    func clearEvents() {
+        events.removeAll()
     }
 }
 
-// MARK: - Dependency Key for {Feature}Analytics
-public enum {Feature}AnalyticsKey: DependencyKey {
-    public static let liveValue = {Feature}Analytics()
-    public static let testValue = {Feature}Analytics()
+// MARK: - Dependency Key
+struct {Feature}AnalyticsKey: DependencyKey {
+    static let liveValue: any {Feature}AnalyticsProtocol = {Feature}AnalyticsService()
+    static let testValue: any {Feature}AnalyticsProtocol = Mock{Feature}AnalyticsService()
+    static let previewValue: any {Feature}AnalyticsProtocol = Mock{Feature}AnalyticsService()
 }
 
 extension DependencyValues {
-    public var {feature}Analytics: {Feature}Analytics {
+    var {feature}Analytics: any {Feature}AnalyticsProtocol {
         get { self[{Feature}AnalyticsKey.self] }
         set { self[{Feature}AnalyticsKey.self] = newValue }
+    }
+}
+```
+
+```swift
+// Sources/Features/{Feature}Feature/Infrastructure/Mocks/Mock{Feature}AnalyticsService.swift
+import Foundation
+
+actor Mock{Feature}AnalyticsService: {Feature}AnalyticsProtocol {
+    private var events: [{Feature}AnalyticsEvent] = []
+
+    init() {}
+
+    func track(_ event: {Feature}AnalyticsEvent) async {
+        events.append(event)
+    }
+
+    func getEvents() -> [{Feature}AnalyticsEvent] {
+        events
+    }
+
+    func clearEvents() {
+        events.removeAll()
     }
 }
 ```

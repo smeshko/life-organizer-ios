@@ -1,0 +1,59 @@
+{
+  "valid_budget_action": {
+    "success": true,
+    "action_type": "app_action_required",
+    "app_action": {
+      "type": "log_budget_entry",
+      "amount": 234.6,
+      "date": "2025-11-03",
+      "transaction_type": "Expenses",
+      "category": "Clothes",
+      "details": "next"
+    },
+    "message": "Logged expenses: 234.6 BGN in Clothes"
+  },
+  "backend_handled": {
+    "success": true,
+    "action_type": "backend_handled",
+    "app_action": null,
+    "message": "Request processed by backend"
+  },
+  "invalid_date": {
+    "success": true,
+    "action_type": "app_action_required",
+    "app_action": {
+      "type": "log_budget_entry",
+      "amount": 100,
+      "date": "invalid-date-format",
+      "transaction_type": "Expenses",
+      "category": "Groceries",
+      "details": null
+    },
+    "message": "Action received"
+  },
+  "missing_details": {
+    "success": true,
+    "action_type": "app_action_required",
+    "app_action": {
+      "type": "log_budget_entry",
+      "amount": 100,
+      "date": "2025-11-03",
+      "transaction_type": "Expenses",
+      "category": "Groceries"
+    },
+    "message": "Action received"
+  },
+  "unknown_category": {
+    "success": true,
+    "action_type": "app_action_required",
+    "app_action": {
+      "type": "log_budget_entry",
+      "amount": 100,
+      "date": "2025-11-03",
+      "transaction_type": "Expenses",
+      "category": "UnknownCategory",
+      "details": null
+    },
+    "message": "Action received"
+  }
+}
