@@ -1,11 +1,35 @@
 import Foundation
 
+// MARK: - Action Handler Errors
+public enum ActionHandlerError: Error, Equatable {
+    case invalidAction(String)
+    case handlerNotFound(String)
+    case unknownProcessingResultType(String)
+    case invalidResponse(String)
+}
+
+extension ActionHandlerError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .invalidAction(let message):
+            return "Invalid action: \(message)"
+        case .handlerNotFound(let message):
+            return "Handler not found: \(message)"
+        case .unknownProcessingResultType(let type):
+            return "Unknown processing result type: \(type)"
+        case .invalidResponse(let message):
+            return "Invalid response: \(message)"
+        }
+    }
+}
+
 /// Centralized error type for the application
 public enum AppError: Error, Equatable {
     case network(NetworkError)
     case persistence(PersistenceError)
     case speechRecognition(SpeechRecognitionError)
     case xlsx(XLSXError)
+    case actionHandler(ActionHandlerError)
     // Add your custom service errors here
     // case yourService(YourServiceError)
 
@@ -169,6 +193,8 @@ extension AppError: LocalizedError {
         case .speechRecognition(let error):
             return error.errorDescription
         case .xlsx(let error):
+            return error.errorDescription
+        case .actionHandler(let error):
             return error.errorDescription
         case .unknown(let message):
             return "Unknown error: \(message)"
