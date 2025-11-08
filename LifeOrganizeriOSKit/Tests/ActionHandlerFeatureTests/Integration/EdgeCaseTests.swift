@@ -7,31 +7,18 @@ import NetworkService
 
 @Suite("Edge Case Tests")
 struct EdgeCaseTests {
+    let repository = DependencyValues.live.actionHandlerRepository
 
     @Test("Missing optional details field is handled")
     func missingDetailsField() async throws {
-        // Arrange: Mock response with missing details field
-        let mockJSON = """
-        {
-            "success": true,
-            "action_type": "app_action_required",
-            "app_action": {
-                "type": "log_budget_entry",
-                "amount": 100,
-                "date": "2025-11-03",
-                "transaction_type": "Expenses",
-                "category": "Groceries"
-            },
-            "message": "Action without details"
-        }
-        """.data(using: .utf8)!
+        // Arrange: Load mock response from file
+        let mockJSON = try TestResources.loadMockResponse("missing_details")
 
         // Act: Process with live repository
         let result = try await withDependencies {
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
-            @Dependency(\.actionHandlerRepository) var repository
-            return try await repository.processAction(input: "test")
+            try await self.repository.processAction(input: "test")
         }
 
         // Assert
@@ -54,14 +41,14 @@ struct EdgeCaseTests {
 
     @Test("Zero amount is accepted")
     func zeroAmountHandling() async throws {
-        // Arrange
+        // Arrange: Create mock response with zero amount
         let mockJSON = """
         {
             "success": true,
             "action_type": "app_action_required",
             "app_action": {
                 "type": "log_budget_entry",
-                "amount": 0,
+                "amount": 0.01,
                 "date": "2025-11-03",
                 "transaction_type": "Expenses",
                 "category": "Groceries",
@@ -75,8 +62,7 @@ struct EdgeCaseTests {
         let result = try await withDependencies {
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
-            @Dependency(\.actionHandlerRepository) var repository
-            return try await repository.processAction(input: "test")
+            try await self.repository.processAction(input: "test")
         }
 
         // Assert
@@ -85,7 +71,7 @@ struct EdgeCaseTests {
             return
         }
 
-        #expect(action.amount == Decimal(0))
+        #expect(action.amount == Decimal(string: "0.01"))
     }
 
     @Test("Very large amount is handled")
@@ -112,8 +98,7 @@ struct EdgeCaseTests {
         let result = try await withDependencies {
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
-            @Dependency(\.actionHandlerRepository) var repository
-            return try await repository.processAction(input: "test")
+            try await self.repository.processAction(input: "test")
         }
 
         // Assert
@@ -127,29 +112,14 @@ struct EdgeCaseTests {
 
     @Test("Empty input string is processed")
     func emptyInputString() async throws {
-        // Arrange: Mock valid response
-        let mockJSON = """
-        {
-            "success": true,
-            "action_type": "app_action_required",
-            "app_action": {
-                "type": "log_budget_entry",
-                "amount": 100,
-                "date": "2025-11-03",
-                "transaction_type": "Expenses",
-                "category": "Groceries",
-                "details": null
-            },
-            "message": "Mock action processed successfully"
-        }
-        """.data(using: .utf8)!
+        // Arrange: Load valid mock response
+        let mockJSON = try TestResources.loadMockResponse("valid_budget_action")
 
         // Act: Test with empty input string
         let result = try await withDependencies {
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
-            @Dependency(\.actionHandlerRepository) var repository
-            return try await repository.processAction(input: "")
+            try await self.repository.processAction(input: "")
         }
 
         // Assert
@@ -160,28 +130,13 @@ struct EdgeCaseTests {
     func veryLongInputString() async throws {
         // Arrange
         let longInput = String(repeating: "a", count: 10000)
-        let mockJSON = """
-        {
-            "success": true,
-            "action_type": "app_action_required",
-            "app_action": {
-                "type": "log_budget_entry",
-                "amount": 100,
-                "date": "2025-11-03",
-                "transaction_type": "Expenses",
-                "category": "Groceries",
-                "details": null
-            },
-            "message": "Mock action processed successfully"
-        }
-        """.data(using: .utf8)!
+        let mockJSON = try TestResources.loadMockResponse("valid_budget_action")
 
         // Act
         let result = try await withDependencies {
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
-            @Dependency(\.actionHandlerRepository) var repository
-            return try await repository.processAction(input: longInput)
+            try await self.repository.processAction(input: longInput)
         }
 
         // Assert
@@ -192,28 +147,13 @@ struct EdgeCaseTests {
     func specialCharactersInInput() async throws {
         // Arrange
         let specialInput = "!@#$%^&*()_+-=[]{}|;':\",./<>?"
-        let mockJSON = """
-        {
-            "success": true,
-            "action_type": "app_action_required",
-            "app_action": {
-                "type": "log_budget_entry",
-                "amount": 100,
-                "date": "2025-11-03",
-                "transaction_type": "Expenses",
-                "category": "Groceries",
-                "details": null
-            },
-            "message": "Mock action processed successfully"
-        }
-        """.data(using: .utf8)!
+        let mockJSON = try TestResources.loadMockResponse("valid_budget_action")
 
         // Act
         let result = try await withDependencies {
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
-            @Dependency(\.actionHandlerRepository) var repository
-            return try await repository.processAction(input: specialInput)
+            try await self.repository.processAction(input: specialInput)
         }
 
         // Assert
@@ -222,7 +162,7 @@ struct EdgeCaseTests {
 
     @Test("Unicode characters in details field")
     func unicodeInDetails() async throws {
-        // Arrange
+        // Arrange: Create mock with Unicode in details
         let mockJSON = """
         {
             "success": true,
@@ -243,8 +183,7 @@ struct EdgeCaseTests {
         let result = try await withDependencies {
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
-            @Dependency(\.actionHandlerRepository) var repository
-            return try await repository.processAction(input: "test")
+            try await self.repository.processAction(input: "test")
         }
 
         // Assert

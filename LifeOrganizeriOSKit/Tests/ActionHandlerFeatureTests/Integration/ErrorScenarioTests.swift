@@ -8,6 +8,7 @@ import NetworkService
 
 @Suite("Error Scenario Tests")
 struct ErrorScenarioTests {
+    let repository = DependencyValues.live.actionHandlerRepository
 
     @Test("Network error propagates correctly")
     func networkErrorHandling() async throws {
@@ -22,8 +23,7 @@ struct ErrorScenarioTests {
             try await withDependencies {
                 $0.networkService = mockNetworkService
             } operation: {
-                @Dependency(\.actionHandlerRepository) var repository
-                try await repository.processAction(input: "test")
+                try await self.repository.processAction(input: "test")
             }
         }
     }
@@ -38,49 +38,33 @@ struct ErrorScenarioTests {
             try await withDependencies {
                 $0.networkService = MockNetworkService(mockData: invalidJSON)
             } operation: {
-                @Dependency(\.actionHandlerRepository) var repository
-                try await repository.processAction(input: "test")
+                try await self.repository.processAction(input: "test")
             }
         }
     }
 
     @Test("Valid response is successfully processed through full stack")
     func successfulEndToEndProcessing() async throws {
-        // Arrange
-        let validJSON = """
-        {
-            "success": true,
-            "action_type": "app_action_required",
-            "app_action": {
-                "type": "log_budget_entry",
-                "amount": 100,
-                "date": "2025-11-03",
-                "transaction_type": "Expenses",
-                "category": "Groceries",
-                "details": null
-            },
-            "message": "Mock action processed successfully"
-        }
-        """.data(using: .utf8)!
+        // Arrange: Load valid mock response
+        let validJSON = try TestResources.loadMockResponse("valid_budget_action")
 
         // Act: Process through live repository with mocked network
         let result = try await withDependencies {
             $0.networkService = MockNetworkService(mockData: validJSON)
         } operation: {
-            @Dependency(\.actionHandlerRepository) var repository
-            return try await repository.processAction(input: "test")
+            try await self.repository.processAction(input: "test")
         }
 
         // Assert: Verify successful processing
         #expect(result.processingResultType == .appActionRequired)
-        #expect(result.message == "Mock action processed successfully")
+        #expect(result.message == "Logged expenses: 234.6 BGN in Clothes")
 
         guard case .budget(let action) = result.action else {
             Issue.record("Expected budget action")
             return
         }
 
-        #expect(action.amount == Decimal(100))
-        #expect(action.category == .groceries)
+        #expect(action.amount == Decimal(string: "234.6"))
+        #expect(action.category == .clothes)
     }
 }

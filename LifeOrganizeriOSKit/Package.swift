@@ -227,6 +227,6 @@ let package = Package(
                 .copy("Resources/BudgetTemplate.xlsx")
             ]
         ),
-        .test("ActionHandlerFeature", additionalDependencies: ["Entities", "NetworkService", "Framework"]),
+        .test("ActionHandlerFeature", additionalDependencies: ["Entities", "NetworkService", "Framework"], resources: [.process("Resources")]),
     ]
 )
