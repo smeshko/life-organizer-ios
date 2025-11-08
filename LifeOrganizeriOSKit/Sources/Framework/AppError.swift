@@ -30,6 +30,7 @@ public enum AppError: Error, Equatable {
     case speechRecognition(SpeechRecognitionError)
     case xlsx(XLSXError)
     case actionHandler(ActionHandlerError)
+    case iCloudSync(iCloudSyncError)
     // Add your custom service errors here
     // case yourService(YourServiceError)
 
@@ -135,6 +136,53 @@ extension SpeechRecognitionError: LocalizedError {
     }
 }
 
+// MARK: - iCloud Sync Errors
+
+/// Errors that can occur during iCloud file synchronization
+public enum iCloudSyncError: Error, Equatable {
+    /// iCloud Drive is not available (user not signed in or iCloud disabled)
+    case iCloudUnavailable
+
+    /// iCloud container not found (app entitlements issue)
+    case containerNotFound
+
+    /// File not found at the specified path
+    case fileNotFound(String)
+
+    /// Insufficient storage space in iCloud Drive
+    case insufficientStorage
+
+    /// File coordination failed (conflict or lock issue)
+    case coordinationFailed(String)
+
+    /// Upload operation failed
+    case uploadFailed(String)
+
+    /// Download operation failed
+    case downloadFailed(String)
+}
+
+extension iCloudSyncError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .iCloudUnavailable:
+            return "iCloud Drive is not available. Please sign in to iCloud in Settings."
+        case .containerNotFound:
+            return "iCloud container not found. Check app entitlements."
+        case .fileNotFound(let path):
+            return "File not found at path: \(path)"
+        case .insufficientStorage:
+            return "Insufficient storage space in iCloud Drive"
+        case .coordinationFailed(let message):
+            return "File coordination failed: \(message)"
+        case .uploadFailed(let message):
+            return "Upload to iCloud failed: \(message)"
+        case .downloadFailed(let message):
+            return "Download from iCloud failed: \(message)"
+        }
+    }
+}
+
 // MARK: - XLSX Errors
 
 /// Errors that can occur during XLSX file operations
@@ -195,6 +243,8 @@ extension AppError: LocalizedError {
         case .xlsx(let error):
             return error.errorDescription
         case .actionHandler(let error):
+            return error.errorDescription
+        case .iCloudSync(let error):
             return error.errorDescription
         case .unknown(let message):
             return "Unknown error: \(message)"
