@@ -2,15 +2,25 @@ import Foundation
 import Framework
 
 public struct MockNetworkService: NetworkServiceProtocol, Sendable {
-    public init() {}
+    private let mockResponseProvider: (@Sendable (any Endpoint) throws -> Data?)?
+
+    public init() {
+        self.mockResponseProvider = nil
+    }
+
+    public init(mockResponseProvider: @escaping @Sendable (any Endpoint) throws -> Data?) {
+        self.mockResponseProvider = mockResponseProvider
+    }
 
     public func sendRequest<T>(to endpoint: any Endpoint) async throws -> T where T: Decodable {
         // Simulate network delay
         try await Task.sleep(nanoseconds: 100_000_000)
 
         // Return mock data based on endpoint
-        if let mockData = mockResponse(for: endpoint) {
+        if let mockData = try mockResponse(for: endpoint) {
             let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(T.self, from: mockData)
         }
 
@@ -26,7 +36,7 @@ public struct MockNetworkService: NetworkServiceProtocol, Sendable {
         // Simulate network delay
         try await Task.sleep(nanoseconds: 100_000_000)
 
-        if let mockData = mockResponse(for: endpoint) {
+        if let mockData = try mockResponse(for: endpoint) {
             return mockData
         }
 
@@ -35,10 +45,14 @@ public struct MockNetworkService: NetworkServiceProtocol, Sendable {
 
     // MARK: - Mock Data Generation
 
-    private func mockResponse(for endpoint: any Endpoint) -> Data? {
-        // This would typically be configured based on the endpoint path/type
-        // For now, return empty JSON object
-        "{}".data(using: .utf8)
+    private func mockResponse(for endpoint: any Endpoint) throws -> Data? {
+        // Use custom provider if available
+        if let provider = mockResponseProvider {
+            return try provider(endpoint)
+        }
+
+        // Default: return empty JSON object
+        return "{}".data(using: .utf8)
     }
 }
 

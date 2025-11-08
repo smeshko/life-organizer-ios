@@ -168,6 +168,9 @@ let package = Package(
         .library(name: "SpeechToTextService", targets: ["SpeechToTextService"]),
         .library(name: "XLSXAppendService", targets: ["XLSXAppendService"]),
 
+        // Features
+        .library(name: "ActionHandlerFeature", targets: ["ActionHandlerFeature"]),
+
         // Add your features and services here as you create them
         // Example:
         // .library(name: "SettingsFeature", targets: ["SettingsFeature"]),
@@ -197,6 +200,7 @@ let package = Package(
 
         // MARK: - Features
         .feature("AppFeature", dependencies: ["SpeechToTextService"]),
+        .feature("ActionHandlerFeature", dependencies: ["NetworkService", "Entities"]),
 
         // MARK: - Services
         .service("NetworkService"),
@@ -223,5 +227,6 @@ let package = Package(
                 .copy("Resources/BudgetTemplate.xlsx")
             ]
         ),
+        .test("ActionHandlerFeature", additionalDependencies: ["Entities", "NetworkService", "Framework"], resources: [.process("Resources")]),
     ]
 )

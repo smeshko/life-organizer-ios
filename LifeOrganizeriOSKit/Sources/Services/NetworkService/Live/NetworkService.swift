@@ -47,6 +47,7 @@ public struct NetworkService: NetworkServiceProtocol, Sendable {
             try validateResponse(response)
 
             let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(T.self, from: data)
         } catch let error as AppError {
             throw error
