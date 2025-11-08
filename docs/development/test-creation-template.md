@@ -1078,7 +1078,45 @@ func testPublicBehavior() {
 }
 ```
 
-### 2. Brittle Tests
+### 2. Property Validation in Integration Tests
+```swift
+// ❌ DON'T: Test property counts in integration tests
+@Test("All 23 categories are supported")  // In EndToEndTests
+func allCategoriesSupported() {
+    let allCategories: [Category] = [.cat1, .cat2, /* ... */]
+    #expect(allCategories.count == 23)
+}
+
+// ✅ DO: Test properties in unit tests or domain tests
+// In CategoryTests.swift
+@Test("BudgetCategory enum has all expected cases")
+func allCategoriesDefined() {
+    // Test domain model properties separately
+}
+```
+
+### 3. Duplicate Test Data
+```swift
+// ❌ DON'T: Define identical test data in multiple files
+// In MapperTests.swift
+let dto = BudgetActionDTO(amount: 234.6, /* ... */)
+
+// In IntegrationTests.swift
+let dto = BudgetActionDTO(amount: 234.6, /* ... */)
+
+// ✅ DO: Centralize test data
+// In TestHelpers.swift
+enum TestData {
+    enum BudgetDTOs {
+        static let validExpense = BudgetActionDTO(amount: 234.6, /* ... */)
+    }
+}
+
+// Use everywhere
+let dto = TestData.BudgetDTOs.validExpense
+```
+
+### 4. Brittle Tests
 ```swift
 // ❌ DON'T: Depend on specific order or timing
 @Test("Items are in specific order")
@@ -1095,7 +1133,7 @@ func testPresence() {
 }
 ```
 
-### 3. Shared Mutable State
+### 5. Shared Mutable State
 ```swift
 // ❌ DON'T: Share state between tests
 struct Tests {
@@ -1117,7 +1155,7 @@ struct Tests {
 }
 ```
 
-### 4. Over-Mocking
+### 6. Over-Mocking
 ```swift
 // ❌ DON'T: Mock everything
 @Test func test() {
@@ -1136,7 +1174,7 @@ struct Tests {
 }
 ```
 
-### 5. Unclear Test Names
+### 7. Unclear Test Names
 ```swift
 // ❌ DON'T: Vague test names
 @Test("Test 1")
@@ -1145,6 +1183,34 @@ func test1() { }
 // ✅ DO: Descriptive test names
 @Test("Fetches user successfully from remote API")
 func fetchesUserSuccessfully() { }
+```
+
+### 8. Inconsistent Error Testing
+```swift
+// ❌ DON'T: Mix error testing patterns
+@Test func test1() {
+    #expect(throws: Error.self) { try operation() }
+}
+
+@Test func test2() {
+    do {
+        try operation()
+        Issue.record("Expected error")
+    } catch { /* verify */ }
+}
+
+// ✅ DO: Use centralized error assertion helpers
+@Test func test1() {
+    ErrorAssertions.assertThrowsWithMessage(containing: "expected") {
+        try operation()
+    }
+}
+
+@Test func test2() {
+    ErrorAssertions.assertThrows(.specific(Error.case)) {
+        try operation()
+    }
+}
 ```
 
 ## 📊 Test Metrics
