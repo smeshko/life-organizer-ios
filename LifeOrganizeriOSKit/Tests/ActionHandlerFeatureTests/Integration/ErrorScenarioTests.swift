@@ -3,32 +3,75 @@ import Dependencies
 import Foundation
 import Framework
 import Entities
+import NetworkService
 @testable import ActionHandlerFeature
 
 @Suite("Error Scenario Tests")
 struct ErrorScenarioTests {
 
-    @Test("Repository throws error when mock error is set")
-    func repositoryErrorHandling() async throws {
-        // Arrange
+    @Test("Network error propagates correctly")
+    func networkErrorHandling() async throws {
+        // Arrange: Create mock network service that throws an error
         let expectedError = AppError.network(.invalidResponse)
-        let mockRepo = MockActionHandlerRepository(mockError: expectedError)
+        let mockNetworkService = MockNetworkService(mockResponseProvider: { _ in
+            throw expectedError
+        })
 
-        // Act & Assert
+        // Act & Assert: Verify error propagates through the full stack
         await #expect(throws: (any Error).self) {
-            try await mockRepo.processAction(input: "test")
+            try await withDependencies {
+                $0.networkService = mockNetworkService
+            } operation: {
+                @Dependency(\.actionHandlerRepository) var repository
+                try await repository.processAction(input: "test")
+            }
         }
     }
 
-    @Test("Default mock response is returned when no error")
-    func defaultMockResponse() async throws {
+    @Test("Invalid JSON response throws decoding error")
+    func invalidJSONResponse() async throws {
+        // Arrange: Return invalid JSON
+        let invalidJSON = "{ invalid json }".data(using: .utf8)!
+
+        // Act & Assert
+        await #expect(throws: (any Error).self) {
+            try await withDependencies {
+                $0.networkService = MockNetworkService(mockData: invalidJSON)
+            } operation: {
+                @Dependency(\.actionHandlerRepository) var repository
+                try await repository.processAction(input: "test")
+            }
+        }
+    }
+
+    @Test("Valid response is successfully processed through full stack")
+    func successfulEndToEndProcessing() async throws {
         // Arrange
-        let mockRepo = MockActionHandlerRepository()
+        let validJSON = """
+        {
+            "success": true,
+            "action_type": "app_action_required",
+            "app_action": {
+                "type": "log_budget_entry",
+                "amount": 100,
+                "date": "2025-11-03",
+                "transaction_type": "Expenses",
+                "category": "Groceries",
+                "details": null
+            },
+            "message": "Mock action processed successfully"
+        }
+        """.data(using: .utf8)!
 
-        // Act
-        let result = try await mockRepo.processAction(input: "test")
+        // Act: Process through live repository with mocked network
+        let result = try await withDependencies {
+            $0.networkService = MockNetworkService(mockData: validJSON)
+        } operation: {
+            @Dependency(\.actionHandlerRepository) var repository
+            return try await repository.processAction(input: "test")
+        }
 
-        // Assert
+        // Assert: Verify successful processing
         #expect(result.processingResultType == .appActionRequired)
         #expect(result.message == "Mock action processed successfully")
 
@@ -39,24 +82,5 @@ struct ErrorScenarioTests {
 
         #expect(action.amount == Decimal(100))
         #expect(action.category == .groceries)
-    }
-
-    @Test("Custom mock response overrides default")
-    func customMockResponse() async throws {
-        // Arrange
-        let customResponse = ProcessingResponse(
-            processingResultType: .backendHandled,
-            action: nil,
-            message: "Custom message"
-        )
-        let mockRepo = MockActionHandlerRepository(mockResponse: customResponse)
-
-        // Act
-        let result = try await mockRepo.processAction(input: "test")
-
-        // Assert
-        #expect(result.processingResultType == .backendHandled)
-        #expect(result.action == nil)
-        #expect(result.message == "Custom message")
     }
 }
