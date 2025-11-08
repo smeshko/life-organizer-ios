@@ -20,6 +20,7 @@ public struct MockNetworkService: NetworkServiceProtocol, Sendable {
         if let mockData = try mockResponse(for: endpoint) {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(T.self, from: mockData)
         }
 

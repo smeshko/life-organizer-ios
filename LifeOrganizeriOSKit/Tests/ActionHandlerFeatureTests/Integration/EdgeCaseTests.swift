@@ -16,6 +16,8 @@ struct EdgeCaseTests {
 
         // Act: Process with live repository
         let result = try await withDependencies {
+            // Force all dependencies to use live values
+            $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "test")
@@ -41,25 +43,13 @@ struct EdgeCaseTests {
 
     @Test("Zero amount is accepted")
     func zeroAmountHandling() async throws {
-        // Arrange: Create mock response with zero amount
-        let mockJSON = """
-        {
-            "success": true,
-            "action_type": "app_action_required",
-            "app_action": {
-                "type": "log_budget_entry",
-                "amount": 0.01,
-                "date": "2025-11-03",
-                "transaction_type": "Expenses",
-                "category": "Groceries",
-                "details": null
-            },
-            "message": "Zero amount action"
-        }
-        """.data(using: .utf8)!
+        // Arrange: Load small amount response
+        let mockJSON = try TestResources.loadMockResponse("small_amount")
 
         // Act
         let result = try await withDependencies {
+            // Force all dependencies to use live values
+            $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "test")
@@ -76,26 +66,14 @@ struct EdgeCaseTests {
 
     @Test("Very large amount is handled")
     func veryLargeAmount() async throws {
-        // Arrange
-        let largeAmount = Decimal(string: "999999999.99")!
-        let mockJSON = """
-        {
-            "success": true,
-            "action_type": "app_action_required",
-            "app_action": {
-                "type": "log_budget_entry",
-                "amount": 999999999.99,
-                "date": "2025-11-03",
-                "transaction_type": "Income",
-                "category": "Other",
-                "details": null
-            },
-            "message": "Large amount action"
-        }
-        """.data(using: .utf8)!
+        // Arrange: Load large amount response
+        let largeAmount = Decimal(string: "999999.99")!
+        let mockJSON = try TestResources.loadMockResponse("large_amount")
 
         // Act
         let result = try await withDependencies {
+            // Force all dependencies to use live values
+            $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "test")
@@ -117,6 +95,8 @@ struct EdgeCaseTests {
 
         // Act: Test with empty input string
         let result = try await withDependencies {
+            // Force all dependencies to use live values
+            $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "")
@@ -134,6 +114,8 @@ struct EdgeCaseTests {
 
         // Act
         let result = try await withDependencies {
+            // Force all dependencies to use live values
+            $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: longInput)
@@ -151,6 +133,8 @@ struct EdgeCaseTests {
 
         // Act
         let result = try await withDependencies {
+            // Force all dependencies to use live values
+            $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: specialInput)
@@ -162,25 +146,13 @@ struct EdgeCaseTests {
 
     @Test("Unicode characters in details field")
     func unicodeInDetails() async throws {
-        // Arrange: Create mock with Unicode in details
-        let mockJSON = """
-        {
-            "success": true,
-            "action_type": "app_action_required",
-            "app_action": {
-                "type": "log_budget_entry",
-                "amount": 100,
-                "date": "2025-11-03",
-                "transaction_type": "Expenses",
-                "category": "Groceries",
-                "details": "Café ☕️ 中文 émoji"
-            },
-            "message": "Unicode action"
-        }
-        """.data(using: .utf8)!
+        // Arrange: Load unicode details response
+        let mockJSON = try TestResources.loadMockResponse("unicode_details")
 
         // Act
         let result = try await withDependencies {
+            // Force all dependencies to use live values
+            $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "test")

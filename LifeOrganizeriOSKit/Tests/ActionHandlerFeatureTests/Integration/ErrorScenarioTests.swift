@@ -21,6 +21,8 @@ struct ErrorScenarioTests {
         // Act & Assert: Verify error propagates through the full stack
         await #expect(throws: (any Error).self) {
             try await withDependencies {
+                // Force all dependencies to use live values
+                $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
                 $0.networkService = mockNetworkService
             } operation: {
                 try await self.repository.processAction(input: "test")
@@ -36,6 +38,8 @@ struct ErrorScenarioTests {
         // Act & Assert
         await #expect(throws: (any Error).self) {
             try await withDependencies {
+                // Force all dependencies to use live values
+                $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
                 $0.networkService = MockNetworkService(mockData: invalidJSON)
             } operation: {
                 try await self.repository.processAction(input: "test")
@@ -50,6 +54,8 @@ struct ErrorScenarioTests {
 
         // Act: Process through live repository with mocked network
         let result = try await withDependencies {
+            // Force all dependencies to use live values
+            $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: validJSON)
         } operation: {
             try await self.repository.processAction(input: "test")

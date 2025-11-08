@@ -5,7 +5,7 @@
     "app_action": {
       "type": "log_budget_entry",
       "amount": 234.6,
-      "date": "2025-11-03",
+      "date": "2025-11-03T00:00:00Z",
       "transaction_type": "Expenses",
       "category": "Clothes",
       "details": "next"
@@ -37,7 +37,7 @@
     "app_action": {
       "type": "log_budget_entry",
       "amount": 100,
-      "date": "2025-11-03",
+      "date": "2025-11-03T00:00:00Z",
       "transaction_type": "Expenses",
       "category": "Groceries"
     },
@@ -49,11 +49,50 @@
     "app_action": {
       "type": "log_budget_entry",
       "amount": 100,
-      "date": "2025-11-03",
+      "date": "2025-11-03T00:00:00Z",
       "transaction_type": "Expenses",
       "category": "UnknownCategory",
       "details": null
     },
     "message": "Action received"
+  },
+  "small_amount": {
+    "success": true,
+    "action_type": "app_action_required",
+    "app_action": {
+      "type": "log_budget_entry",
+      "amount": 0.01,
+      "date": "2025-11-03T00:00:00Z",
+      "transaction_type": "Expenses",
+      "category": "Groceries",
+      "details": null
+    },
+    "message": "Zero amount action"
+  },
+  "large_amount": {
+    "success": true,
+    "action_type": "app_action_required",
+    "app_action": {
+      "type": "log_budget_entry",
+      "amount": 999999.99,
+      "date": "2025-11-03T00:00:00Z",
+      "transaction_type": "Income",
+      "category": "Other",
+      "details": null
+    },
+    "message": "Large amount action"
+  },
+  "unicode_details": {
+    "success": true,
+    "action_type": "app_action_required",
+    "app_action": {
+      "type": "log_budget_entry",
+      "amount": 100,
+      "date": "2025-11-03T00:00:00Z",
+      "transaction_type": "Expenses",
+      "category": "Groceries",
+      "details": "Café ☕️ 中文 émoji"
+    },
+    "message": "Unicode action"
   }
 }

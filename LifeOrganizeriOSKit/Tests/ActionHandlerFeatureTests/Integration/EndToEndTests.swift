@@ -18,6 +18,8 @@ struct EndToEndTests {
 
         // Act: Process with live repository using mocked network service
         let result = try await withDependencies {
+            // Force all dependencies to use live values
+            $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "spent 120 euros at Next")
@@ -46,6 +48,8 @@ struct EndToEndTests {
 
         // Act
         let result = try await withDependencies {
+            // Force all dependencies to use live values
+            $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "test input")
