@@ -61,14 +61,14 @@ feature_branch: feature/backend-api-implementation
 5. **REQ-005**: System must transform API TransactionType values (Expenses/Income/Savings) to internal enum cases
    - Rationale: API uses capitalized strings; app uses Swift enums with different casing
 
-6. **REQ-006**: System must validate BudgetCategory values match one of 23 predefined categories (16 expense, 4 income, 3 savings)
-   - Rationale: Backend enforces strict category validation; app must match
+6. **REQ-006**: System must validate BudgetCategory values match one of 23 predefined categories (16 expense, 4 income, 3 savings), mapping unknown categories to "Other"
+   - Rationale: Backend enforces strict category validation; app must match and handle graceful degradation for future category additions
 
 7. **REQ-007**: System must parse ISO 8601 date strings (YYYY-MM-DD format) to Date objects
    - Rationale: API returns dates as strings; app needs Date objects for processing
 
-8. **REQ-008**: System must convert amount values from BGN (Bulgarian Lev) to appropriate numeric type
-   - Rationale: Backend returns amounts as floats; app must handle decimal precision
+8. **REQ-008**: System must convert amount values from BGN (Bulgarian Lev) to Decimal type
+   - Rationale: Decimal provides exact decimal arithmetic for financial values without floating-point rounding errors
 
 9. **REQ-009**: System must handle nullable details field for budget actions
    - Rationale: Merchant/description information is optional
@@ -152,12 +152,19 @@ feature_branch: feature/backend-api-implementation
 - Authentication is not required in Phase 1 (added in future version)
 - Action execution (writing to Excel, creating reminders) is out of scope for this implementation
 - BudgetCategory enum uses exact string values from OpenAPI spec (e.g., "Body care", "Salary Ivo", not camelCase)
+- Unknown budget categories from backend are mapped to "Other" for graceful degradation
+- Amount values use Decimal type for financial precision and proper currency formatting
 
-## Open Questions
+## Resolved Questions
 
-- [ ] Should the app cache budget categories or always rely on enum definition?
-- [ ] What should happen if backend returns a category not in the app's enum? (Fail gracefully or add to "Other"?)
-- [ ] Should amount precision be Double or Decimal for financial accuracy?
+- [x] **Should the app cache budget categories or always rely on enum definition?**
+  - **Decision**: Always rely on enum definition. Budget categories are stable and defined in code.
+
+- [x] **What should happen if backend returns a category not in the app's enum?**
+  - **Decision**: Map unknown categories to "Other" category. This provides graceful degradation if backend adds new categories before app is updated.
+
+- [x] **Should amount precision be Double or Decimal for financial accuracy?**
+  - **Decision**: Use Decimal type for proper currency formatting and financial precision. Decimal provides exact decimal arithmetic without floating-point rounding errors.
 
 ---
 
