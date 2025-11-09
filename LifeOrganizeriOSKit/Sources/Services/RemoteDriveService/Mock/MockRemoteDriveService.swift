@@ -36,7 +36,7 @@ public struct MockRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
 
         // Simulate error if configured
         if shouldSimulateError {
-            throw errorToThrow ?? AppError.iCloudSync(.downloadFailed("Mock error"))
+            throw errorToThrow ?? AppError.remoteDriveSync(.downloadFailed("Mock error"))
         }
 
         // Use custom provider if available
@@ -64,12 +64,12 @@ public struct MockRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
 
         // Simulate error if configured
         if shouldSimulateError {
-            throw errorToThrow ?? AppError.iCloudSync(.uploadFailed("Mock error"))
+            throw errorToThrow ?? AppError.remoteDriveSync(.uploadFailed("Mock error"))
         }
 
         // Verify local file exists
         guard FileManager.default.fileExists(atPath: localURL.path) else {
-            throw AppError.iCloudSync(.fileNotFound)
+            throw AppError.remoteDriveSync(.fileNotFound("Local file not found"))
         }
 
         // Success - no actual upload in mock
@@ -86,7 +86,7 @@ public struct MockRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
                 for step in progressSteps {
                     // Check for error simulation at 50%
                     if shouldSimulateError && step == 50 {
-                        continuation.finish(throwing: errorToThrow ?? AppError.iCloudSync(.downloadFailed("Mock error at 50%")))
+                        continuation.finish(throwing: errorToThrow ?? AppError.remoteDriveSync(.downloadFailed("Mock error at 50%")))
                         return
                     }
 
@@ -127,7 +127,7 @@ public struct MockRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
                 for step in progressSteps {
                     // Check for error simulation at 50%
                     if shouldSimulateError && step == 50 {
-                        continuation.finish(throwing: errorToThrow ?? AppError.iCloudSync(.uploadFailed("Mock error at 50%")))
+                        continuation.finish(throwing: errorToThrow ?? AppError.remoteDriveSync(.uploadFailed("Mock error at 50%")))
                         return
                     }
 

@@ -1,11 +1,11 @@
 import Foundation
 
 public struct LiveRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
-    private let fileManager: FileManager
+    private let fileManager: any FileManagerProtocol
     private let containerIdentifier: String?
 
     public init(
-        fileManager: FileManager = .default,
+        fileManager: any FileManagerProtocol = FileManager.default,
         containerIdentifier: String? = nil
     ) {
         self.fileManager = fileManager
@@ -52,7 +52,7 @@ public struct LiveRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
 
         // Verify local file exists
         guard fileManager.fileExists(atPath: localURL.path) else {
-            throw AppError.iCloudSync(.fileNotFound)
+            throw AppError.remoteDriveSync(.fileNotFound("Local file not found"))
         }
 
         // Get container URL
@@ -111,7 +111,7 @@ public struct LiveRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
                     try validatePath(cloudPath)
 
                     guard self.fileManager.fileExists(atPath: localURL.path) else {
-                        throw AppError.iCloudSync(.fileNotFound)
+                        throw AppError.remoteDriveSync(.fileNotFound("Local file not found"))
                     }
 
                     // Get local file size
@@ -148,7 +148,7 @@ public struct LiveRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
             guard let url = self.fileManager.url(
                 forUbiquityContainerIdentifier: self.containerIdentifier
             ) else {
-                throw AppError.iCloudSync(.containerNotFound)
+                throw AppError.remoteDriveSync(.containerNotFound)
             }
             return url.appendingPathComponent("Documents")
         }.value
@@ -168,12 +168,12 @@ public struct LiveRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
                     let data = try Data(contentsOf: coordURL)
                     continuation.resume(returning: data)
                 } catch {
-                    continuation.resume(throwing: AppError.iCloudSync(.downloadFailed(error.localizedDescription)))
+                    continuation.resume(throwing: AppError.remoteDriveSync(.downloadFailed(error.localizedDescription)))
                 }
             }
 
             if let error = error {
-                continuation.resume(throwing: AppError.iCloudSync(.coordinationFailed(error.localizedDescription)))
+                continuation.resume(throwing: AppError.remoteDriveSync(.coordinationFailed(error.localizedDescription)))
             }
         }
     }
@@ -192,12 +192,12 @@ public struct LiveRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
                     try self.fileManager.copyItem(at: sourceURL, to: tempURL)
                     continuation.resume()
                 } catch {
-                    continuation.resume(throwing: AppError.iCloudSync(.uploadFailed(error.localizedDescription)))
+                    continuation.resume(throwing: AppError.remoteDriveSync(.uploadFailed(error.localizedDescription)))
                 }
             }
 
             if let error = error {
-                continuation.resume(throwing: AppError.iCloudSync(.coordinationFailed(error.localizedDescription)))
+                continuation.resume(throwing: AppError.remoteDriveSync(.coordinationFailed(error.localizedDescription)))
             }
         }
     }
@@ -205,19 +205,19 @@ public struct LiveRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
     private func validatePath(_ path: String) throws {
         // Validate path doesn't contain "../" (security)
         if path.contains("../") {
-            throw AppError.iCloudSync(.invalidPath("Path contains invalid '../' sequence"))
+            throw AppError.remoteDriveSync(.invalidPath("Path contains invalid '../' sequence"))
         }
 
         // Validate path is not absolute
         if path.hasPrefix("/") {
-            throw AppError.iCloudSync(.invalidPath("Path must be relative, not absolute"))
+            throw AppError.remoteDriveSync(.invalidPath("Path must be relative, not absolute"))
         }
     }
 
     private func getFileSize(at url: URL) throws -> Int64 {
         let resourceValues = try url.resourceValues(forKeys: [.fileSizeKey])
         guard let fileSize = resourceValues.fileSize else {
-            throw AppError.iCloudSync(.downloadFailed("Unable to determine file size"))
+            throw AppError.remoteDriveSync(.downloadFailed("Unable to determine file size"))
         }
         return Int64(fileSize)
     }

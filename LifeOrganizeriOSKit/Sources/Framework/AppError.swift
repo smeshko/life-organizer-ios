@@ -30,7 +30,7 @@ public enum AppError: Error, Equatable {
     case speechRecognition(SpeechRecognitionError)
     case xlsx(XLSXError)
     case actionHandler(ActionHandlerError)
-    case iCloudSync(iCloudSyncError)
+    case remoteDriveSync(RemoteDriveSyncError)
     // Add your custom service errors here
     // case yourService(YourServiceError)
 
@@ -136,20 +136,20 @@ extension SpeechRecognitionError: LocalizedError {
     }
 }
 
-// MARK: - iCloud Sync Errors
+// MARK: - Remote Drive Sync Errors
 
-/// Errors that can occur during iCloud file synchronization
-public enum iCloudSyncError: Error, Equatable {
-    /// iCloud Drive is not available (user not signed in or iCloud disabled)
-    case iCloudUnavailable
+/// Errors that can occur during remote drive file synchronization
+public enum RemoteDriveSyncError: Error, Equatable {
+    /// Remote drive is not available (user not signed in or service disabled)
+    case remoteDriveUnavailable
 
-    /// iCloud container not found (app entitlements issue)
+    /// Remote drive container not found (app entitlements issue)
     case containerNotFound
 
     /// File not found at the specified path
     case fileNotFound(String)
 
-    /// Insufficient storage space in iCloud Drive
+    /// Insufficient storage space in remote drive
     case insufficientStorage
 
     /// File coordination failed (conflict or lock issue)
@@ -160,25 +160,30 @@ public enum iCloudSyncError: Error, Equatable {
 
     /// Download operation failed
     case downloadFailed(String)
+
+    /// Invalid path provided
+    case invalidPath(String)
 }
 
-extension iCloudSyncError: LocalizedError {
+extension RemoteDriveSyncError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case .iCloudUnavailable:
-            return "iCloud Drive is not available. Please sign in to iCloud in Settings."
+        case .remoteDriveUnavailable:
+            return "Remote drive is not available. Please sign in to your cloud provider in Settings."
         case .containerNotFound:
-            return "iCloud container not found. Check app entitlements."
+            return "Remote drive container not found. Check app entitlements."
         case .fileNotFound(let path):
             return "File not found at path: \(path)"
         case .insufficientStorage:
-            return "Insufficient storage space in iCloud Drive"
+            return "Insufficient storage space in remote drive"
         case .coordinationFailed(let message):
             return "File coordination failed: \(message)"
         case .uploadFailed(let message):
-            return "Upload to iCloud failed: \(message)"
+            return "Upload to remote drive failed: \(message)"
         case .downloadFailed(let message):
-            return "Download from iCloud failed: \(message)"
+            return "Download from remote drive failed: \(message)"
+        case .invalidPath(let message):
+            return "Invalid path: \(message)"
         }
     }
 }
@@ -244,7 +249,7 @@ extension AppError: LocalizedError {
             return error.errorDescription
         case .actionHandler(let error):
             return error.errorDescription
-        case .iCloudSync(let error):
+        case .remoteDriveSync(let error):
             return error.errorDescription
         case .unknown(let message):
             return "Unknown error: \(message)"
