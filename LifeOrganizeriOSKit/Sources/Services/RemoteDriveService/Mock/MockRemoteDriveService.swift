@@ -1,4 +1,5 @@
 import Foundation
+import Framework
 
 public struct MockRemoteDriveService: RemoteDriveServiceProtocol, Sendable {
     public let shouldSimulateError: Bool

@@ -167,6 +167,7 @@ let package = Package(
         .library(name: "NetworkService", targets: ["NetworkService"]),
         .library(name: "SpeechToTextService", targets: ["SpeechToTextService"]),
         .library(name: "XLSXAppendService", targets: ["XLSXAppendService"]),
+        .library(name: "RemoteDriveService", targets: ["RemoteDriveService"]),
 
         // Features
         .library(name: "ActionHandlerFeature", targets: ["ActionHandlerFeature"]),
@@ -206,6 +207,7 @@ let package = Package(
         .service("NetworkService"),
         .service("SpeechToTextService"),
         .service("XLSXAppendService", dependencies: [Dependencies.zipFoundation]),
+        .service("RemoteDriveService"),
 
         // MARK: - Add Your Services Here
         // Example:
@@ -227,6 +229,7 @@ let package = Package(
                 .copy("Resources/BudgetTemplate.xlsx")
             ]
         ),
+        .test("RemoteDriveService", additionalDependencies: ["Framework"]),
         .test("ActionHandlerFeature", additionalDependencies: ["Entities", "NetworkService", "Framework"], resources: [.process("Resources")]),
     ]
 )
