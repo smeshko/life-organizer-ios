@@ -44,6 +44,7 @@ public struct AppFeature {
     public enum Action {
         case onAppear
         case inputTextChanged(String)
+        case sendButtonTapped
         case startRecordingButtonTapped
         case stopRecordingButtonTapped
         case recognitionResultReceived(String, isFinal: Bool)
@@ -60,6 +61,13 @@ public struct AppFeature {
 
             case .inputTextChanged(let text):
                 state.inputText = text
+                return .none
+
+            case .sendButtonTapped:
+                // TODO: Send message to backend/AI service
+                // For now, just clear the input and show in transcription
+                state.transcribedText = "You sent: \(state.inputText)"
+                state.inputText = ""
                 return .none
 
             case .startRecordingButtonTapped:

@@ -11,13 +11,20 @@ public struct AppView: View {
     }
 
     public var body: some View {
-        ZStack(alignment: .bottom) {
+        ZStack {
             // Background
             Color.lifeBackground
                 .ignoresSafeArea()
 
-            VStack {
+            VStack(spacing: .lifeSpacingLG) {
                 Spacer()
+
+                // Greeting headline
+                Text("How can I help you today?")
+                    .font(.lifeTitle1)
+                    .foregroundColor(.lifeTextPrimary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, .lifeSpacingXL)
 
                 // Input field container
                 HStack(spacing: .lifeSpacingSM) {
@@ -27,42 +34,67 @@ public struct AppView: View {
                         text: Binding(
                             get: { store.inputText },
                             set: { store.send(.inputTextChanged($0)) }
-                        ),
-                        axis: .vertical
+                        )
                     )
                     .font(.lifeBody)
                     .foregroundColor(.lifeTextPrimary)
-                    .padding(.lifeSpacingMD)
-                    .lineLimit(1...6)
+                    .padding(.horizontal, .lifeSpacingMD)
+                    .frame(height: 44)
 
-                    // Microphone button
-                    Button {
-                        if store.isRecording {
-                            store.send(.stopRecordingButtonTapped)
-                        } else {
-                            store.send(.startRecordingButtonTapped)
+                    // Show send button when text exists, mic button otherwise
+                    if !store.inputText.isEmpty {
+                        // Send button
+                        Button {
+                            store.send(.sendButtonTapped)
+                        } label: {
+                            Image(systemName: "arrow.up.circle.fill")
+                                .font(.system(size: 32, weight: .medium))
+                                .foregroundColor(.lifePrimary)
                         }
-                    } label: {
-                        Image(systemName: "mic.fill")
-                            .font(.system(size: 20, weight: .medium))
-                            .foregroundColor(store.isRecording ? .white : .lifeIconDefault)
-                            .frame(width: 40, height: 40)
-                            .background(
-                                Circle()
-                                    .fill(store.isRecording ? Color.lifePrimary : Color.lifeSurface)
-                            )
+                        .padding(.trailing, .lifeSpacingXS)
+                    } else {
+                        // Microphone button
+                        Button {
+                            if store.isRecording {
+                                store.send(.stopRecordingButtonTapped)
+                            } else {
+                                store.send(.startRecordingButtonTapped)
+                            }
+                        } label: {
+                            Image(systemName: "mic.fill")
+                                .font(.system(size: 20, weight: .medium))
+                                .foregroundColor(store.isRecording ? .white : .lifeIconDefault)
+                                .frame(width: 40, height: 40)
+                                .background(
+                                    Circle()
+                                        .fill(store.isRecording ? Color.lifePrimary : Color.lifeSurface)
+                                )
+                        }
+                        .padding(.trailing, .lifeSpacingXS)
                     }
-                    .padding(.trailing, .lifeSpacingXS)
                 }
-                .padding(.horizontal, .lifeSpacingMD)
-                .padding(.vertical, .lifeSpacingSM)
                 .background(
-                    RoundedRectangle(cornerRadius: .lifeRadiusLG)
+                    RoundedRectangle(cornerRadius: .lifeRadiusPill)
                         .fill(Color.lifeSurface)
                 )
                 .lifeShadowSubtle()
                 .padding(.horizontal, .lifeSpacingMD)
-                .padding(.bottom, .lifeSpacingMD)
+
+                // Show transcribed/sent messages
+                if !store.transcribedText.isEmpty {
+                    Text(store.transcribedText)
+                        .font(.lifeBody)
+                        .foregroundColor(.lifeTextSecondary)
+                        .padding(.lifeSpacingMD)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(
+                            RoundedRectangle(cornerRadius: .lifeRadiusMD)
+                                .fill(Color.lifeSurfaceAlt)
+                        )
+                        .padding(.horizontal, .lifeSpacingMD)
+                }
+
+                Spacer()
             }
 
             // Error overlay (if needed)
