@@ -11,76 +11,76 @@ public struct AppView: View {
     }
 
     public var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "swift")
-                .font(.system(size: 80))
-                .foregroundStyle(.orange)
+        ZStack(alignment: .bottom) {
+            // Background
+            Color.lifeBackground
+                .ignoresSafeArea()
 
-            Text(store.message)
-                .font(.title)
-                .multilineTextAlignment(.center)
+            VStack {
+                Spacer()
 
-            Text("Start building your features!")
-                .font(.body)
-                .foregroundStyle(.secondary)
+                // Input field container
+                HStack(spacing: .lifeSpacingSM) {
+                    // Text field
+                    TextField(
+                        "Message",
+                        text: Binding(
+                            get: { store.inputText },
+                            set: { store.send(.inputTextChanged($0)) }
+                        ),
+                        axis: .vertical
+                    )
+                    .font(.lifeBody)
+                    .foregroundColor(.lifeTextPrimary)
+                    .padding(.lifeSpacingMD)
+                    .lineLimit(1...6)
 
-            Divider()
-                .padding(.vertical)
-
-            // Speech-to-Text Test Section
-            VStack(spacing: 16) {
-                Text("Speech-to-Text Test")
-                    .font(.headline)
-
-                // Recording button
-                Button {
-                    if store.isRecording {
-                        store.send(.stopRecordingButtonTapped)
-                    } else {
-                        store.send(.startRecordingButtonTapped)
+                    // Microphone button
+                    Button {
+                        if store.isRecording {
+                            store.send(.stopRecordingButtonTapped)
+                        } else {
+                            store.send(.startRecordingButtonTapped)
+                        }
+                    } label: {
+                        Image(systemName: "mic.fill")
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundColor(store.isRecording ? .white : .lifeIconDefault)
+                            .frame(width: 40, height: 40)
+                            .background(
+                                Circle()
+                                    .fill(store.isRecording ? Color.lifePrimary : Color.lifeSurface)
+                            )
                     }
-                } label: {
-                    HStack {
-                        Image(systemName: store.isRecording ? "stop.circle.fill" : "mic.circle.fill")
-                            .font(.title2)
-                        Text(store.isRecording ? "Stop Recording" : "Start Recording")
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(store.isRecording ? Color.red : Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                    .padding(.trailing, .lifeSpacingXS)
                 }
+                .padding(.horizontal, .lifeSpacingMD)
+                .padding(.vertical, .lifeSpacingSM)
+                .background(
+                    RoundedRectangle(cornerRadius: .lifeRadiusLG)
+                        .fill(Color.lifeSurface)
+                )
+                .lifeShadowSubtle()
+                .padding(.horizontal, .lifeSpacingMD)
+                .padding(.bottom, .lifeSpacingMD)
+            }
 
-                // Transcribed text display
-                if !store.transcribedText.isEmpty {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Transcription:")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-
-                        Text(store.transcribedText)
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(8)
-                    }
-                }
-
-                // Error message display
-                if let errorMessage = store.errorMessage {
+            // Error overlay (if needed)
+            if let errorMessage = store.errorMessage {
+                VStack {
                     Text(errorMessage)
-                        .font(.caption)
-                        .foregroundStyle(.red)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.red.opacity(0.1))
-                        .cornerRadius(8)
+                        .font(.lifeCaption)
+                        .foregroundColor(.red)
+                        .padding(.lifeSpacingSM)
+                        .background(
+                            RoundedRectangle(cornerRadius: .lifeRadiusSM)
+                                .fill(Color.red.opacity(0.1))
+                        )
+                        .padding(.lifeSpacingMD)
+                    Spacer()
                 }
             }
-            .padding(.horizontal)
         }
-        .padding()
         .onAppear {
             store.send(.onAppear)
         }

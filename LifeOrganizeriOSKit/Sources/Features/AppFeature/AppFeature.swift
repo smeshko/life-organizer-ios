@@ -32,6 +32,7 @@ public struct AppFeature {
     @ObservableState
     public struct State: Equatable {
         public var message: String = "Welcome to your iOS app!"
+        public var inputText: String = ""
         public var isRecording: Bool = false
         public var transcribedText: String = ""
         public var errorMessage: String?
@@ -42,6 +43,7 @@ public struct AppFeature {
     /// The actions that can be performed in the app.
     public enum Action {
         case onAppear
+        case inputTextChanged(String)
         case startRecordingButtonTapped
         case stopRecordingButtonTapped
         case recognitionResultReceived(String, isFinal: Bool)
@@ -54,6 +56,10 @@ public struct AppFeature {
             switch action {
             case .onAppear:
                 // Initialize app-level logic here
+                return .none
+
+            case .inputTextChanged(let text):
+                state.inputText = text
                 return .none
 
             case .startRecordingButtonTapped:
@@ -92,6 +98,7 @@ public struct AppFeature {
                 return .cancel(id: CancelID.recording)
 
             case let .recognitionResultReceived(text, isFinal):
+                state.inputText = text
                 state.transcribedText = text
                 // Don't stop recording on final results - wait for stream completion
                 return .none
