@@ -15,6 +15,10 @@ public struct AppView: View {
             // Background
             Color.lifeBackground
                 .ignoresSafeArea()
+                .onTapGesture {
+                    // Dismiss keyboard on tap
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
 
             VStack(spacing: .lifeSpacingLG) {
                 Spacer()
@@ -52,6 +56,7 @@ public struct AppView: View {
                                 .foregroundColor(.lifePrimary)
                         }
                         .padding(.trailing, .lifeSpacingXS)
+                        .padding(.vertical, 4)
                     } else {
                         // Microphone button
                         Button {
@@ -71,6 +76,7 @@ public struct AppView: View {
                                 )
                         }
                         .padding(.trailing, .lifeSpacingXS)
+                        .padding(.vertical, 4)
                     }
                 }
                 .background(
@@ -79,20 +85,6 @@ public struct AppView: View {
                 )
                 .lifeShadowSubtle()
                 .padding(.horizontal, .lifeSpacingMD)
-
-                // Show transcribed/sent messages
-                if !store.transcribedText.isEmpty {
-                    Text(store.transcribedText)
-                        .font(.lifeBody)
-                        .foregroundColor(.lifeTextSecondary)
-                        .padding(.lifeSpacingMD)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(
-                            RoundedRectangle(cornerRadius: .lifeRadiusMD)
-                                .fill(Color.lifeSurfaceAlt)
-                        )
-                        .padding(.horizontal, .lifeSpacingMD)
-                }
 
                 Spacer()
             }

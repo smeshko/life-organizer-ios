@@ -65,8 +65,7 @@ public struct AppFeature {
 
             case .sendButtonTapped:
                 // TODO: Send message to backend/AI service
-                // For now, just clear the input and show in transcription
-                state.transcribedText = "You sent: \(state.inputText)"
+                // For now, just clear the input
                 state.inputText = ""
                 return .none
 
