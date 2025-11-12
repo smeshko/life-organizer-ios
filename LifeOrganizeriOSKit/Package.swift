@@ -191,8 +191,8 @@ let package = Package(
         ),
 
         // MARK: - Features
-        .feature("AppFeature", dependencies: ["SpeechToTextService"]),
-        .feature("ActionHandlerFeature", dependencies: ["NetworkService", "Entities"]),
+        .feature("AppFeature", dependencies: ["ActionHandlerFeature"]),
+        .feature("ActionHandlerFeature", dependencies: ["NetworkService", "Entities", "SpeechToTextService"]),
 
         // MARK: - Services
         .service("NetworkService"),
