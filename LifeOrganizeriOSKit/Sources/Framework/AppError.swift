@@ -28,7 +28,6 @@ public enum AppError: Error, Equatable {
     case network(NetworkError)
     case persistence(PersistenceError)
     case speechRecognition(SpeechRecognitionError)
-    case xlsx(XLSXError)
     case actionHandler(ActionHandlerError)
     // Add your custom service errors here
     // case yourService(YourServiceError)
@@ -135,53 +134,6 @@ extension SpeechRecognitionError: LocalizedError {
     }
 }
 
-// MARK: - XLSX Errors
-
-/// Errors that can occur during XLSX file operations
-public enum XLSXError: Error, Equatable {
-    /// The specified file was not found or is not accessible
-    case fileNotFound
-
-    /// The file is not a valid XLSX format or is corrupted
-    case invalidXLSXFormat
-
-    /// The requested sheet name does not exist in the workbook
-    case sheetNotFound(String)
-
-    /// ZIP archive operation failed (unzip or zip)
-    case zipOperationFailed(String)
-
-    /// XML parsing or structure validation failed
-    case xmlParsingFailed(String)
-
-    /// Worksheet modification operation failed
-    case worksheetModificationFailed(String)
-
-    /// Invalid input parameters provided to the service
-    case invalidInputParameters(String)
-}
-
-extension XLSXError: LocalizedError {
-    public var errorDescription: String? {
-        switch self {
-        case .fileNotFound:
-            return "XLSX file not found or is not accessible"
-        case .invalidXLSXFormat:
-            return "Invalid XLSX file format or corrupted file"
-        case .sheetNotFound(let name):
-            return "Sheet '\(name)' not found in workbook"
-        case .zipOperationFailed(let message):
-            return "ZIP operation failed: \(message)"
-        case .xmlParsingFailed(let message):
-            return "XML parsing failed: \(message)"
-        case .worksheetModificationFailed(let message):
-            return "Failed to modify worksheet: \(message)"
-        case .invalidInputParameters(let message):
-            return "Invalid parameters: \(message)"
-        }
-    }
-}
-
 // MARK: - LocalizedError Conformance
 extension AppError: LocalizedError {
     public var errorDescription: String? {
@@ -191,8 +143,6 @@ extension AppError: LocalizedError {
         case .persistence(let error):
             return error.errorDescription
         case .speechRecognition(let error):
-            return error.errorDescription
-        case .xlsx(let error):
             return error.errorDescription
         case .actionHandler(let error):
             return error.errorDescription
