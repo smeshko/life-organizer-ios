@@ -53,13 +53,17 @@ struct ErrorScenarioTests {
         let validJSON = try TestResources.loadMockResponse("valid_budget_action")
 
         // Act: Process through live repository with mocked network
-        let result = try await withDependencies {
+        let results = try await withDependencies {
             // Force all dependencies to use live values
             $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: validJSON)
         } operation: {
             try await self.repository.processAction(input: "test")
         }
+
+        // Assert: Verify array structure
+        #expect(results.count == 1)
+        let result = results[0]
 
         // Assert: Verify successful processing
         #expect(result.processingResultType == .appActionRequired)

@@ -15,10 +15,6 @@ public struct ActionHandlerView: View {
             // Background
             Color.lifeBackground
                 .ignoresSafeArea()
-                .onTapGesture {
-                    // Dismiss keyboard on tap
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                }
 
             VStack(spacing: .lifeSpacingLG) {
                 Spacer()

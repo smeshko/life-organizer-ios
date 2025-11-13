@@ -59,8 +59,12 @@ public struct ActionHandlerFeature {
                     @Dependency(\.actionHandlerRepository) var repository
 
                     do {
-                        let response = try await repository.processAction(input: inputText)
-                        await send(.processingSuccess(response))
+                        let responses = try await repository.processAction(input: inputText)
+                        // TODO: Handle multiple responses in UI - for now, show first result
+                        // Multi-transaction UI support requires updating State to store [ProcessingResponse]
+                        if let firstResponse = responses.first {
+                            await send(.processingSuccess(firstResponse))
+                        }
                     } catch {
                         await send(.processingFailure(error))
                     }

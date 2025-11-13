@@ -25,11 +25,11 @@ enum TestResources {
 
         let data = try Data(contentsOf: url)
         guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let responseDict = json[key] as? [String: Any] else {
+              let responseArray = json[key] as? [[String: Any]] else {
             throw TestResourceError.responseNotFound(key)
         }
 
-        return try JSONSerialization.data(withJSONObject: responseDict)
+        return try JSONSerialization.data(withJSONObject: responseArray)
     }
 }
 
