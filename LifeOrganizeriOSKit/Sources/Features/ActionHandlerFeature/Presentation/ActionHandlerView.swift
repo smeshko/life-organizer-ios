@@ -5,7 +5,7 @@ import CoreUI
 /// SwiftUI view for ActionHandlerFeature that displays input field with voice and text input.
 public struct ActionHandlerView: View {
     @Bindable var store: StoreOf<ActionHandlerFeature>
-
+    
     public init(store: StoreOf<ActionHandlerFeature>) {
         self.store = store
     }
@@ -15,41 +15,40 @@ public struct ActionHandlerView: View {
             // Background
             Color.lifeBackground
                 .ignoresSafeArea()
-
+            
             VStack(spacing: .lifeSpacingLG) {
                 Spacer()
-
+                
                 // Greeting headline
                 Text("How can I help you today?")
                     .font(.lifeTitle1)
                     .foregroundColor(.lifeTextPrimary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, .lifeSpacingXL)
-
+                
                 // Input field container
-                HStack(spacing: .lifeSpacingSM) {
-                    // Text field
+                HStack(alignment: .center, spacing: .lifeSpacingSM) {
                     TextField(
                         "Message",
                         text: Binding(
                             get: { store.inputText },
                             set: { store.send(.inputTextChanged($0)) }
-                        )
+                        ),
+                        axis: .vertical
                     )
+                    .lineLimit(1...4)
                     .font(.lifeBody)
                     .foregroundColor(.lifeTextPrimary)
-                    .padding(.horizontal, .lifeSpacingMD)
-                    .frame(height: 44)
-
+                    .background(Color.clear)
+                    
                     // Show loading spinner, send button, or mic button
                     if store.isLoading {
                         // Loading spinner
                         ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
+                            .progressViewStyle(.circular)
                             .tint(.lifePrimary)
                             .frame(width: 40, height: 40)
                             .padding(.trailing, .lifeSpacingXS)
-                            .padding(.vertical, 4)
                     } else if !store.inputText.isEmpty {
                         // Send button
                         Button {
@@ -60,7 +59,6 @@ public struct ActionHandlerView: View {
                                 .foregroundColor(.lifePrimary)
                         }
                         .padding(.trailing, .lifeSpacingXS)
-                        .padding(.vertical, 4)
                     } else {
                         // Microphone button
                         Button {
@@ -80,19 +78,20 @@ public struct ActionHandlerView: View {
                                 )
                         }
                         .padding(.trailing, .lifeSpacingXS)
-                        .padding(.vertical, 4)
                     }
                 }
+                .padding(.vertical, .lifeSpacingSM)
+                .padding(.leading, .lifeSpacingMD)
                 .background(
-                    RoundedRectangle(cornerRadius: .lifeRadiusPill)
+                    RoundedRectangle(cornerRadius: .lifeRadiusXL)
                         .fill(Color.lifeSurface)
                 )
                 .lifeShadowSubtle()
                 .padding(.horizontal, .lifeSpacingMD)
-
+                
                 Spacer()
             }
-
+            
             // Error overlay (if needed)
             if let errorMessage = store.errorMessage {
                 VStack {
