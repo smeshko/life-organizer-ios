@@ -53,4 +53,14 @@ public extension Color {
     /// - Light: #6E6E80 (medium gray)
     /// - Dark: #B4B4B4 (light gray)
     static let lifeIconDefault = Color("Life/IconDefault", bundle: .module)
+
+    // MARK: - Semantic Colors
+
+    /// Success color for positive feedback
+    /// - Light/Dark: #34C759 (green)
+    static let lifeSuccess = Color.green
+
+    /// Error color for negative feedback
+    /// - Light/Dark: #FF3B30 (red)
+    static let lifeError = Color.red
 }

@@ -1,12 +1,12 @@
 import Foundation
 import Framework
 
-/// API endpoints for ActionHandler feature
-public enum ActionHandlerEndpoint {
-    case processAction(Data)
+/// App-level API endpoints for health checks, status, and system-wide operations
+public enum AppEndpoint {
+    case status
 }
 
-extension ActionHandlerEndpoint: Endpoint {
+extension AppEndpoint: Endpoint {
     public var url: URL? {
         let baseURL = APIConfiguration.baseURL
         return baseURL.appendingPathComponent(path)
@@ -14,29 +14,25 @@ extension ActionHandlerEndpoint: Endpoint {
 
     public var path: String {
         switch self {
-        case .processAction:
-            return "/api/v1/process"
+        case .status:
+            return "/api/v1/status"
         }
     }
 
     public var method: HTTPMethod {
         switch self {
-        case .processAction:
-            return .post
+        case .status:
+            return .get
         }
     }
 
     public var headers: [String: String]? {
         return [
-            "Content-Type": "application/json",
             "Accept": "application/json"
         ]
     }
 
     public var body: Data? {
-        switch self {
-        case .processAction(let data):
-            return data
-        }
+        return nil
     }
 }
