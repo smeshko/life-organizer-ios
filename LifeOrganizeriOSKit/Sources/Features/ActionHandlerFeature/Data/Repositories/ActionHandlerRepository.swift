@@ -5,7 +5,7 @@ import Entities
 actor ActionHandlerRepository: ActionHandlerRepositoryProtocol {
     @Dependency(\.actionHandlerRemoteDataSource) private var remoteDataSource
 
-    func processAction(input: String) async throws -> ProcessingResponse {
+    func processAction(input: String) async throws -> [ProcessingResponse] {
         try await remoteDataSource.processAction(input: input)
     }
 }

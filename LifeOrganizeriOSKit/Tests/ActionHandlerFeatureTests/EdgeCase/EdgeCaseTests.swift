@@ -15,13 +15,17 @@ struct EdgeCaseTests {
         let mockJSON = try TestResources.loadMockResponse("missing_details")
 
         // Act: Process with live repository
-        let result = try await withDependencies {
+        let results = try await withDependencies {
             // Force all dependencies to use live values
             $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "test")
         }
+
+        // Assert: Verify array structure
+        #expect(results.count == 1)
+        let result = results[0]
 
         // Assert
         guard case .budget(let action) = result.action else {
@@ -47,13 +51,17 @@ struct EdgeCaseTests {
         let mockJSON = try TestResources.loadMockResponse("small_amount")
 
         // Act
-        let result = try await withDependencies {
+        let results = try await withDependencies {
             // Force all dependencies to use live values
             $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "test")
         }
+
+        // Assert: Verify array structure
+        #expect(results.count == 1)
+        let result = results[0]
 
         // Assert
         guard case .budget(let action) = result.action else {
@@ -71,13 +79,17 @@ struct EdgeCaseTests {
         let mockJSON = try TestResources.loadMockResponse("large_amount")
 
         // Act
-        let result = try await withDependencies {
+        let results = try await withDependencies {
             // Force all dependencies to use live values
             $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "test")
         }
+
+        // Assert: Verify array structure
+        #expect(results.count == 1)
+        let result = results[0]
 
         // Assert
         guard case .budget(let action) = result.action else {
@@ -94,13 +106,17 @@ struct EdgeCaseTests {
         let mockJSON = try TestResources.loadMockResponse("valid_budget_action")
 
         // Act: Test with empty input string
-        let result = try await withDependencies {
+        let results = try await withDependencies {
             // Force all dependencies to use live values
             $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "")
         }
+
+        // Assert: Verify array structure
+        #expect(results.count == 1)
+        let result = results[0]
 
         // Assert
         #expect(result.processingResultType == .appActionRequired)
@@ -113,13 +129,17 @@ struct EdgeCaseTests {
         let mockJSON = try TestResources.loadMockResponse("valid_budget_action")
 
         // Act
-        let result = try await withDependencies {
+        let results = try await withDependencies {
             // Force all dependencies to use live values
             $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: longInput)
         }
+
+        // Assert: Verify array structure
+        #expect(results.count == 1)
+        let result = results[0]
 
         // Assert
         #expect(result.processingResultType == .appActionRequired)
@@ -132,13 +152,17 @@ struct EdgeCaseTests {
         let mockJSON = try TestResources.loadMockResponse("valid_budget_action")
 
         // Act
-        let result = try await withDependencies {
+        let results = try await withDependencies {
             // Force all dependencies to use live values
             $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: specialInput)
         }
+
+        // Assert: Verify array structure
+        #expect(results.count == 1)
+        let result = results[0]
 
         // Assert
         #expect(result.processingResultType == .appActionRequired)
@@ -150,13 +174,17 @@ struct EdgeCaseTests {
         let mockJSON = try TestResources.loadMockResponse("unicode_details")
 
         // Act
-        let result = try await withDependencies {
+        let results = try await withDependencies {
             // Force all dependencies to use live values
             $0.actionHandlerRemoteDataSource = DependencyValues.live.actionHandlerRemoteDataSource
             $0.networkService = MockNetworkService(mockData: mockJSON)
         } operation: {
             try await self.repository.processAction(input: "test")
         }
+
+        // Assert: Verify array structure
+        #expect(results.count == 1)
+        let result = results[0]
 
         // Assert
         guard case .budget(let action) = result.action else {

@@ -2,9 +2,9 @@ import Foundation
 import Entities
 
 struct MockActionHandlerRemoteDataSource: ActionHandlerRemoteDataSourceProtocol {
-    func processAction(input: String) async throws -> ProcessingResponse {
-        // Return default mock response
-        ProcessingResponse(
+    func processAction(input: String) async throws -> [ProcessingResponse] {
+        // Return default mock response (single-element array)
+        [ProcessingResponse(
             processingResultType: .appActionRequired,
             action: .budget(BudgetAction(
                 amount: Decimal(100),
@@ -14,6 +14,6 @@ struct MockActionHandlerRemoteDataSource: ActionHandlerRemoteDataSourceProtocol 
                 details: "Mock budget action"
             )),
             message: "Mock action processed successfully"
-        )
+        )]
     }
 }
