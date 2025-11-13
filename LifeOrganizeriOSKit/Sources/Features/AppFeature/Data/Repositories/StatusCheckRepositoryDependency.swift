@@ -1,13 +1,12 @@
 import ComposableArchitecture
-import NetworkService
 
 extension StatusCheckRepository: DependencyKey {
     public static var liveValue: StatusCheckRepository {
-        StatusCheckRepository(networkService: NetworkService())
+        StatusCheckRepository()
     }
 
     public static var testValue: StatusCheckRepository {
-        StatusCheckRepository(networkService: NetworkService())
+        StatusCheckRepository()
     }
 }
 

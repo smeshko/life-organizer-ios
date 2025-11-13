@@ -1,13 +1,12 @@
 import Foundation
 import NetworkService
+import Dependencies
 
 /// Repository for checking backend API status
 public struct StatusCheckRepository: StatusCheckRepositoryProtocol {
-    private let networkService: NetworkServiceProtocol
+    @Dependency(\.networkService) var networkService
 
-    public init(networkService: NetworkServiceProtocol) {
-        self.networkService = networkService
-    }
+    public init() {}
 
     public func checkStatus() async throws -> StatusResponseDTO {
         try await networkService.sendRequest(to: AppEndpoint.status)

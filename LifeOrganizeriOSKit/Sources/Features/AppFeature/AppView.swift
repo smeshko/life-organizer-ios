@@ -19,13 +19,13 @@ public struct AppView: View {
 
             // Connection status indicator - centered below safe area
             if store.showConnectionIndicator {
-                VStack(spacing: 0) {
+                VStack {
                     if store.isConnectedToBackend {
                         // Success indicator
                         HStack(spacing: .lifeSpacingSM) {
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundColor(.lifeSuccess)
-                                .font(.system(size: 20))
+                                .font(.lifeIconMD)
 
                             Text("Connected")
                                 .font(.lifeCaption)
@@ -42,7 +42,7 @@ public struct AppView: View {
                         HStack(spacing: .lifeSpacingSM) {
                             Image(systemName: "xmark.circle.fill")
                                 .foregroundColor(.lifeError)
-                                .font(.system(size: 20))
+                                .font(.lifeIconMD)
 
                             Text("Connection Failed")
                                 .font(.lifeCaption)
@@ -55,12 +55,14 @@ public struct AppView: View {
                                 .fill(Color.lifeError.opacity(0.15))
                         )
                     }
+
+                    Spacer()
                 }
                 .padding(.top, .lifeSpacingSM)
                 .transition(.move(edge: .top).combined(with: .opacity))
             }
         }
-        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: store.showConnectionIndicator)
+        .animation(.lifeSpring, value: store.showConnectionIndicator)
         .onAppear {
             store.send(.onAppear)
         }
