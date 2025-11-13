@@ -9,22 +9,7 @@ public struct ActionHandlerView: View {
     public init(store: StoreOf<ActionHandlerFeature>) {
         self.store = store
     }
-    
-    /// Calculate dynamic height based on line count
-    /// - 1 line: 44pt
-    /// - 2 lines: 66pt
-    /// - 3 lines: 88pt (max, then scrolls)
-    private var textEditorHeight: CGFloat {
-        let lineCount = max(1, store.inputText.split(separator: "\n").count)
-        let lineHeight: CGFloat = 22
-        let basePadding: CGFloat = 8
-        
-        if lineCount >= 3 {
-            return 88 // 3 lines max
-        }
-        return CGFloat(lineCount) * lineHeight + basePadding * 2
-    }
-    
+
     public var body: some View {
         ZStack {
             // Background

@@ -15,6 +15,13 @@
     {
       "target" : {
         "containerPath" : "container:LifeOrganizeriOSKit",
+        "identifier" : "SpeechToTextServiceTests",
+        "name" : "SpeechToTextServiceTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LifeOrganizeriOSKit",
         "identifier" : "CoreUITests",
         "name" : "CoreUITests"
       }
@@ -22,8 +29,8 @@
     {
       "target" : {
         "containerPath" : "container:LifeOrganizeriOSKit",
-        "identifier" : "SpeechToTextServiceTests",
-        "name" : "SpeechToTextServiceTests"
+        "identifier" : "FrameworkTests",
+        "name" : "FrameworkTests"
       }
     },
     {
