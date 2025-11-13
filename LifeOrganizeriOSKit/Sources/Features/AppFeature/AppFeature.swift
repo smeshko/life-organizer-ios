@@ -52,24 +52,11 @@ public struct AppFeature {
             case .onAppear:
                 // Check backend connection status at app startup
                 return .run { send in
-                    @Dependency(\.networkService) var networkService
+                    @Dependency(\.statusCheckRepository) var repository
                     do {
-                        // First, let's fetch raw data to see what we're getting
-                        let rawData = try await networkService.fetchData(at: AppEndpoint.status)
-                        if let jsonString = String(data: rawData, encoding: .utf8) {
-                            print("📦 Raw status response: \(jsonString)")
-                        }
-
-                        // Now try to decode
-                        let decoder = JSONDecoder()
-                        decoder.keyDecodingStrategy = .convertFromSnakeCase
-                        let status = try decoder.decode(StatusResponseDTO.self, from: rawData)
+                        let status = try await repository.checkStatus()
                         await send(.statusCheckCompleted(.success(status)))
-                    } catch let decodingError as DecodingError {
-                        print("❌ Decoding error details: \(decodingError)")
-                        await send(.statusCheckCompleted(.failure(decodingError)))
                     } catch {
-                        print("❌ Network error: \(error)")
                         await send(.statusCheckCompleted(.failure(error)))
                     }
                 }

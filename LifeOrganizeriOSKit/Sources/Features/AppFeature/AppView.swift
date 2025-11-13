@@ -12,59 +12,51 @@ public struct AppView: View {
     }
 
     public var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             ActionHandlerView(
                 store: store.scope(state: \.actionHandler, action: \.actionHandler)
             )
 
-            // Connection status indicator
+            // Connection status indicator - centered below safe area
             if store.showConnectionIndicator {
-                VStack {
-                    HStack {
-                        Spacer()
+                VStack(spacing: 0) {
+                    if store.isConnectedToBackend {
+                        // Success indicator
+                        HStack(spacing: .lifeSpacingSM) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.lifeSuccess)
+                                .font(.system(size: 20))
 
-                        if store.isConnectedToBackend {
-                            // Success indicator
-                            HStack(spacing: 8) {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.green)
-                                    .font(.system(size: 20))
-
-                                Text("Connected")
-                                    .font(.caption)
-                                    .foregroundColor(.green)
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(
-                                Capsule()
-                                    .fill(Color.green.opacity(0.15))
-                            )
-                            .padding(.trailing, 16)
-                        } else {
-                            // Error indicator
-                            HStack(spacing: 8) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.red)
-                                    .font(.system(size: 20))
-
-                                Text("Connection Failed")
-                                    .font(.caption)
-                                    .foregroundColor(.red)
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(
-                                Capsule()
-                                    .fill(Color.red.opacity(0.15))
-                            )
-                            .padding(.trailing, 16)
+                            Text("Connected")
+                                .font(.lifeCaption)
+                                .foregroundColor(.lifeSuccess)
                         }
-                    }
-                    .padding(.top, 60)
+                        .padding(.horizontal, .lifeSpacingMD)
+                        .padding(.vertical, .lifeSpacingSM)
+                        .background(
+                            Capsule()
+                                .fill(Color.lifeSuccess.opacity(0.15))
+                        )
+                    } else {
+                        // Error indicator
+                        HStack(spacing: .lifeSpacingSM) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.lifeError)
+                                .font(.system(size: 20))
 
-                    Spacer()
+                            Text("Connection Failed")
+                                .font(.lifeCaption)
+                                .foregroundColor(.lifeError)
+                        }
+                        .padding(.horizontal, .lifeSpacingMD)
+                        .padding(.vertical, .lifeSpacingSM)
+                        .background(
+                            Capsule()
+                                .fill(Color.lifeError.opacity(0.15))
+                        )
+                    }
                 }
+                .padding(.top, .lifeSpacingSM)
                 .transition(.move(edge: .top).combined(with: .opacity))
             }
         }
