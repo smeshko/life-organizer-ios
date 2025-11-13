@@ -10,6 +10,20 @@ public struct ActionHandlerView: View {
         self.store = store
     }
 
+    /// Calculate dynamic height for text editor based on content
+    /// - 1 line: 44pt (minimum)
+    /// - 2 lines: 66pt
+    /// - 3+ lines: 88pt (maximum, enables scrolling)
+    private var textEditorHeight: CGFloat {
+        let lineHeight: CGFloat = 22
+        let verticalPadding: CGFloat = 10
+
+        let lineCount = store.inputText.components(separatedBy: .newlines).count
+        let cappedLineCount = min(lineCount, 3)
+
+        return CGFloat(cappedLineCount) * lineHeight + verticalPadding * 2
+    }
+
     public var body: some View {
         ZStack {
             // Background
@@ -27,19 +41,31 @@ public struct ActionHandlerView: View {
                     .padding(.horizontal, .lifeSpacingXL)
 
                 // Input field container
-                HStack(spacing: .lifeSpacingSM) {
-                    // Text field
-                    TextField(
-                        "Message",
-                        text: Binding(
-                            get: { store.inputText },
-                            set: { store.send(.inputTextChanged($0)) }
+                HStack(alignment: .bottom, spacing: .lifeSpacingSM) {
+                    // Multi-line text editor
+                    ZStack(alignment: .topLeading) {
+                        // Placeholder text
+                        if store.inputText.isEmpty {
+                            Text("Message")
+                                .font(.lifeBody)
+                                .foregroundColor(.gray.opacity(0.5))
+                                .padding(.horizontal, .lifeSpacingMD)
+                                .padding(.top, 12)
+                        }
+
+                        TextEditor(
+                            text: Binding(
+                                get: { store.inputText },
+                                set: { store.send(.inputTextChanged($0)) }
+                            )
                         )
-                    )
-                    .font(.lifeBody)
-                    .foregroundColor(.lifeTextPrimary)
-                    .padding(.horizontal, .lifeSpacingMD)
-                    .frame(height: 44)
+                        .font(.lifeBody)
+                        .foregroundColor(.lifeTextPrimary)
+                        .scrollContentBackground(.hidden)
+                        .background(Color.clear)
+                        .padding(.horizontal, .lifeSpacingMD - 5) // Adjust for TextEditor default padding
+                        .frame(minHeight: 44, maxHeight: textEditorHeight)
+                    }
 
                     // Show loading spinner, send button, or mic button
                     if store.isLoading {
