@@ -5,11 +5,11 @@ import CoreUI
 /// SwiftUI view for ActionHandlerFeature that displays input field with voice and text input.
 public struct ActionHandlerView: View {
     @Bindable var store: StoreOf<ActionHandlerFeature>
-
+    
     public init(store: StoreOf<ActionHandlerFeature>) {
         self.store = store
     }
-
+    
     /// Calculate dynamic height based on line count
     /// - 1 line: 44pt
     /// - 2 lines: 66pt
@@ -18,64 +18,52 @@ public struct ActionHandlerView: View {
         let lineCount = max(1, store.inputText.split(separator: "\n").count)
         let lineHeight: CGFloat = 22
         let basePadding: CGFloat = 8
-
+        
         if lineCount >= 3 {
             return 88 // 3 lines max
         }
         return CGFloat(lineCount) * lineHeight + basePadding * 2
     }
-
+    
     public var body: some View {
         ZStack {
             // Background
             Color.lifeBackground
                 .ignoresSafeArea()
-
+            
             VStack(spacing: .lifeSpacingLG) {
                 Spacer()
-
+                
                 // Greeting headline
                 Text("How can I help you today?")
                     .font(.lifeTitle1)
                     .foregroundColor(.lifeTextPrimary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, .lifeSpacingXL)
-
+                
                 // Input field container
-                HStack(alignment: .bottom, spacing: .lifeSpacingSM) {
-                    // Multi-line text editor
-                    ZStack(alignment: .topLeading) {
-                        // Placeholder text
-                        if store.inputText.isEmpty {
-                            Text("Message")
-                                .font(.lifeBody)
-                                .foregroundColor(.gray.opacity(0.5))
-                                .padding(.horizontal, .lifeSpacingMD)
-                                .padding(.vertical, 10)
-                        }
-
-                        TextEditor(
-                            text: Binding(
-                                get: { store.inputText },
-                                set: { store.send(.inputTextChanged($0)) }
-                            )
-                        )
-                        .font(.lifeBody)
-                        .foregroundColor(.lifeTextPrimary)
-                        .scrollContentBackground(.hidden)
-                        .background(Color.clear)
-                        .frame(height: textEditorHeight)
-                    }
-
+                HStack(alignment: .center, spacing: .lifeSpacingSM) {
+                    TextField(
+                        "Message",
+                        text: Binding(
+                            get: { store.inputText },
+                            set: { store.send(.inputTextChanged($0)) }
+                        ),
+                        axis: .vertical
+                    )
+                    .lineLimit(1...4)
+                    .font(.lifeBody)
+                    .foregroundColor(.lifeTextPrimary)
+                    .background(Color.clear)
+                    
                     // Show loading spinner, send button, or mic button
                     if store.isLoading {
                         // Loading spinner
                         ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
+                            .progressViewStyle(.circular)
                             .tint(.lifePrimary)
                             .frame(width: 40, height: 40)
                             .padding(.trailing, .lifeSpacingXS)
-                            .padding(.vertical, 4)
                     } else if !store.inputText.isEmpty {
                         // Send button
                         Button {
@@ -86,7 +74,6 @@ public struct ActionHandlerView: View {
                                 .foregroundColor(.lifePrimary)
                         }
                         .padding(.trailing, .lifeSpacingXS)
-                        .padding(.vertical, 4)
                     } else {
                         // Microphone button
                         Button {
@@ -106,19 +93,20 @@ public struct ActionHandlerView: View {
                                 )
                         }
                         .padding(.trailing, .lifeSpacingXS)
-                        .padding(.vertical, 4)
                     }
                 }
+                .padding(.vertical, .lifeSpacingSM)
+                .padding(.leading, .lifeSpacingMD)
                 .background(
-                    RoundedRectangle(cornerRadius: .lifeRadiusPill)
+                    RoundedRectangle(cornerRadius: .lifeRadiusXL)
                         .fill(Color.lifeSurface)
                 )
                 .lifeShadowSubtle()
                 .padding(.horizontal, .lifeSpacingMD)
-
+                
                 Spacer()
             }
-
+            
             // Error overlay (if needed)
             if let errorMessage = store.errorMessage {
                 VStack {
