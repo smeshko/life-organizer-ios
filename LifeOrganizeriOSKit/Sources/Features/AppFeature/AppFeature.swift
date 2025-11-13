@@ -3,6 +3,7 @@ import Framework
 import ComposableArchitecture
 import CoreUI
 import ActionHandlerFeature
+import NetworkService
 
 /// The root TCA reducer that coordinates the entire application.
 ///
@@ -53,11 +54,22 @@ public struct AppFeature {
                 return .run { send in
                     @Dependency(\.networkService) var networkService
                     do {
-                        let status: StatusResponseDTO = try await networkService.sendRequest(
-                            to: AppEndpoint.status
-                        )
+                        // First, let's fetch raw data to see what we're getting
+                        let rawData = try await networkService.fetchData(at: AppEndpoint.status)
+                        if let jsonString = String(data: rawData, encoding: .utf8) {
+                            print("📦 Raw status response: \(jsonString)")
+                        }
+
+                        // Now try to decode
+                        let decoder = JSONDecoder()
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        let status = try decoder.decode(StatusResponseDTO.self, from: rawData)
                         await send(.statusCheckCompleted(.success(status)))
+                    } catch let decodingError as DecodingError {
+                        print("❌ Decoding error details: \(decodingError)")
+                        await send(.statusCheckCompleted(.failure(decodingError)))
                     } catch {
+                        print("❌ Network error: \(error)")
                         await send(.statusCheckCompleted(.failure(error)))
                     }
                 }

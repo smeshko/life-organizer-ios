@@ -2,16 +2,11 @@ import Foundation
 
 /// DTO for /api/v1/status endpoint response
 /// Matches the OpenAPI spec for backend status information
+/// NetworkService uses convertFromSnakeCase, so no custom CodingKeys needed
 public struct StatusResponseDTO: Codable, Sendable {
     public let apiVersion: String
     public let debug: Bool
     public let endpoints: StatusEndpoints
-
-    enum CodingKeys: String, CodingKey {
-        case apiVersion = "api_version"
-        case debug
-        case endpoints
-    }
 }
 
 /// Available endpoints returned by status endpoint
