@@ -18,11 +18,6 @@ public struct ActionHandlerFeature {
     @Dependency(\.speechToTextService) var speechToTextService
     @Dependency(\.actionHandlerRepository) var actionHandlerRepository
 
-    private enum CancelID {
-        case recording
-        case processing
-    }
-
     @ObservableState
     public struct State: Equatable {
         public var inputText: String = ""
@@ -70,7 +65,7 @@ public struct ActionHandlerFeature {
                         await send(.processingFailure(error))
                     }
                 }
-                .cancellable(id: CancelID.processing)
+                .cancellable(id: "processing")
 
             case .startRecordingButtonTapped:
                 state.isRecording = true
@@ -98,11 +93,11 @@ public struct ActionHandlerFeature {
                         await send(.recognitionError(error))
                     }
                 }
-                .cancellable(id: CancelID.recording)
+                .cancellable(id: "recording")
 
             case .stopRecordingButtonTapped:
                 state.isRecording = false
-                return .cancel(id: CancelID.recording)
+                return .cancel(id: "recording")
 
             case let .recognitionResultReceived(text, isFinal):
                 state.inputText = text
