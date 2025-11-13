@@ -89,8 +89,14 @@ public struct AppFeature {
             case .statusCheckCompleted(.failure(let error)):
                 state.isConnectedToBackend = false
                 state.backendConnectionError = error.localizedDescription
+                state.showConnectionIndicator = true
                 print("❌ Backend connection failed: \(error.localizedDescription)")
-                return .none
+
+                // Hide indicator after 3 seconds (slightly longer for error message)
+                return .run { send in
+                    try await Task.sleep(for: .seconds(3))
+                    await send(.hideConnectionIndicator)
+                }
 
             case .hideConnectionIndicator:
                 state.showConnectionIndicator = false

@@ -23,22 +23,43 @@ public struct AppView: View {
                     HStack {
                         Spacer()
 
-                        HStack(spacing: 8) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.green)
-                                .font(.system(size: 20))
+                        if store.isConnectedToBackend {
+                            // Success indicator
+                            HStack(spacing: 8) {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.green)
+                                    .font(.system(size: 20))
 
-                            Text("Connected")
-                                .font(.caption)
-                                .foregroundColor(.green)
+                                Text("Connected")
+                                    .font(.caption)
+                                    .foregroundColor(.green)
+                            }
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(
+                                Capsule()
+                                    .fill(Color.green.opacity(0.15))
+                            )
+                            .padding(.trailing, 16)
+                        } else {
+                            // Error indicator
+                            HStack(spacing: 8) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.red)
+                                    .font(.system(size: 20))
+
+                                Text("Connection Failed")
+                                    .font(.caption)
+                                    .foregroundColor(.red)
+                            }
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(
+                                Capsule()
+                                    .fill(Color.red.opacity(0.15))
+                            )
+                            .padding(.trailing, 16)
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .background(
-                            Capsule()
-                                .fill(Color.green.opacity(0.15))
-                        )
-                        .padding(.trailing, 16)
                     }
                     .padding(.top, 60)
 
