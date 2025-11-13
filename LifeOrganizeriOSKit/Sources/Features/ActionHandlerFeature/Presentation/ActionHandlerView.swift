@@ -2,21 +2,27 @@ import SwiftUI
 import ComposableArchitecture
 import CoreUI
 
-/// PreferenceKey for measuring text height
-private struct TextHeightPreferenceKey: PreferenceKey {
-    static let defaultValue: CGFloat = 44
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
-
 /// SwiftUI view for ActionHandlerFeature that displays input field with voice and text input.
 public struct ActionHandlerView: View {
     @Bindable var store: StoreOf<ActionHandlerFeature>
-    @State private var textHeight: CGFloat = 44
 
     public init(store: StoreOf<ActionHandlerFeature>) {
         self.store = store
+    }
+
+    /// Calculate dynamic height based on line count
+    /// - 1 line: 44pt
+    /// - 2 lines: 66pt
+    /// - 3 lines: 88pt (max, then scrolls)
+    private var textEditorHeight: CGFloat {
+        let lineCount = max(1, store.inputText.split(separator: "\n").count)
+        let lineHeight: CGFloat = 22
+        let basePadding: CGFloat = 8
+
+        if lineCount >= 3 {
+            return 88 // 3 lines max
+        }
+        return CGFloat(lineCount) * lineHeight + basePadding * 2
     }
 
     public var body: some View {
@@ -39,31 +45,13 @@ public struct ActionHandlerView: View {
                 HStack(alignment: .bottom, spacing: .lifeSpacingSM) {
                     // Multi-line text editor
                     ZStack(alignment: .topLeading) {
-                        // Hidden text view to measure content size
-                        Text(store.inputText.isEmpty ? " " : store.inputText)
-                            .font(.lifeBody)
-                            .padding(.horizontal, .lifeSpacingMD)
-                            .padding(.vertical, 8)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(
-                                GeometryReader { geometry in
-                                    Color.clear
-                                        .preference(
-                                            key: TextHeightPreferenceKey.self,
-                                            value: geometry.size.height
-                                        )
-                                }
-                            )
-                            .hidden()
-
                         // Placeholder text
                         if store.inputText.isEmpty {
                             Text("Message")
                                 .font(.lifeBody)
                                 .foregroundColor(.gray.opacity(0.5))
                                 .padding(.horizontal, .lifeSpacingMD)
-                                .padding(.vertical, 8)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.vertical, 10)
                         }
 
                         TextEditor(
@@ -76,11 +64,7 @@ public struct ActionHandlerView: View {
                         .foregroundColor(.lifeTextPrimary)
                         .scrollContentBackground(.hidden)
                         .background(Color.clear)
-                        .padding(.horizontal, .lifeSpacingMD - 5)
-                        .frame(height: min(max(textHeight, 44), 88))
-                    }
-                    .onPreferenceChange(TextHeightPreferenceKey.self) { newHeight in
-                        textHeight = newHeight
+                        .frame(height: textEditorHeight)
                     }
 
                     // Show loading spinner, send button, or mic button
