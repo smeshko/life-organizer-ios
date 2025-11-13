@@ -25,11 +25,11 @@ enum TestResources {
 
         let data = try Data(contentsOf: url)
         guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let responseDict = json[key] as? [String: Any] else {
+              let responseArray = json[key] as? [[String: Any]] else {
             throw TestResourceError.responseNotFound(key)
         }
 
-        return try JSONSerialization.data(withJSONObject: responseDict)
+        return try JSONSerialization.data(withJSONObject: responseArray)
     }
 }
 
@@ -208,6 +208,36 @@ enum TestData {
             appAction: nil,
             message: "Some message"
         )
+    }
+
+    /// Array-based processing responses for multi-transaction scenarios
+    enum ProcessingResponseArrays {
+        /// Single transaction - array with 1 element
+        static let singleTransaction = [ProcessingResponseDTOs.appActionRequired]
+
+        /// Multiple successful transactions
+        static let multipleSuccesses = [
+            ProcessingResponseDTOs.appActionRequired,
+            ProcessingResponseDTO(
+                success: true,
+                actionType: "app_action_required",
+                appAction: .budget(BudgetDTOs.validIncome),
+                message: "Logged income: 5000.0 BGN in Salary Ivo"
+            ),
+            ProcessingResponseDTO(
+                success: true,
+                actionType: "backend_handled",
+                appAction: nil,
+                message: "Processed transaction"
+            )
+        ]
+
+        /// Mixed success and failure responses
+        static let mixedSuccessFailure = [
+            ProcessingResponseDTOs.appActionRequired,
+            ProcessingResponseDTOs.error,
+            ProcessingResponseDTOs.backendHandled
+        ]
     }
 }
 

@@ -1,5 +1,5 @@
 {
-  "valid_budget_action": {
+  "valid_budget_action": [{
     "success": true,
     "action_type": "app_action_required",
     "app_action": {
@@ -11,14 +11,14 @@
       "details": "next"
     },
     "message": "Logged expenses: 234.6 BGN in Clothes"
-  },
-  "backend_handled": {
+  }],
+  "backend_handled": [{
     "success": true,
     "action_type": "backend_handled",
     "app_action": null,
     "message": "Request processed by backend"
-  },
-  "invalid_date": {
+  }],
+  "invalid_date": [{
     "success": true,
     "action_type": "app_action_required",
     "app_action": {
@@ -30,8 +30,8 @@
       "details": null
     },
     "message": "Action received"
-  },
-  "missing_details": {
+  }],
+  "missing_details": [{
     "success": true,
     "action_type": "app_action_required",
     "app_action": {
@@ -42,8 +42,8 @@
       "category": "Groceries"
     },
     "message": "Action received"
-  },
-  "unknown_category": {
+  }],
+  "unknown_category": [{
     "success": true,
     "action_type": "app_action_required",
     "app_action": {
@@ -55,8 +55,8 @@
       "details": null
     },
     "message": "Action received"
-  },
-  "small_amount": {
+  }],
+  "small_amount": [{
     "success": true,
     "action_type": "app_action_required",
     "app_action": {
@@ -68,8 +68,8 @@
       "details": null
     },
     "message": "Zero amount action"
-  },
-  "large_amount": {
+  }],
+  "large_amount": [{
     "success": true,
     "action_type": "app_action_required",
     "app_action": {
@@ -81,8 +81,8 @@
       "details": null
     },
     "message": "Large amount action"
-  },
-  "unicode_details": {
+  }],
+  "unicode_details": [{
     "success": true,
     "action_type": "app_action_required",
     "app_action": {
@@ -94,5 +94,5 @@
       "details": "Café ☕️ 中文 émoji"
     },
     "message": "Unicode action"
-  }
+  }]
 }

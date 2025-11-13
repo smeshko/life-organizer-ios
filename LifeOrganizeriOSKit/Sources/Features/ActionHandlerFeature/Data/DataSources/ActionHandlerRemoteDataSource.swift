@@ -9,7 +9,7 @@ actor ActionHandlerRemoteDataSource: ActionHandlerRemoteDataSourceProtocol {
 
     init() {}
 
-    func processAction(input: String) async throws -> ProcessingResponse {
+    func processAction(input: String) async throws -> [ProcessingResponse] {
         // Create request DTO
         let requestDTO = ProcessActionRequestDTO(input: input)
 
@@ -18,14 +18,16 @@ actor ActionHandlerRemoteDataSource: ActionHandlerRemoteDataSourceProtocol {
         let requestData = try encoder.encode(requestDTO)
 
         // Call network service with endpoint
-        let responseDTO: ProcessingResponseDTO = try await networkService.sendRequest(
+        let responseDTOs: [ProcessingResponseDTO] = try await networkService.sendRequest(
             to: ActionHandlerEndpoint.processAction(requestData)
         )
 
-        // Map DTO to entity
-        let response = try ProcessingResponseMapper.toDomain(responseDTO)
+        // Map each DTO to entity
+        let responses = try responseDTOs.map { dto in
+            try ProcessingResponseMapper.toDomain(dto)
+        }
 
-        return response
+        return responses
     }
 }
 
