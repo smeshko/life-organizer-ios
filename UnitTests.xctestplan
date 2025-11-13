@@ -15,6 +15,13 @@
     {
       "target" : {
         "containerPath" : "container:LifeOrganizeriOSKit",
+        "identifier" : "CoreUITests",
+        "name" : "CoreUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LifeOrganizeriOSKit",
         "identifier" : "SpeechToTextServiceTests",
         "name" : "SpeechToTextServiceTests"
       }
@@ -22,29 +29,8 @@
     {
       "target" : {
         "containerPath" : "container:LifeOrganizeriOSKit",
-        "identifier" : "FrameworkTests",
-        "name" : "FrameworkTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:LifeOrganizeriOSKit",
         "identifier" : "ActionHandlerFeatureTests",
         "name" : "ActionHandlerFeatureTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:LifeOrganizeriOSKit",
-        "identifier" : "XLSXAppendServiceTests",
-        "name" : "XLSXAppendServiceTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:LifeOrganizeriOSKit",
-        "identifier" : "CoreUITests",
-        "name" : "CoreUITests"
       }
     }
   ],
