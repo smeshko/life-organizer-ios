@@ -23,12 +23,40 @@ extension ActionHandlerError: LocalizedError {
     }
 }
 
+// MARK: - Classifier Errors
+/// Errors specific to the ClassifierService
+public enum ClassifierError: Error, Equatable {
+    case modelLoadFailed(String)
+    case tokenizerLoadFailed(String)
+    case tokenizationFailed(String)
+    case inferenceFailed(String)
+    case invalidCategory(String)
+}
+
+extension ClassifierError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .modelLoadFailed(let message):
+            return "Failed to load classifier model: \(message)"
+        case .tokenizerLoadFailed(let message):
+            return "Failed to load tokenizer: \(message)"
+        case .tokenizationFailed(let message):
+            return "Tokenization failed: \(message)"
+        case .inferenceFailed(let message):
+            return "Model inference failed: \(message)"
+        case .invalidCategory(let message):
+            return "Invalid category: \(message)"
+        }
+    }
+}
+
 /// Centralized error type for the application
 public enum AppError: Error, Equatable {
     case network(NetworkError)
     case persistence(PersistenceError)
     case speechRecognition(SpeechRecognitionError)
     case actionHandler(ActionHandlerError)
+    case classifier(ClassifierError)
     // Add your custom service errors here
     // case yourService(YourServiceError)
 
@@ -145,6 +173,8 @@ extension AppError: LocalizedError {
         case .speechRecognition(let error):
             return error.errorDescription
         case .actionHandler(let error):
+            return error.errorDescription
+        case .classifier(let error):
             return error.errorDescription
         case .unknown(let message):
             return "Unknown error: \(message)"

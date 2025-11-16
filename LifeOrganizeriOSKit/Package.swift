@@ -17,6 +17,7 @@ enum PackageURL {
     static let dependencies = "https://github.com/pointfreeco/swift-dependencies"
     static let grdb = "https://github.com/groue/GRDB.swift"
     static let sharing = "https://github.com/pointfreeco/swift-sharing"
+    static let transformers = "https://github.com/huggingface/swift-transformers"
 }
 
 // MARK: - Dependency References
@@ -160,6 +161,7 @@ let package = Package(
         // Services
         .library(name: "NetworkService", targets: ["NetworkService"]),
         .library(name: "SpeechToTextService", targets: ["SpeechToTextService"]),
+        .library(name: "ClassifierService", targets: ["ClassifierService"]),
 
         // Features
         .library(name: "ActionHandlerFeature", targets: ["ActionHandlerFeature"]),
@@ -171,7 +173,8 @@ let package = Package(
     dependencies: [
         .package(url: PackageURL.tca, from: PackageVersion.tca),
         .package(url: PackageURL.dependencies, from: PackageVersion.dependencies),
-        .package(url: PackageURL.sharing, from: PackageVersion.sharing)
+        .package(url: PackageURL.sharing, from: PackageVersion.sharing),
+        .package(url: PackageURL.transformers, from: "0.1.17")
         // Add GRDB when you need local persistence:
         // .package(url: PackageURL.grdb, from: PackageVersion.grdb),
     ],
@@ -197,6 +200,12 @@ let package = Package(
         // MARK: - Services
         .service("NetworkService"),
         .service("SpeechToTextService"),
+        .service(
+            "ClassifierService",
+            dependencies: [
+                .product(name: "Transformers", package: "swift-transformers"),
+            ]
+        ),
 
         // MARK: - Add Your Services Here
         // Example:

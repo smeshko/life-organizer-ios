@@ -85,3 +85,6 @@ docs/planning/work/
 .specify/
 .worktrees/
 .linear
+
+# CoreML model weights (too large for git, >100MB)
+*.mlpackage/Data/com.apple.CoreML/weights/*.bin
