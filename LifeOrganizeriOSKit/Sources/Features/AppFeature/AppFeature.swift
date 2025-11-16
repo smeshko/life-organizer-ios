@@ -31,6 +31,7 @@ public struct AppFeature {
         public var isConnectedToBackend: Bool = false
         public var backendConnectionError: String?
         public var showConnectionIndicator: Bool = false
+        @Presents public var classifierTest: ClassifierTestFeature.State?
 
         public init() {
             self.actionHandler = ActionHandlerFeature.State()
@@ -43,6 +44,8 @@ public struct AppFeature {
         case onAppear
         case statusCheckCompleted(Result<StatusResponseDTO, Error>)
         case hideConnectionIndicator
+        case showClassifierTest
+        case classifierTest(PresentationAction<ClassifierTestFeature.Action>)
     }
 
     public var body: some ReducerOf<Self> {
@@ -88,6 +91,13 @@ public struct AppFeature {
                 state.showConnectionIndicator = false
                 return .none
 
+            case .showClassifierTest:
+                state.classifierTest = ClassifierTestFeature.State()
+                return .none
+
+            case .classifierTest:
+                return .none
+
             case .actionHandler:
                 return .none
             }
@@ -95,6 +105,10 @@ public struct AppFeature {
 
         Scope(state: \.actionHandler, action: \.actionHandler) {
             ActionHandlerFeature()
+        }
+
+        .ifLet(\.$classifierTest, action: \.classifierTest) {
+            ClassifierTestFeature()
         }
     }
 }

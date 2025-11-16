@@ -12,54 +12,84 @@ public struct AppView: View {
     }
 
     public var body: some View {
-        ZStack(alignment: .top) {
-            ActionHandlerView(
-                store: store.scope(state: \.actionHandler, action: \.actionHandler)
-            )
+        NavigationStack {
+            ZStack(alignment: .top) {
+                ActionHandlerView(
+                    store: store.scope(state: \.actionHandler, action: \.actionHandler)
+                )
 
-            // Connection status indicator - centered below safe area
-            if store.showConnectionIndicator {
+                // Test button - positioned at top right
                 VStack {
-                    if store.isConnectedToBackend {
-                        // Success indicator
-                        HStack(spacing: .lifeSpacingSM) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.lifeSuccess)
-                                .font(.lifeIconMD)
-
-                            Text("Connected")
+                    HStack {
+                        Spacer()
+                        Button {
+                            store.send(.showClassifierTest)
+                        } label: {
+                            Text("Test Classifier")
                                 .font(.lifeCaption)
-                                .foregroundColor(.lifeSuccess)
+                                .foregroundColor(.lifePrimary)
+                                .padding(.horizontal, .lifeSpacingMD)
+                                .padding(.vertical, .lifeSpacingSM)
+                                .background(
+                                    Capsule()
+                                        .fill(Color.lifePrimary.opacity(0.1))
+                                )
                         }
-                        .padding(.horizontal, .lifeSpacingMD)
-                        .padding(.vertical, .lifeSpacingSM)
-                        .background(
-                            Capsule()
-                                .fill(Color.lifeSuccess.opacity(0.15))
-                        )
-                    } else {
-                        // Error indicator
-                        HStack(spacing: .lifeSpacingSM) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.lifeError)
-                                .font(.lifeIconMD)
-
-                            Text("Connection Failed")
-                                .font(.lifeCaption)
-                                .foregroundColor(.lifeError)
-                        }
-                        .padding(.horizontal, .lifeSpacingMD)
-                        .padding(.vertical, .lifeSpacingSM)
-                        .background(
-                            Capsule()
-                                .fill(Color.lifeError.opacity(0.15))
-                        )
+                        .padding(.top, .lifeSpacingSM)
+                        .padding(.trailing, .lifeSpacingMD)
                     }
-
                     Spacer()
                 }
-                .padding(.top, .lifeSpacingSM)
-                .transition(.move(edge: .top).combined(with: .opacity))
+
+                // Connection status indicator - centered below safe area
+                if store.showConnectionIndicator {
+                    VStack {
+                        if store.isConnectedToBackend {
+                            // Success indicator
+                            HStack(spacing: .lifeSpacingSM) {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.lifeSuccess)
+                                    .font(.lifeIconMD)
+
+                                Text("Connected")
+                                    .font(.lifeCaption)
+                                    .foregroundColor(.lifeSuccess)
+                            }
+                            .padding(.horizontal, .lifeSpacingMD)
+                            .padding(.vertical, .lifeSpacingSM)
+                            .background(
+                                Capsule()
+                                    .fill(Color.lifeSuccess.opacity(0.15))
+                            )
+                        } else {
+                            // Error indicator
+                            HStack(spacing: .lifeSpacingSM) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.lifeError)
+                                    .font(.lifeIconMD)
+
+                                Text("Connection Failed")
+                                    .font(.lifeCaption)
+                                    .foregroundColor(.lifeError)
+                            }
+                            .padding(.horizontal, .lifeSpacingMD)
+                            .padding(.vertical, .lifeSpacingSM)
+                            .background(
+                                Capsule()
+                                    .fill(Color.lifeError.opacity(0.15))
+                            )
+                        }
+
+                        Spacer()
+                    }
+                    .padding(.top, .lifeSpacingSM)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                }
+            }
+            .navigationDestination(
+                item: $store.scope(state: \.classifierTest, action: \.classifierTest)
+            ) { store in
+                ClassifierTestView(store: store)
             }
         }
         .animation(.lifeSpring, value: store.showConnectionIndicator)
