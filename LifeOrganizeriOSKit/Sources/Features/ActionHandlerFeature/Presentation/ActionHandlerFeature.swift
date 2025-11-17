@@ -66,7 +66,7 @@ public struct ActionHandlerFeature {
                     do {
                         // Classify input to get category
                         let classification = try await classifier.classify(inputText)
-                        let category = classification.category.toBackendCategory
+                        let category = classification.category
                         
                         let responses = try await repository.processAction(input: inputText, category: category)
                         // TODO: Handle multiple responses in UI - for now, show first result

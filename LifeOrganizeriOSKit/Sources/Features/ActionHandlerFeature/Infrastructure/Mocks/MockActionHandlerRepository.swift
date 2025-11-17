@@ -1,5 +1,6 @@
 import Foundation
 import Entities
+import ClassifierService
 
 actor MockActionHandlerRepository: ActionHandlerRepositoryProtocol {
     var mockResponses: [ProcessingResponse]?
@@ -13,11 +14,7 @@ actor MockActionHandlerRepository: ActionHandlerRepositoryProtocol {
         self.mockError = mockError
     }
 
-    func processAction(input: String) async throws -> [ProcessingResponse] {
-        try await processAction(input: input, category: "")
-    }
-    
-    func processAction(input: String, category: String) async throws -> [ProcessingResponse] {
+    func processAction(input: String, category: TextCategory) async throws -> [ProcessingResponse] {
         if let error = mockError {
             throw error
         }

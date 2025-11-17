@@ -10,23 +10,23 @@ import Foundation
 /// - NOTE: General notes and thoughts
 /// - QUOTE: Inspirational quotes and sayings
 public enum TextCategory: String, CaseIterable, Sendable, Equatable {
-    case BUDGET
-    case SHOPPING
-    case REMINDER
-    case CALENDAR
-    case NOTE
-    case QUOTE
+    case budget
+    case shopping
+    case reminder
+    case calendar
+    case note
+    case quote
 
     /// Index mapping for CoreML model output
-    /// BUDGET=0, SHOPPING=1, REMINDER=2, CALENDAR=3, NOTE=4, QUOTE=5
+    /// budget=0, shopping=1, reminder=2, calendar=3, note=4, quote=5
     public var index: Int {
         switch self {
-        case .BUDGET: return 0
-        case .SHOPPING: return 1
-        case .REMINDER: return 2
-        case .CALENDAR: return 3
-        case .NOTE: return 4
-        case .QUOTE: return 5
+        case .budget: return 0
+        case .shopping: return 1
+        case .reminder: return 2
+        case .calendar: return 3
+        case .note: return 4
+        case .quote: return 5
         }
     }
 
@@ -36,8 +36,8 @@ public enum TextCategory: String, CaseIterable, Sendable, Equatable {
     }
     
     /// Convert iOS TextCategory to backend API category string format
-    /// Maps: BUDGET->budget, SHOPPING->shopping, REMINDER->reminder, CALENDAR->calendar, NOTE->note, QUOTE->quote
+    /// Maps: budget->budget, shopping->shopping, reminder->reminder, calendar->calendar, note->note, quote->quote
     public var toBackendCategory: String {
-        return self.rawValue.lowercased()
+        return self.rawValue
     }
 }
