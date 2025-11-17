@@ -42,7 +42,7 @@ public struct AppFeature {
     public enum Action {
         case actionHandler(ActionHandlerFeature.Action)
         case onAppear
-        case statusCheckCompleted(Result<StatusResponseDTO, Error>)
+        case statusCheckCompleted(Result<StatusResponseDTO, any Error>)
         case hideConnectionIndicator
         case showClassifierTest
         case classifierTest(PresentationAction<ClassifierTestFeature.Action>)

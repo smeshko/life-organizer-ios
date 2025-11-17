@@ -11,7 +11,7 @@ extension StatusCheckRepository: DependencyKey {
 }
 
 extension DependencyValues {
-    public var statusCheckRepository: StatusCheckRepositoryProtocol {
+    public var statusCheckRepository: any StatusCheckRepositoryProtocol {
         get { self[StatusCheckRepository.self] }
         set { self[StatusCheckRepository.self] = newValue as! StatusCheckRepository }
     }

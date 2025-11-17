@@ -203,6 +203,7 @@ let package = Package(
         .service(
             "ClassifierService",
             dependencies: [
+                "Entities",
                 .product(name: "Transformers", package: "swift-transformers"),
             ]
         ),

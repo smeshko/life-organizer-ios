@@ -1,3 +1,4 @@
+import Entities
 import Foundation
 import Framework
 

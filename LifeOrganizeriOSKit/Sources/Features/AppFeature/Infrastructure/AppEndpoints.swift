@@ -26,7 +26,7 @@ extension AppEndpoint: Endpoint {
         }
     }
 
-    public var headers: [String: String]? {
+    public var headers: [String: String] {
         return [
             "Accept": "application/json"
         ]

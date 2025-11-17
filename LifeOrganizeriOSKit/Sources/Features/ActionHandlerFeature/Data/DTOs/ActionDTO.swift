@@ -9,7 +9,7 @@ public enum ActionDTO: Codable, Sendable {
         case type
     }
 
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         // Read the type discriminator
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
@@ -25,7 +25,7 @@ public enum ActionDTO: Codable, Sendable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         switch self {
         case .budget(let budgetAction):
             try budgetAction.encode(to: encoder)

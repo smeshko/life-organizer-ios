@@ -38,10 +38,10 @@ public struct ActionHandlerFeature {
         case startRecordingButtonTapped
         case stopRecordingButtonTapped
         case recognitionResultReceived(String, isFinal: Bool)
-        case recognitionError(Error)
+        case recognitionError(any Error)
         case recognitionCompleted
         case processingSuccess(ProcessingResponse)
-        case processingFailure(Error)
+        case processingFailure(any Error)
     }
 
     public var body: some ReducerOf<Self> {
@@ -89,7 +89,7 @@ public struct ActionHandlerFeature {
                     @Dependency(\.speechToTextService) var speechService
 
                     do {
-                        let status = await speechService.authorizationStatus()
+                        let status = speechService.authorizationStatus()
                         if status != .authorized {
                             let newStatus = try await speechService.requestAuthorization()
                             guard newStatus == .authorized else {
@@ -112,7 +112,7 @@ public struct ActionHandlerFeature {
                 state.isRecording = false
                 return .cancel(id: "recording")
 
-            case let .recognitionResultReceived(text, isFinal):
+            case let .recognitionResultReceived(text, _):
                 state.inputText = text
                 state.transcribedText = text
                 return .none
