@@ -47,12 +47,14 @@ public struct ActionHandlerFeature {
             switch action {
             case .inputTextChanged(let text):
                 state.inputText = text
+                state.processingResult = nil
                 return .none
 
             case .sendButtonTapped:
                 guard !state.inputText.isEmpty else { return .none }
                 state.isLoading = true
                 state.errorMessage = nil
+                state.processingResult = nil
 
                 let inputText = state.inputText
                 return .run { send in
