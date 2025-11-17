@@ -16,7 +16,7 @@ private enum ClassifierServiceKey: DependencyKey {
 
         let box = ResultBox()
 
-        Task.detached {
+        Task.detached(priority: .userInitiated) {
             do {
                 box.service = try await ClassifierService()
             } catch {
