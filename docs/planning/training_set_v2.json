@@ -1,0 +1,8882 @@
+{
+  "train": [
+    {
+      "text": "from huberman's book: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "read in atomic habits: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "grit says: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from new york times chapter 2: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "planning to paint the room",
+      "label": "NOTE"
+    },
+    {
+      "text": "I paid 23.50 dollars gas",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from thinking fast and slow page 88: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "groceries 100 euro today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "clothes 100 leva today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "don't forget submit the report",
+      "label": "REMINDER"
+    },
+    {
+      "text": "quote form deep work: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "renew the subscription at 3pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "schedule birthday dinner in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "feeling optimistic about switching jobs",
+      "label": "NOTE"
+    },
+    {
+      "text": "parent teacher meeting every monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I think it was like 1250 maybe 12 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy a pasta",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "2400 $ coffee",
+      "label": "BUDGET"
+    },
+    {
+      "text": "had a thought about the project strategy",
+      "label": "NOTE"
+    },
+    {
+      "text": "reminder: send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "grab bananas",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from bill gates's book: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "feeling good about switching jobs",
+      "label": "NOTE"
+    },
+    {
+      "text": "my focus is better mornings - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "gym session wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "bananas diapers and pepper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "doctor appointment thursday afternoon 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from deep work chapter 3: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "pick up shampoo and maybe batteries",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "wedding next month at 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "recurring: standup saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I need to buy onions",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "maybe solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "remembered probably shouldn't overcommit",
+      "label": "NOTE"
+    },
+    {
+      "text": "from quiet minute 12: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "paid about 250 for rent yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "playdate starts friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "appointment friday at 8:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "spent 20 on milk and eggs",
+      "label": "BUDGET"
+    },
+    {
+      "text": "spent 5 leva on vitamins",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need beef later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent 100 $ on clothes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "read in youtube video: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "interview departs thursday afternoon",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "observation: coffee at main street is amazing",
+      "label": "NOTE"
+    },
+    {
+      "text": "cat food formula and dog food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need oats",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "note: traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "from the lecture: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "feeling worried about switching jobs",
+      "label": "NOTE"
+    },
+    {
+      "text": "wish list: noise cancelling headphones",
+      "label": "NOTE"
+    },
+    {
+      "text": "rent cost me 2400 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I paid 1250 \u20ac shoes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "call every week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "read in the interview: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "yoga class every week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "my paycheck was 23.50",
+      "label": "BUDGET"
+    },
+    {
+      "text": "maybe create a side project",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent 23.50 dollars on clothes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from the lean startup chapter 3: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "haircut cost me 45 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "got paid 12 $",
+      "label": "BUDGET"
+    },
+    {
+      "text": "dinner starts friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need fish",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "rent 2400 usd today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "book the appointment at 3pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "interview starts next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "had a thought about redecorating the room",
+      "label": "NOTE"
+    },
+    {
+      "text": "birthday dinner departs this saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "dentist appointment thursday afternoon at 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "call the plumber tonight",
+      "label": "REMINDER"
+    },
+    {
+      "text": "don't forget to send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "received 500 dollars refund",
+      "label": "BUDGET"
+    },
+    {
+      "text": "nuts from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I need to change the password before bed",
+      "label": "REMINDER"
+    },
+    {
+      "text": "team sync starts in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "income: 100 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "grab apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "salary 23.50 eur deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "gym session every month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I should learn a new language",
+      "label": "NOTE"
+    },
+    {
+      "text": "set a reminder to pick up the kids",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from how to win friends page 104: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "noted that my focus is better mornings",
+      "label": "NOTE"
+    },
+    {
+      "text": "playdate this saturday 6pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "schedule review meeting in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "random thought: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "67.99 dollars coffee beans",
+      "label": "BUDGET"
+    },
+    {
+      "text": "pick up rice and maybe yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "bonus payment 1250 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from economist page 12: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I'm thinking about the project strategy",
+      "label": "NOTE"
+    },
+    {
+      "text": "umm spent 1250 on clothes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "review meeting next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "don't forget change the password",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from james clear's video: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from grit minute 12: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "backup my files before next week",
+      "label": "REMINDER"
+    },
+    {
+      "text": "buy chicken",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "reminder: take medication",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me to take medication at 8am",
+      "label": "REMINDER"
+    },
+    {
+      "text": "pick up shampoo",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "meeting with anna next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "noted that coffee at main street is amazing",
+      "label": "NOTE"
+    },
+    {
+      "text": "remembered experiment with new recipe",
+      "label": "NOTE"
+    },
+    {
+      "text": "go to the gym this weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remember to take medication",
+      "label": "REMINDER"
+    },
+    {
+      "text": "pick up bread on the way home",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "idea: solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "coffee batteries and bananas",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "recurring: gym session tuesday and thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me to submit the report at 10:30",
+      "label": "REMINDER"
+    },
+    {
+      "text": "had a thought about starting a blog",
+      "label": "NOTE"
+    },
+    {
+      "text": "mental note: check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "make sure to change the password",
+      "label": "REMINDER"
+    },
+    {
+      "text": "spent 1250 bucks on gas",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from youtube video page 104: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "lex friedman podcast says: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "call the plumber before bed",
+      "label": "REMINDER"
+    },
+    {
+      "text": "considering try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "meeting with lisa next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "team meeting wednesday morning at 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "get me carrots",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from that video about productivity: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "wish list: noise cancelling headphones",
+      "label": "NOTE"
+    },
+    {
+      "text": "take medication later",
+      "label": "REMINDER"
+    },
+    {
+      "text": "get tea the cheap kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "don't forget to renew the subscription",
+      "label": "REMINDER"
+    },
+    {
+      "text": "wish list: standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent 45 lev on medicine",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need to remember to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "meeting with anna next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need fish",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "recurring: gym session month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "appointment on the 5th at 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "considering start a podcast",
+      "label": "NOTE"
+    },
+    {
+      "text": "mental note: probably shouldn't overcommit",
+      "label": "NOTE"
+    },
+    {
+      "text": "mental note: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "wedding next monday 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "mental note: book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "from lex friedman podcast chapter 4: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "appointment in june at 8:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "buy a spinach",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "salary 67.99 dollars deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "sapiens says: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "party in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "garlic formula and nuts",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "buy beef",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "planning garden project",
+      "label": "NOTE"
+    },
+    {
+      "text": "I noticed the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "thinking starting a blog",
+      "label": "NOTE"
+    },
+    {
+      "text": "coffee on monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need carrots",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "veritasium says: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "bought coffee for 67.99",
+      "label": "BUDGET"
+    },
+    {
+      "text": "review meeting departs tomorrow",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "shopping: tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from range page 32: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "toilet paper tissues and tomatoes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "had a thought about learning to cook",
+      "label": "NOTE"
+    },
+    {
+      "text": "get fish the gluten free kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "random thought: look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "remind me to renew the subscription at noon",
+      "label": "REMINDER"
+    },
+    {
+      "text": "reminder: book the appointment",
+      "label": "REMINDER"
+    },
+    {
+      "text": "recurring: interview monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from veritasium page 45: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "idea: automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent somewhere around 12 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "renew the subscription before friday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "call mark at 3pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "don't forget pick up the kids",
+      "label": "REMINDER"
+    },
+    {
+      "text": "need to remember to stretch",
+      "label": "REMINDER"
+    },
+    {
+      "text": "bonus payment 45 bucks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to send the invoice at 9am",
+      "label": "REMINDER"
+    },
+    {
+      "text": "quote from that article: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "paid 500 euro for rent",
+      "label": "BUDGET"
+    },
+    {
+      "text": "67.99 \u20ac at DM",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy a tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I'm thinking about switching jobs",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy a snacks",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I noticed coffee at main street is amazing",
+      "label": "NOTE"
+    },
+    {
+      "text": "set a reminder to cancel the trial",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I need to buy fish",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "quote from youtube video: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I should exercise regularly",
+      "label": "NOTE"
+    },
+    {
+      "text": "set a reminder to send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "mental note: learning new skill might be fun",
+      "label": "NOTE"
+    },
+    {
+      "text": "feeling motivated about improving my health",
+      "label": "NOTE"
+    },
+    {
+      "text": "got paid 2400 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "had a thought about starting a blog",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to buy chocolate",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "buy rice and pasta",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "wish list: better running shoes",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to get flour",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I think it was like 67.99 maybe 5 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "note: meetings run long without agenda",
+      "label": "NOTE"
+    },
+    {
+      "text": "the plant needs less water - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "need apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "make sure to take out the trash",
+      "label": "REMINDER"
+    },
+    {
+      "text": "sapiens says: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I should network more",
+      "label": "NOTE"
+    },
+    {
+      "text": "blink says: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I need chicken later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from bbc documentary minute 5: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "shopping: salt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "random thought: learning new skill might be fun",
+      "label": "NOTE"
+    },
+    {
+      "text": "from that video about learning: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "spent somewhere around 2400 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to send the invoice at 6:00",
+      "label": "REMINDER"
+    },
+    {
+      "text": "250 euro at the store",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need to get salt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me backup my files",
+      "label": "REMINDER"
+    },
+    {
+      "text": "need cereal",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "note: the car is making noise",
+      "label": "NOTE"
+    },
+    {
+      "text": "practice guitar before the weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "uber 1250 euros today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "meeting with john next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from quiet: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "random thought: try meditation for 10 days",
+      "label": "NOTE"
+    },
+    {
+      "text": "mental note: learning new skill might be fun",
+      "label": "NOTE"
+    },
+    {
+      "text": "party on tuesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "bought haircut for 500",
+      "label": "BUDGET"
+    },
+    {
+      "text": "idea: try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "from sapiens chapter 1: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "pick up carrots and maybe toothpaste",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "quote from the interview: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "get me rice",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "mental note: experiment with new recipe",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy onions and yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I think it was like 67.99 maybe 45 bucks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "brainstorm: take a course",
+      "label": "NOTE"
+    },
+    {
+      "text": "noted that battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "birthday dinner june 12 at 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I need toilet paper later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "read in thinking fast and slow: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "get bread",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "paid 500 leva for coffee beans",
+      "label": "BUDGET"
+    },
+    {
+      "text": "form that book about learning: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need to get chocolate",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need better cable management - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "pick up eggs and maybe fish",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me stretch",
+      "label": "REMINDER"
+    },
+    {
+      "text": "got paid 100 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from blink page 32: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "get me garlic",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "don't forget to take out the trash",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from huberman lab minute 5: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "wish list: new laptop",
+      "label": "NOTE"
+    },
+    {
+      "text": "dentist appointment on sunday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "conference starts in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "buy baby wipes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I need to buy beef",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "renew the subscription before the weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "soap pasta and shampoo",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "considering weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "set a reminder to pick up the kids",
+      "label": "REMINDER"
+    },
+    {
+      "text": "considering solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "appointment on the 5th at 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from deep work page 104: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "doctor appointment every week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "salary 23.50 leva deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "random thought: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "get apples the whole wheat kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "playdate thursday afternoon at 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from blink: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "made 2400 $ selling gas",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need to buy pasta",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab some paper towels",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "thinking the project strategy",
+      "label": "NOTE"
+    },
+    {
+      "text": "mental note: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab some spinach",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "considering start a podcast",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab some pepper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "call the plumber next monday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "my paycheck was 100",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy a pepper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "100 lev at the pharmacy",
+      "label": "BUDGET"
+    },
+    {
+      "text": "salary 45 dollars deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "idea: start a podcast",
+      "label": "NOTE"
+    },
+    {
+      "text": "my focus is better mornings - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to buy dog food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need to remember to water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "wish list: standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "don't forget to cancel the trial",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I noticed the plant needs less water",
+      "label": "NOTE"
+    },
+    {
+      "text": "get yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "team sync oct 10 at 11am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "appointment friday at 14:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I think it was like 1250 maybe 2400 euros",
+      "label": "BUDGET"
+    },
+    {
+      "text": "coffee next month 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "get me oranges",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab some tomatoes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get garlic",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "mental note: try meditation for 10 days",
+      "label": "NOTE"
+    },
+    {
+      "text": "from bbc documentary: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "pick up carrots",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me to take medication at 8am",
+      "label": "REMINDER"
+    },
+    {
+      "text": "coffee august 5 at 9am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "brainstorm: organize a team event",
+      "label": "NOTE"
+    },
+    {
+      "text": "from flow: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "form the study page 104: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "brainstorm: take a course",
+      "label": "NOTE"
+    },
+    {
+      "text": "pick up pepper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the interview minute 12: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "get me baby wipes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "recurring: team meeting month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "feeling hopeful about redecorating the room",
+      "label": "NOTE"
+    },
+    {
+      "text": "mental note: experiment with new recipe",
+      "label": "NOTE"
+    },
+    {
+      "text": "thinking getting a new car",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to get garlic",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "paid about 5 for rent yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "meeting with my boss this saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "buy a bread",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need bananas",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "reminder: pick up the kids",
+      "label": "REMINDER"
+    },
+    {
+      "text": "brainstorm: take a course",
+      "label": "NOTE"
+    },
+    {
+      "text": "I noticed the car is making noise",
+      "label": "NOTE"
+    },
+    {
+      "text": "bought coffee for 250",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need snacks later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent somewhere around 1250 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy bananas and bread",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "playdate friday 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "maybe learn guitar",
+      "label": "NOTE"
+    },
+    {
+      "text": "500 $ cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "standup june 12 at 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "wish list: new sofa",
+      "label": "NOTE"
+    },
+    {
+      "text": "pick up toothpaste and maybe eggs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "read in bbc documentary: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "don't forget submit the report",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I should improve my skills",
+      "label": "NOTE"
+    },
+    {
+      "text": "remember to send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "random thought: learning new skill might be fun",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab some bananas",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "recurring: conference saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "maybe get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "call sarah in the morning",
+      "label": "REMINDER"
+    },
+    {
+      "text": "idea: switch to a better app",
+      "label": "NOTE"
+    },
+    {
+      "text": "jot: traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "idea: try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "call anna on tuesday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remembered check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent somewhere around 5 bucks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "dish soap from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "meeting with mark thursday afternoon",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "standup tomorrow",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "medicine cost me 250 bucks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "umm spent 23.50 on milk",
+      "label": "BUDGET"
+    },
+    {
+      "text": "bonus payment 23.50 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "received 100 \u20ac refund",
+      "label": "BUDGET"
+    },
+    {
+      "text": "wish list: comfortable chair",
+      "label": "NOTE"
+    },
+    {
+      "text": "from that talk about learning: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "paid 500 eur for uber",
+      "label": "BUDGET"
+    },
+    {
+      "text": "grab nuts",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I paid 12 euro movie tickets",
+      "label": "BUDGET"
+    },
+    {
+      "text": "spent somewhere around 5 usd",
+      "label": "BUDGET"
+    },
+    {
+      "text": "noted that the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "don't forget renew the subscription",
+      "label": "REMINDER"
+    },
+    {
+      "text": "planning to reorganize closet",
+      "label": "NOTE"
+    },
+    {
+      "text": "income: 45 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "thinking getting a new car",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to get apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "stretch before 5pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "1250 lev at the store",
+      "label": "BUDGET"
+    },
+    {
+      "text": "pick up laundry detergent",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "considering switch to a better app",
+      "label": "NOTE"
+    },
+    {
+      "text": "go to the gym in the morning",
+      "label": "REMINDER"
+    },
+    {
+      "text": "received 500 euros refund",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I think it was like 12 maybe 45 bucks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "pick up dog food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent somewhere around 100 eur",
+      "label": "BUDGET"
+    },
+    {
+      "text": "quote from deep work: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "observation: meetings run long without agenda",
+      "label": "NOTE"
+    },
+    {
+      "text": "appointment on the 5th at 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "buy a milk",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "umm spent 12 on rent",
+      "label": "BUDGET"
+    },
+    {
+      "text": "250 $ cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "team meeting in june at 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "umm spent 100 on lunch",
+      "label": "BUDGET"
+    },
+    {
+      "text": "recurring: conference weekday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "considering try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "planning garden project",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to get dog food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I need to buy eggs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "change the password after work",
+      "label": "REMINDER"
+    },
+    {
+      "text": "buy chicken",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from that article page 12: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "considering switch to a better app",
+      "label": "NOTE"
+    },
+    {
+      "text": "shopping: onions",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "umm spent 100 on gym membership",
+      "label": "BUDGET"
+    },
+    {
+      "text": "paid about 500 for books yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me practice guitar",
+      "label": "REMINDER"
+    },
+    {
+      "text": "teh neighbor is loud - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "the neighbor is loud - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "my paycheck was 2400",
+      "label": "BUDGET"
+    },
+    {
+      "text": "paid 1250 euro for coffee beans",
+      "label": "BUDGET"
+    },
+    {
+      "text": "spent 67.99 euros on shoes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I should learn a new language",
+      "label": "NOTE"
+    },
+    {
+      "text": "meeting with mark next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I need to buy pepper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "conference next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "set a reminder to check the mail",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me take medication",
+      "label": "REMINDER"
+    },
+    {
+      "text": "considering solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "thinking redecorating the room",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need oranges later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "book club every tuesday and thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need to remember to backup my files",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remembered look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "review meeting march 21 at 9am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "brainstorm: organize a team event",
+      "label": "NOTE"
+    },
+    {
+      "text": "shopping: tomatoes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "noted that my focus is better mornings",
+      "label": "NOTE"
+    },
+    {
+      "text": "made 45 \u20ac selling haircut",
+      "label": "BUDGET"
+    },
+    {
+      "text": "noted that traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "from james clear's talk: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "mental note: try meditation for 10 days",
+      "label": "NOTE"
+    },
+    {
+      "text": "project kickoff on saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "observation: the car is making noise",
+      "label": "NOTE"
+    },
+    {
+      "text": "remind me renew the subscription",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me to go to the gym at 6:00",
+      "label": "REMINDER"
+    },
+    {
+      "text": "quote from quiet: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me to backup my files at 3pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "standup departs next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I think it was like 45 maybe 5 euros",
+      "label": "BUDGET"
+    },
+    {
+      "text": "meetings run long without agenda - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "maybe weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "party next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "interview in june 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "idea: create a side project",
+      "label": "NOTE"
+    },
+    {
+      "text": "idea: solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "schedule parent teacher meeting next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "cancel the trial before tomorrow",
+      "label": "REMINDER"
+    },
+    {
+      "text": "buy tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "don't forget submit the report",
+      "label": "REMINDER"
+    },
+    {
+      "text": "schedule gym session thursday afternoon",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "recurring: webinar week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "wish list: comfortable chair",
+      "label": "NOTE"
+    },
+    {
+      "text": "made 1250 usd selling internet",
+      "label": "BUDGET"
+    },
+    {
+      "text": "planning garden project",
+      "label": "NOTE"
+    },
+    {
+      "text": "get milk",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "review meeting every tuesday and thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "spent somewhere around 2400 euros",
+      "label": "BUDGET"
+    },
+    {
+      "text": "idea: switch to a better app",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid about 250 for gym membership yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need to remember to take medication",
+      "label": "REMINDER"
+    },
+    {
+      "text": "call 12/11 at 8:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "feeling hopeful about better file organization",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab some laundry detergent",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me to renew the subscription at 6:00",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I need to buy pasta",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "flight on the 5th 6pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "call sarah this weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "wish list: noise cancelling headphones",
+      "label": "NOTE"
+    },
+    {
+      "text": "reminder: call the dentist",
+      "label": "REMINDER"
+    },
+    {
+      "text": "don't forget to feed the cat",
+      "label": "REMINDER"
+    },
+    {
+      "text": "get milk the frozen kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "had a thought about switching jobs",
+      "label": "NOTE"
+    },
+    {
+      "text": "maybe get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "I think it was like 100 maybe 12 eur",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from tim ferriss's podcast: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me go to the gym",
+      "label": "REMINDER"
+    },
+    {
+      "text": "buy pepper and apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "shopping: toilet paper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from quiet: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "feeling excited about switching jobs",
+      "label": "NOTE"
+    },
+    {
+      "text": "shopping: yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "set a reminder to pay the bill",
+      "label": "REMINDER"
+    },
+    {
+      "text": "23.50 eur at DM",
+      "label": "BUDGET"
+    },
+    {
+      "text": "umm spent 12 on rent",
+      "label": "BUDGET"
+    },
+    {
+      "text": "feeling optimistic about better file organization",
+      "label": "NOTE"
+    },
+    {
+      "text": "traffic is worse on thursdays - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent 23.50 $ on books",
+      "label": "BUDGET"
+    },
+    {
+      "text": "random thought: probably shouldn't overcommit",
+      "label": "NOTE"
+    },
+    {
+      "text": "formula from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "drive says: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I need to take medication later",
+      "label": "REMINDER"
+    },
+    {
+      "text": "need to remember to pick up the kids",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I need to buy carrots",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "party in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "spent somewhere around 100 bucks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "planning weekend trip",
+      "label": "NOTE"
+    },
+    {
+      "text": "birthday dinner departs on tuesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I need tea later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get chicken",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need to get apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the study page 32: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "shopping: sugar",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "haircut on monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from economist: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I should improve my skills",
+      "label": "NOTE"
+    },
+    {
+      "text": "jot: the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "don't forget to pick up the kids",
+      "label": "REMINDER"
+    },
+    {
+      "text": "get snacks",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I need to buy apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me to stretch at 8am",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from ted talk page 32: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from economist chapter 2: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "maybe weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "get formula the gluten free kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab some olive oil",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I need to buy bananas",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "set a reminder to practice guitar",
+      "label": "REMINDER"
+    },
+    {
+      "text": "meeting with my boss on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "deep work says: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "jot: the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to buy diapers",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent 500 lev on coffee beans",
+      "label": "BUDGET"
+    },
+    {
+      "text": "shopping: cat food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "call the dentist before friday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "maybe automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "I noticed coffee at main street is amazing",
+      "label": "NOTE"
+    },
+    {
+      "text": "recurring: playdate month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "team meeting in june 16:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "mental note: probably shouldn't overcommit",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab garlic",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab some cereal",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need pasta",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "my paycheck was 250",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get cereal",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "bought books for 12",
+      "label": "BUDGET"
+    },
+    {
+      "text": "shopping: bread",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "veritasium says: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "recurring: call week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "jot: need better cable management",
+      "label": "NOTE"
+    },
+    {
+      "text": "bonus payment 1250 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from start with why chapter 4: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "paid about 250 for taxi yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "bought phone charger for 100",
+      "label": "BUDGET"
+    },
+    {
+      "text": "made 5 dollars selling internet",
+      "label": "BUDGET"
+    },
+    {
+      "text": "received 67.99 bucks refund",
+      "label": "BUDGET"
+    },
+    {
+      "text": "paid 1250 euros for haircut",
+      "label": "BUDGET"
+    },
+    {
+      "text": "call john after work",
+      "label": "REMINDER"
+    },
+    {
+      "text": "my paycheck was 100",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need to pick up dry cleaning at 3pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I think it was like 2400 maybe 250 usd",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from that interview about productivity: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I think it was like 500 maybe 45 $",
+      "label": "BUDGET"
+    },
+    {
+      "text": "shopping: cereal",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab some soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "quote from new york times: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "considering start a podcast",
+      "label": "NOTE"
+    },
+    {
+      "text": "remind me to practice guitar at noon",
+      "label": "REMINDER"
+    },
+    {
+      "text": "flight in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "coffee next monday 10:30",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "had a thought about the project strategy",
+      "label": "NOTE"
+    },
+    {
+      "text": "don't forget to send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from the interview chapter 2: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need to remember to take out the trash",
+      "label": "REMINDER"
+    },
+    {
+      "text": "reminder: change the password",
+      "label": "REMINDER"
+    },
+    {
+      "text": "idea: try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent somewhere around 2400 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remember to pick up dry cleaning",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from atomic habits minute 12: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "quote from the lean startup: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I should network more",
+      "label": "NOTE"
+    },
+    {
+      "text": "flight tomorrow",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "team meeting next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "read in start with why: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "team meeting on tuesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "the study says: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I paid 500 lev parking",
+      "label": "BUDGET"
+    },
+    {
+      "text": "45 euros cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "read in sapiens: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "the fridge light is flickering - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "from thinking fast and slow minute 12: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me to renew the subscription at noon",
+      "label": "REMINDER"
+    },
+    {
+      "text": "flight every weekday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from sam altman's talk: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me pick up the kids",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me to send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "the plant needs less water - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "from blink page 104: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need rice",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the interview chapter 2: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "call july 3 at 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I'm thinking about productivity",
+      "label": "NOTE"
+    },
+    {
+      "text": "check the mail tomorrow",
+      "label": "REMINDER"
+    },
+    {
+      "text": "call anna on friday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "random thought: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab diapers",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "rent cost me 2400 usd",
+      "label": "BUDGET"
+    },
+    {
+      "text": "meeting with lisa on tuesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "earned 500 from the project",
+      "label": "BUDGET"
+    },
+    {
+      "text": "presentation every week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "call the plumber tonight",
+      "label": "REMINDER"
+    },
+    {
+      "text": "read in the study: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "set a reminder to practice guitar",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I need to buy dog food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "set a reminder to book the appointment",
+      "label": "REMINDER"
+    },
+    {
+      "text": "buy tissues and pepper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "random thought: try meditation for 10 days",
+      "label": "NOTE"
+    },
+    {
+      "text": "milk",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "thinking traveling",
+      "label": "NOTE"
+    },
+    {
+      "text": "backup my files tonight",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from that book about productivity: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I think it was like 67.99 maybe 2400 euro",
+      "label": "BUDGET"
+    },
+    {
+      "text": "appointment thursday afternoon at 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me to take out the trash at 9am",
+      "label": "REMINDER"
+    },
+    {
+      "text": "get flour",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I think it was like 250 maybe 1250 dollars",
+      "label": "BUDGET"
+    },
+    {
+      "text": "don't forget to book the appointment",
+      "label": "REMINDER"
+    },
+    {
+      "text": "read in huberman lab: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need to remember to take out the trash",
+      "label": "REMINDER"
+    },
+    {
+      "text": "buy a spinach",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "idea: get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "jot: coffee at main street is amazing",
+      "label": "NOTE"
+    },
+    {
+      "text": "remember to go to the gym",
+      "label": "REMINDER"
+    },
+    {
+      "text": "get me lightbulbs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get butter the organic kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I need to pay rent wednesday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "schedule party tomorrow",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "sold movie tickets for 500",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from the mom test: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I think it was like 45 maybe 100 euro",
+      "label": "BUDGET"
+    },
+    {
+      "text": "practice guitar before next week",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me to stretch at 6:00",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me to submit teh report at 3pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "noted that the car is making noise",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid 67.99 leva for taxi",
+      "label": "BUDGET"
+    },
+    {
+      "text": "meetings run long without agenda - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "playdate 12/11 at 9am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "random thought: check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy milk",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I'm thinking about starting a blog",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to get pepper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "project kickoff on wednesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "note: the fridge light is flickering",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent 5 euros on gas",
+      "label": "BUDGET"
+    },
+    {
+      "text": "don't forget shopping list",
+      "label": "REMINDER"
+    },
+    {
+      "text": "note: traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "quote from bbc documentary: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "received 5 lev refund",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from huberman's talk: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I paid 2400 bucks dinner",
+      "label": "BUDGET"
+    },
+    {
+      "text": "bought taxi for 250",
+      "label": "BUDGET"
+    },
+    {
+      "text": "spent 2400 usd on vitamins",
+      "label": "BUDGET"
+    },
+    {
+      "text": "bought dinner for 12",
+      "label": "BUDGET"
+    },
+    {
+      "text": "bought gym membership for 23.50",
+      "label": "BUDGET"
+    },
+    {
+      "text": "gym session oct 10 at 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I'm thinking about traveling",
+      "label": "NOTE"
+    },
+    {
+      "text": "party tomorrow at 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "clothes cost me 12 $",
+      "label": "BUDGET"
+    },
+    {
+      "text": "made 250 \u20ac selling rent",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get me onions",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "idea: create a side project",
+      "label": "NOTE"
+    },
+    {
+      "text": "huberman lab says: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "had a thought about reading more",
+      "label": "NOTE"
+    },
+    {
+      "text": "idea: weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "from lex friedman podcast minute 33: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "electricity bill 67.99 euro today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "read in veritasium: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "spent 12 euro on movie tickets",
+      "label": "BUDGET"
+    },
+    {
+      "text": "spent somewhere around 2400 usd",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I should network more",
+      "label": "NOTE"
+    },
+    {
+      "text": "from range minute 22: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "drive says: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "quiet says: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "67.99 dollars at Lidl",
+      "label": "BUDGET"
+    },
+    {
+      "text": "500 \u20ac at the gas station",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to check the mail",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I think it was like 250 maybe 23.50 eur",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy tissues and tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "interview next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I noticed the car is making noise",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to get coffee",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "meeting with anna next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "playdate every week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "backup my files next monday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "feeling optimistic about redecorating the room",
+      "label": "NOTE"
+    },
+    {
+      "text": "got paid 250 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "noted that the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "appointment this saturday at 6pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "quote from blink: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "brainstorm: automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "reminder: renew the subscription",
+      "label": "REMINDER"
+    },
+    {
+      "text": "read in youtube video: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "read in atomic habits: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "spent somewhere around 1250 $",
+      "label": "BUDGET"
+    },
+    {
+      "text": "5 lev at DM",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy snacks",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "read in bbc documentary: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "earned 100 from the project",
+      "label": "BUDGET"
+    },
+    {
+      "text": "maybe automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "planning to reorganize closet",
+      "label": "NOTE"
+    },
+    {
+      "text": "review meeting 12/11 at 16:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "noted that traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "from that interview about productivity: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "random thought: look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "from range minute 45: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from quiet: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "buy a soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from huberman's video: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remembered experiment with new recipe",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to remember to water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "schedule flight wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "idea: automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid about 500 for electricity bill yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "buy laundry detergent and apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "got paid 67.99 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "observation: traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "wish list: new sofa",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need cereal later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "meeting with my boss next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "review meeting on friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "sold lunch for 5",
+      "label": "BUDGET"
+    },
+    {
+      "text": "brainstorm: get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "meeting with the team friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from new york times page 45: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "presentation on tuesday 11am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "observation: coffee at main street is amazing",
+      "label": "NOTE"
+    },
+    {
+      "text": "pasta from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "noted that traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "internet cost me 23.50 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need spinach",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "random thought: book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "don't forget take medication",
+      "label": "REMINDER"
+    },
+    {
+      "text": "250 euro rent",
+      "label": "BUDGET"
+    },
+    {
+      "text": "set a reminder to cancel the trial",
+      "label": "REMINDER"
+    },
+    {
+      "text": "income: 250 $",
+      "label": "BUDGET"
+    },
+    {
+      "text": "brainstorm: get a stadning desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "the lean startup says: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "don't forget to stretch",
+      "label": "REMINDER"
+    },
+    {
+      "text": "brainstorm: take a course",
+      "label": "NOTE"
+    },
+    {
+      "text": "quote from that article: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from grit minute 22: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "phone charger 1250 euros today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "yogurt coffee and nuts",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "appointment on the 5th at 9am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "pick up bananas and maybe soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "salary 500 $ deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from blink minute 22: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "maybe solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "read in youtube video: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "read in range: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "snacks from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "received 100 eur refund",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need to remember to practice guitar",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I need to pick up dry cleaning this weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "the fridge light is flickering - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "noted that battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to get tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "pick up tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I paid 2400 lev dinner",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy a toilet paper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "umm spent 250 on haircut",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need yogurt later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "schedule parent teacher meeting wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "umm spent 5 on parking",
+      "label": "BUDGET"
+    },
+    {
+      "text": "feeling worried about starting a blog",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent 45 dollars on gym membership",
+      "label": "BUDGET"
+    },
+    {
+      "text": "coffee beans 45 lev today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need to stretch after work",
+      "label": "REMINDER"
+    },
+    {
+      "text": "pay rent next week",
+      "label": "REMINDER"
+    },
+    {
+      "text": "considering try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "considering get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "get oranges",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get me pepper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me to water the plants at 3pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me to backup my files",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from flow minute 10: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from that article chapter 5: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "wish list: better running shoes",
+      "label": "NOTE"
+    },
+    {
+      "text": "5 $ cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "mental note: learning new skill might be fun",
+      "label": "NOTE"
+    },
+    {
+      "text": "shopping: dog food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "had a thought about better file organization",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to buy cereal",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "coffee july 3 at 11am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "idea: automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "from huberman's book: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from economist: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "meeting with anna on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need to remember to cancel the trial",
+      "label": "REMINDER"
+    },
+    {
+      "text": "appointment on tuesday at 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "submit the report on friday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "received 2400 leva refund",
+      "label": "BUDGET"
+    },
+    {
+      "text": "schedule wedding on tuesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from drive: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from sam altman's book: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need to remember to reply to that email",
+      "label": "REMINDER"
+    },
+    {
+      "text": "tissues toilet paper and apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "standup departs next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "buy dish soap and cheese",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "make sure to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "appointment next month at 16:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "pick up spinach and maybe snacks",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remember to call the dentist",
+      "label": "REMINDER"
+    },
+    {
+      "text": "maybe create a side project",
+      "label": "NOTE"
+    },
+    {
+      "text": "read in deep work: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from huberman's podcast: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I need oranges later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent 2400 euros on books",
+      "label": "BUDGET"
+    },
+    {
+      "text": "haircut in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "grab chicken",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the mom test minute 5: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I need to buy yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "random thought: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to buy baby wipes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "rent 1250 usd today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "random thought: probably shouldn't overcommit",
+      "label": "NOTE"
+    },
+    {
+      "text": "noted that the car is making noise",
+      "label": "NOTE"
+    },
+    {
+      "text": "recurring: standup tuesday and thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "spent somewhere around 23.50 euro",
+      "label": "BUDGET"
+    },
+    {
+      "text": "battery on laptop is dying - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "appointment friday at 9am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "lunch on thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "milk from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "haircut departs friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "pick up coffee",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "12 usd at Amazon",
+      "label": "BUDGET"
+    },
+    {
+      "text": "cancel the trial before friday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from the lean startup page 104: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "thinking improving my health",
+      "label": "NOTE"
+    },
+    {
+      "text": "get nuts the organic kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent 12 leva on coffee beans",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I paid 250 bucks clothes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "umm spent 100 on gas",
+      "label": "BUDGET"
+    },
+    {
+      "text": "12 bucks at online",
+      "label": "BUDGET"
+    },
+    {
+      "text": "submit the report this weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "spent 100 euros on coffee beans",
+      "label": "BUDGET"
+    },
+    {
+      "text": "shopping: beef",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab dog food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from new york times page 32: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "bought snacks for 23.50",
+      "label": "BUDGET"
+    },
+    {
+      "text": "doctor appointment next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "pick up oats and maybe cat food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "reminder: send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "bought clothes for 45",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me check the mail",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I need lettuce later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "onions chocolate and snacks",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "thinking the project strategy",
+      "label": "NOTE"
+    },
+    {
+      "text": "schedule webinar next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from the mom test chapter 1: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "my paycheck was 100",
+      "label": "BUDGET"
+    },
+    {
+      "text": "umm spent 1250 on milk",
+      "label": "BUDGET"
+    },
+    {
+      "text": "playdate departs on tuesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "presentation in june at 10:30",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "gym session august 5 at 8:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me go to the gym",
+      "label": "REMINDER"
+    },
+    {
+      "text": "vitamins cost me 100 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "noted that the fridge light is flickering",
+      "label": "NOTE"
+    },
+    {
+      "text": "45 euros milk",
+      "label": "BUDGET"
+    },
+    {
+      "text": "make sure to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "feeling excited about starting a blog",
+      "label": "NOTE"
+    },
+    {
+      "text": "reminder: backup my files",
+      "label": "REMINDER"
+    },
+    {
+      "text": "dentist appointment tuesday costs 150",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "pick up bananas and maybe lightbulbs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "idea: organize a team event",
+      "label": "NOTE"
+    },
+    {
+      "text": "the neighbor is loud - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "from tim ferriss's book: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "note: meetings run long without agenda",
+      "label": "NOTE"
+    },
+    {
+      "text": "don't forget practice guitar",
+      "label": "REMINDER"
+    },
+    {
+      "text": "recurring: yoga class saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "call my boss this weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "need rice",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "noted that the car is making noise",
+      "label": "NOTE"
+    },
+    {
+      "text": "sold lunch for 2400",
+      "label": "BUDGET"
+    },
+    {
+      "text": "read in veritasium: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "quote from how to win friends: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "planning meal plan for week",
+      "label": "NOTE"
+    },
+    {
+      "text": "I noticed my focus is better mornings",
+      "label": "NOTE"
+    },
+    {
+      "text": "shopping: apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "appointment next month at 10:30",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "sold medicine for 67.99",
+      "label": "BUDGET"
+    },
+    {
+      "text": "atomic habits says: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from the study page 32: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "maybe get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "got paid 100 eur",
+      "label": "BUDGET"
+    },
+    {
+      "text": "reminder: call the dentist",
+      "label": "REMINDER"
+    },
+    {
+      "text": "make sure to practice guitar",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from bill gates's podcast: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "idea: switch to a better app",
+      "label": "NOTE"
+    },
+    {
+      "text": "remind me to backup my files at 9am",
+      "label": "REMINDER"
+    },
+    {
+      "text": "thinking starting a blog",
+      "label": "NOTE"
+    },
+    {
+      "text": "schedule parent teacher meeting friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "quote from blink: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "sold taxi for 1250",
+      "label": "BUDGET"
+    },
+    {
+      "text": "maybe take a course",
+      "label": "NOTE"
+    },
+    {
+      "text": "from the interview minute 5: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "grab carrots",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "thinking the project strategy",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid 500 eur for coffee",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need to take medication later",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from bill gates's talk: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "brainstorm: try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "got paid 5 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need to remember to stretch",
+      "label": "REMINDER"
+    },
+    {
+      "text": "interview every week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "book club next month at 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I paid 67.99 leva books",
+      "label": "BUDGET"
+    },
+    {
+      "text": "paid about 23.50 for vitamins yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "idea: solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "my focus is better mornings - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "meetings run long without agenda - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "considering automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "recurring: review meeting weekday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "team meeting starts friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me to pay rent at noon",
+      "label": "REMINDER"
+    },
+    {
+      "text": "note: the fridge light is flickering",
+      "label": "NOTE"
+    },
+    {
+      "text": "I should read more books",
+      "label": "NOTE"
+    },
+    {
+      "text": "from ted talk minute 5: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "observation: my focus is better mornings",
+      "label": "NOTE"
+    },
+    {
+      "text": "diapers diapers and batteries",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "noted that the plant needs less water",
+      "label": "NOTE"
+    },
+    {
+      "text": "from quiet page 45: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me to take out the trash at 8am",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I should network more",
+      "label": "NOTE"
+    },
+    {
+      "text": "taxi 67.99 euro today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from that video about productivity: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "new york times says: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "quote from the interview: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "brainstorm: get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "lunch on thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "read in quiet: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "feed the cat later",
+      "label": "REMINDER"
+    },
+    {
+      "text": "pick up tomatoes and maybe soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "thinking better file organization",
+      "label": "NOTE"
+    },
+    {
+      "text": "note: the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "need oats",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "pay the bill next monday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "haircut starts thursday afternoon",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from tim ferriss's book: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "call the plumber on tuesday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "pick up pepper and maybe formula",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "coffee 23.50 $ today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from the interview page 104: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "buy fish and paper towels",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "paid about 1250 for lunch yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "jot: need better cable management",
+      "label": "NOTE"
+    },
+    {
+      "text": "from james clear's podcast: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from huberman lab minute 22: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "100 bucks electricity bill",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get bananas the canned kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me to book the appointment",
+      "label": "REMINDER"
+    },
+    {
+      "text": "spent 23.50 $ on dinner",
+      "label": "BUDGET"
+    },
+    {
+      "text": "grab cheese",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get me toilet paper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "maybe automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "dinner starts wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "planning garden project",
+      "label": "NOTE"
+    },
+    {
+      "text": "bought shoes for 500",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me go to the gym",
+      "label": "REMINDER"
+    },
+    {
+      "text": "mental note: book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab some toilet paper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "brainstorm: switch to a better app",
+      "label": "NOTE"
+    },
+    {
+      "text": "pay rent before the weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "noted that traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "reminder: call the dentist",
+      "label": "REMINDER"
+    },
+    {
+      "text": "1250 lev snacks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "presentation july 3 at 11am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I noticed the fridge light is flickering",
+      "label": "NOTE"
+    },
+    {
+      "text": "umm spent 23.50 on books",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to pay the bill",
+      "label": "REMINDER"
+    },
+    {
+      "text": "buy chocolate and salt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "schedule book club next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "noted that traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "I noticed battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "need better cable management - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid 23.50 euro for movie tickets",
+      "label": "BUDGET"
+    },
+    {
+      "text": "quote from the interview: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I noticed battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "considering organize a team event",
+      "label": "NOTE"
+    },
+    {
+      "text": "dinner departs next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I need to stretch on friday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "project kickoff every monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "call the vet tonight",
+      "label": "REMINDER"
+    },
+    {
+      "text": "paid 5 \u20ac for medicine",
+      "label": "BUDGET"
+    },
+    {
+      "text": "call the vet later",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from huberman's video: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "thinking reading more",
+      "label": "NOTE"
+    },
+    {
+      "text": "lunch friday 8:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "umm spent 23.50 on electricity bill",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy a soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "pay rent after work",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from the lecture chapter 5: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me to take out the trash at 9am",
+      "label": "REMINDER"
+    },
+    {
+      "text": "pay the bill after work",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remembered research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "from james clear's talk: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remembered probably shouldn't overcommit",
+      "label": "NOTE"
+    },
+    {
+      "text": "get formula",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "paid 5 euro for books",
+      "label": "BUDGET"
+    },
+    {
+      "text": "make sure to water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "250 leva cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "pick up milk",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I need to buy lightbulbs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "haircut starts next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "buy cat food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the study minute 5: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "grab some garlic",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "flight next week at 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "parent teacher meeting this saturday 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "idea: get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "cheese tea and tissues",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent 12 eur on groceries",
+      "label": "BUDGET"
+    },
+    {
+      "text": "grab garlic",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "call the dentist before next week",
+      "label": "REMINDER"
+    },
+    {
+      "text": "haircut on tuesday at 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "buy bananas",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remembered look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "remembered research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab sugar",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I'm thinking about redecorating the room",
+      "label": "NOTE"
+    },
+    {
+      "text": "need paper towels",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "call mark in the morning",
+      "label": "REMINDER"
+    },
+    {
+      "text": "considering weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "playdate next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from start with why minute 33: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "parent teacher meeting starts next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "500 eur at online",
+      "label": "BUDGET"
+    },
+    {
+      "text": "interview wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "maybe get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "salary 23.50 leva deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from huberman's book: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from that talk about sleep: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "buy a dish soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I'm thinking about starting a blog",
+      "label": "NOTE"
+    },
+    {
+      "text": "parent teacher meeting starts friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remember to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "shopping: pepper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from start with why: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "don't forget stretch",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me to call the dentist at 3pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "sold parking for 250",
+      "label": "BUDGET"
+    },
+    {
+      "text": "feeling curious about the project strategy",
+      "label": "NOTE"
+    },
+    {
+      "text": "from huberman's book: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "haircut every month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "note: my focus is better mornings",
+      "label": "NOTE"
+    },
+    {
+      "text": "shopping: rice",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I need to buy shampoo",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "observation: the plant needs less water",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy paper towels",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remembered probably shouldn't overcommit",
+      "label": "NOTE"
+    },
+    {
+      "text": "conference on wednesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "dentist appointment next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "mental note: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "remember to reply to that email",
+      "label": "REMINDER"
+    },
+    {
+      "text": "dinner tihs saturday at 10:30",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "don't forget go to the gym",
+      "label": "REMINDER"
+    },
+    {
+      "text": "jot: meetings run long without agenda",
+      "label": "NOTE"
+    },
+    {
+      "text": "I noticed traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "remembered probably shouldn't overcommit",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to get lightbulbs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from that book about sleep: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from veritasium minute 55: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "thinking improving my health",
+      "label": "NOTE"
+    },
+    {
+      "text": "earned 2400 from the project",
+      "label": "BUDGET"
+    },
+    {
+      "text": "salary 45 euro deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "webinar every tuesday and thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me to check the mail",
+      "label": "REMINDER"
+    },
+    {
+      "text": "lunch june 12 at 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "idea: solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to send the invoice wednesday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remembered check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "bonus payment 100 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "jot: my focus is better mornings",
+      "label": "NOTE"
+    },
+    {
+      "text": "considering weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "salt form the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me to take out the trash at 10:30",
+      "label": "REMINDER"
+    },
+    {
+      "text": "umm spent 12 on groceries",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need tomatoes later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I need to buy flour",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "random thought: experiment with new recipe",
+      "label": "NOTE"
+    },
+    {
+      "text": "received 500 euros refund",
+      "label": "BUDGET"
+    },
+    {
+      "text": "internet 1250 eur today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "internet 2400 \u20ac today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "sugar dog food and yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "go to the gym wednesday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I think it was like 100 maybe 23.50 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "reminder: submit the report",
+      "label": "REMINDER"
+    },
+    {
+      "text": "idea: try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "I paid 5 leva internet",
+      "label": "BUDGET"
+    },
+    {
+      "text": "spent somewhere around 67.99 eur",
+      "label": "BUDGET"
+    },
+    {
+      "text": "team meeting this saturday 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "pick up dish soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "idea: take a course",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent 500 euros on phone charger",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to buy groceries",
+      "label": "REMINDER"
+    },
+    {
+      "text": "flight every tuesday and thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from that video about learning: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "umm spent 250 on dinner",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I'm thinking about getting a new car",
+      "label": "NOTE"
+    },
+    {
+      "text": "random thought: look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "get beef",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the lecture: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "presentation on sunday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "feeling motivated about better file organization",
+      "label": "NOTE"
+    },
+    {
+      "text": "I paid 67.99 eur coffee beans",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from flow chapter 4: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "shoes 67.99 eur today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "set a reminder to send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "read in atomic habits: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "party friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "shoes cost me 12 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "gym session starts on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "bonus payment 12 usd",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get coffee the whole wheat kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "the study says: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me to check the mail",
+      "label": "REMINDER"
+    },
+    {
+      "text": "meeting with john in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "sold shoes for 12",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I noticed the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "from bbc documentary minute 12: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "pick up eggs and maybe beef",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need to get toilet paper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "recurring: standup saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "recurring: doctor appointment saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "noted that need better cable management",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy a yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "paid 15 for groceries",
+      "label": "BUDGET"
+    },
+    {
+      "text": "observation: need better cable management",
+      "label": "NOTE"
+    },
+    {
+      "text": "gym session next week at 16:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "umm spent 1250 on phone charger",
+      "label": "BUDGET"
+    },
+    {
+      "text": "meeting with the team wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remember to take medication",
+      "label": "REMINDER"
+    },
+    {
+      "text": "spent 100 lev on coffee beans",
+      "label": "BUDGET"
+    },
+    {
+      "text": "grit says: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "read in the lean startup: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "noted that the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "I should read more books",
+      "label": "NOTE"
+    },
+    {
+      "text": "my paycheck was 250",
+      "label": "BUDGET"
+    },
+    {
+      "text": "stretch before next week",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I think it was like 500 maybe 45 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "paid about 100 for milk yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "brainstorm: solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "don't forget to backup my files",
+      "label": "REMINDER"
+    },
+    {
+      "text": "paid about 5 for internet yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "don't forget to send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "shopping: flour",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I think it was like 100 maybe 67.99 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "maybe weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid about 1250 for parking yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "paid 500 euros for books",
+      "label": "BUDGET"
+    },
+    {
+      "text": "thinking the project strategy",
+      "label": "NOTE"
+    },
+    {
+      "text": "random thought: try meditation for 10 days",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab some beef",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab bananas",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "observation: the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "from atomic habits page 12: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "quote from veritasium: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need to get garlic",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need to get cereal",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get me apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "set a reminder to water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "team sync 1st august at 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "party departs wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from tim ferriss's video: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "buy a garlic",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "book club departs this saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "review meeting thursday afternoon 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "noted that need better cable management",
+      "label": "NOTE"
+    },
+    {
+      "text": "from sam altman's book: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "brainstorm: organize a team event",
+      "label": "NOTE"
+    },
+    {
+      "text": "schedule party this saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remember to practice guitar",
+      "label": "REMINDER"
+    },
+    {
+      "text": "chicken batteries and sugar",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "income: 250 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "presentation on monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "quote from bbc documentary: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "appointment tomorrow at 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me submit the report",
+      "label": "REMINDER"
+    },
+    {
+      "text": "67.99 bucks cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "coffee cost me 100 eur",
+      "label": "BUDGET"
+    },
+    {
+      "text": "grab sugar",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "salary 100 bucks deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "45 $ at Amazon",
+      "label": "BUDGET"
+    },
+    {
+      "text": "haircut departs on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "noted that traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "from lex friedman podcast minute 33: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "make sure to renew the subscription",
+      "label": "REMINDER"
+    },
+    {
+      "text": "umm spent 250 on gas",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy a apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "earned 23.50 from weekend gig",
+      "label": "BUDGET"
+    },
+    {
+      "text": "thinking learning to cook",
+      "label": "NOTE"
+    },
+    {
+      "text": "need baby wipes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "set a reminder to pick up the kids",
+      "label": "REMINDER"
+    },
+    {
+      "text": "had a thought about getting a new car",
+      "label": "NOTE"
+    },
+    {
+      "text": "feeling good about better file organization",
+      "label": "NOTE"
+    },
+    {
+      "text": "67.99 \u20ac cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to change the password at 3pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "grab some bread",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "chicken soap and olive oil",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "buy eggs and snacks",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "quote from huberman lab: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "read in ted talk: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I think it was like 67.99 maybe 500 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "pick up fish",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "planning garden project",
+      "label": "NOTE"
+    },
+    {
+      "text": "conference wednesday morning 9am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "make sure to pay the bill",
+      "label": "REMINDER"
+    },
+    {
+      "text": "get diapers",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "read in how to win friends: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I need to buy tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "playdate august 5 at 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "lunch friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "income: 23.50 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "vitamins cost me 23.50 euro",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need to get flour",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "500 \u20ac cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "salary 67.99 \u20ac deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I should improve my skills",
+      "label": "NOTE"
+    },
+    {
+      "text": "random thought: look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "23.50 $ lunch",
+      "label": "BUDGET"
+    },
+    {
+      "text": "dentist appointment next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "thinking starting a blog",
+      "label": "NOTE"
+    },
+    {
+      "text": "67.99 leva at the shop",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from the interview page 88: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "call on tuesday 14:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from the study minute 5: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "gym session on wednesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "buy a tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need to remember to reply to that email",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from flow: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "grab cereal",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "birthday dinner next monday at 6pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "maybe try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "from economist page 45: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "pick up the kids before 5pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I think it was like 500 maybe 12 bucks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "internet cost me 5 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need dish soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from bill gates's video: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "pick up fish",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "don't forget take out the trash",
+      "label": "REMINDER"
+    },
+    {
+      "text": "spent 45 usd on clothes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "earned 2400 from freelance work",
+      "label": "BUDGET"
+    },
+    {
+      "text": "jot: the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "from bill gates's video: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I need to backup my files later",
+      "label": "REMINDER"
+    },
+    {
+      "text": "rent cost me 1250 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remembered probably shouldn't overcommit",
+      "label": "NOTE"
+    },
+    {
+      "text": "note: the plant needs less water",
+      "label": "NOTE"
+    },
+    {
+      "text": "from youtube video minute 12: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remembered look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "considering get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "45 leva at DM",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from veritasium chapter 3: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "jot: battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "5 euros at the store",
+      "label": "BUDGET"
+    },
+    {
+      "text": "grab rice",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remember to water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "conference on tuesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "wish list: new laptop",
+      "label": "NOTE"
+    },
+    {
+      "text": "23.50 \u20ac at the shop",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need to remember to pay the bill",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from flow minute 33: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "1250 \u20ac gym membership",
+      "label": "BUDGET"
+    },
+    {
+      "text": "shopping: diapers",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from that talk about learning: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "paid about 1250 for dinner yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "jot: battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "I noticed the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to get fish",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "pick up eggs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent somewhere around 250 dollars",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need to take medication tonight",
+      "label": "REMINDER"
+    },
+    {
+      "text": "random thought: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "from the interview chapter 4: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "spent somewhere around 1250 bucks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "thinking switching jobs",
+      "label": "NOTE"
+    },
+    {
+      "text": "go to the gym before tomorrow",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me reply to that email",
+      "label": "REMINDER"
+    },
+    {
+      "text": "yogurt shampoo and tissues",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent somewhere around 250 dollars",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remembered experiment with new recipe",
+      "label": "NOTE"
+    },
+    {
+      "text": "get carrots",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the lean startup: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "meeting with john on tuesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "haircut cost me 500 euro",
+      "label": "BUDGET"
+    },
+    {
+      "text": "mental note: book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "I should exercise regularly",
+      "label": "NOTE"
+    },
+    {
+      "text": "conference on friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I need to pick up the kids at 3pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "buy batteries and chocolate",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "make sure to go to the gym",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from tim ferriss's talk: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "pick up dry cleaning on tuesday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I need to buy cheese",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from blink page 32: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "recurring: playdate monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I need to buy diapers",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent somewhere around 2400 bucks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "noted that coffee at main street is amazing",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to buy batteries",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab some salt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "brainstorm: weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "reminder: go to the gym",
+      "label": "REMINDER"
+    },
+    {
+      "text": "pick up salt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from blink page 32: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "buy dish soap and flour",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "appointment tomorrow at 11am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "flight starts friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "haircut on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me practice guitar",
+      "label": "REMINDER"
+    },
+    {
+      "text": "appointment on tuesday at 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "get yogurt the cheap kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "considering create a side project",
+      "label": "NOTE"
+    },
+    {
+      "text": "schedule dentist appointment on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "grab rice",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me pick up the kids",
+      "label": "REMINDER"
+    },
+    {
+      "text": "the car is making noise - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "2400 usd at the restaurant",
+      "label": "BUDGET"
+    },
+    {
+      "text": "got paid 1250 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "salary 67.99 leva deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "jot: need better cable management",
+      "label": "NOTE"
+    },
+    {
+      "text": "observation: need better cable management",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to get yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "call starts tomorrow",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "set a reminder to take medication",
+      "label": "REMINDER"
+    },
+    {
+      "text": "coffee starts wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "buy milk",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "paid about 67.99 for coffee beans yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from that article chapter 4: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "recurring: presentation weekday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from range chapter 4: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "mental note: learning new skill might be fun",
+      "label": "NOTE"
+    },
+    {
+      "text": "from youtube video page 88: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I should exercise regularly",
+      "label": "NOTE"
+    },
+    {
+      "text": "don't forget to change the password",
+      "label": "REMINDER"
+    },
+    {
+      "text": "considering weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "schedule doctor appointment wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "standup on monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "grab butter",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "noted that my focus is better mornings",
+      "label": "NOTE"
+    },
+    {
+      "text": "get cereal the small kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "shopping: tissues",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "mental note: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "wedding next week 9am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "mental note: check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "bought medicine for 67.99",
+      "label": "BUDGET"
+    },
+    {
+      "text": "jot: coffee at main street is amazing",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab baby wipes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from tim ferriss's interview: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "pick up lettuce and maybe laundry detergent",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "paid 250 usd for gas",
+      "label": "BUDGET"
+    },
+    {
+      "text": "pick up eggs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I should exercise regularly",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab pepper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "toothpaste diapers and cheese",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I think it was like 100 maybe 45 usd",
+      "label": "BUDGET"
+    },
+    {
+      "text": "received 45 $ refund",
+      "label": "BUDGET"
+    },
+    {
+      "text": "haircut next week at 16:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remembered check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "mental note: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab laundry detergent",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the study chapter 2: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "reminder: book the appointment",
+      "label": "REMINDER"
+    },
+    {
+      "text": "party next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "wish list: standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "idea: try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "umm spent 1250 on milk",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from ted talk: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I need carrots later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need to remember to take medication",
+      "label": "REMINDER"
+    },
+    {
+      "text": "maybe get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "need oats",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "pepper from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "jot: coffee at main street is amazing",
+      "label": "NOTE"
+    },
+    {
+      "text": "shopping: tomatoes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab some rice",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "idea: solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy a snacks",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the lecture minute 45: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "buy a toothpaste",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "pick up laundry detergent",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "call the dentist next monday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "schedule team sync in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from ted talk minute 5: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "call the plumber at 3pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remembered book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "planning weekend trip",
+      "label": "NOTE"
+    },
+    {
+      "text": "make sure to water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "brainstorm: create a side project",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy cheese and eggs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "shopping: snacks",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "income: 100 $",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remembered book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "feeling confident about better file organization",
+      "label": "NOTE"
+    },
+    {
+      "text": "idea: weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "note: the plant needs less water",
+      "label": "NOTE"
+    },
+    {
+      "text": "pick up paper towels",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me to take medication",
+      "label": "REMINDER"
+    },
+    {
+      "text": "don't forget to check the mail",
+      "label": "REMINDER"
+    },
+    {
+      "text": "paid 250 bucks for medicine",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from tim ferriss's podcast: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "sold taxi for 500",
+      "label": "BUDGET"
+    },
+    {
+      "text": "mental note: check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "don't forget feed the cat",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from ted talk: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from range minute 5: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I should read more books",
+      "label": "NOTE"
+    },
+    {
+      "text": "remind me to book the appointment",
+      "label": "REMINDER"
+    },
+    {
+      "text": "feeling curious about productivity",
+      "label": "NOTE"
+    },
+    {
+      "text": "remember to change the password",
+      "label": "REMINDER"
+    },
+    {
+      "text": "take medication after work",
+      "label": "REMINDER"
+    },
+    {
+      "text": "pick up garlic and maybe apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from new york times minute 10: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "wedding tomorrow at 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "planning weekend trip",
+      "label": "NOTE"
+    },
+    {
+      "text": "maybe organize a team event",
+      "label": "NOTE"
+    },
+    {
+      "text": "remembered book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need dish soap later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "random thought: book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "dinner on sunday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from quiet: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "observation: my focus is better mornings",
+      "label": "NOTE"
+    },
+    {
+      "text": "pay rent before bed",
+      "label": "REMINDER"
+    },
+    {
+      "text": "shopping: eggs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from new york times page 88: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "call sarah after work",
+      "label": "REMINDER"
+    },
+    {
+      "text": "schedule review meeting tomorrow",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "laundry detergent dog food and cat food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "set a reminder to submit the report",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from james clear's podcast: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "considering try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "12 bucks internet",
+      "label": "BUDGET"
+    },
+    {
+      "text": "random thought: try meditation for 10 days",
+      "label": "NOTE"
+    },
+    {
+      "text": "got paid 500 $",
+      "label": "BUDGET"
+    },
+    {
+      "text": "salary 45 usd deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "read in the interview: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "get toilet paper the unsweetened kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab some apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "100 lev milk",
+      "label": "BUDGET"
+    },
+    {
+      "text": "renew the subscription before 5pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "500 euros rent",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I noticed the car is making noise",
+      "label": "NOTE"
+    },
+    {
+      "text": "I paid 23.50 bucks gas",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need dish soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "recurring: webinar monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from lex friedman podcast page 45: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "team meeting on sunday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I think it was like 67.99 maybe 2400 dollars",
+      "label": "BUDGET"
+    },
+    {
+      "text": "wish list: new laptop",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy a baby wipes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "quote from veritasium: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I should exercise regularly",
+      "label": "NOTE"
+    },
+    {
+      "text": "mental note: look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid about 45 for gas yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "umm spent 250 on electricity bill",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need eggs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "battery on laptop is dying - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent somewhere around 100 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from the interview minute 12: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need baby wipes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "meeting with the client tomorrow",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "maybe try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "brainstorm: organize a team event",
+      "label": "NOTE"
+    },
+    {
+      "text": "meeting with the team thursday afternoon",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "sold vitamins for 100",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I should learn a new language",
+      "label": "NOTE"
+    },
+    {
+      "text": "I think it was like 250 maybe 5 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "had a thought about redecorating the room",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to buy bananas",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "salary 67.99 eur deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "brainstorm: automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to take out the trash after work",
+      "label": "REMINDER"
+    },
+    {
+      "text": "paid about 1250 for phone charger yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from the interview chapter 5: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from that article: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "meeting with mark wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "birthday dinner next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "onions from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "had a thought about switching jobs",
+      "label": "NOTE"
+    },
+    {
+      "text": "feeling confident about traveling",
+      "label": "NOTE"
+    },
+    {
+      "text": "umm spent 45 on haircut",
+      "label": "BUDGET"
+    },
+    {
+      "text": "schedule call in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "pick up dish soap and maybe formula",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "idea: get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "call john",
+      "label": "REMINDER"
+    },
+    {
+      "text": "appointment next monday at 10:30",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "cancel the trial in the morning",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from that book about learning: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me book the appointment",
+      "label": "REMINDER"
+    },
+    {
+      "text": "feeling good about redecorating the room",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to buy carrots",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get dish soap the organic kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me to pick up dry cleaning",
+      "label": "REMINDER"
+    },
+    {
+      "text": "sold internet for 2400",
+      "label": "BUDGET"
+    },
+    {
+      "text": "pick up pasta and maybe spinach",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "team meeting june 12 at 11am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from huberman's podcast: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "quote from how to win friends: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remembered look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid about 100 for electricity bill yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get chicken the canned kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "team sync next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me to water the plants at 5pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "my paycheck was 45",
+      "label": "BUDGET"
+    },
+    {
+      "text": "maybe try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "coffee on tuesday 14:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "get apples the cheap kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "reminder: book the appointment",
+      "label": "REMINDER"
+    },
+    {
+      "text": "webinar next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "umm spent 23.50 on uber",
+      "label": "BUDGET"
+    },
+    {
+      "text": "don't forget to book the appointment",
+      "label": "REMINDER"
+    },
+    {
+      "text": "need to get paper towels",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "make sure to water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "flight every tuesday and thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "thinking productivity",
+      "label": "NOTE"
+    },
+    {
+      "text": "internet cost me 12 euros",
+      "label": "BUDGET"
+    },
+    {
+      "text": "noted that meetings run long without agenda",
+      "label": "NOTE"
+    },
+    {
+      "text": "had a thought about traveling",
+      "label": "NOTE"
+    },
+    {
+      "text": "toothpaste lightbulbs and pepper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "read in how to win friends: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from huberman's interview: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "appointment in june at 8:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "noted that the plant needs less water",
+      "label": "NOTE"
+    },
+    {
+      "text": "considering switch to a better app",
+      "label": "NOTE"
+    },
+    {
+      "text": "from bill gates's interview: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "quote from bbc documentary: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "2400 euro cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "income: 67.99 dollars",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy a cereal",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "clothes cost me 500 euros",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy a spinach",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "considering start a podcast",
+      "label": "NOTE"
+    },
+    {
+      "text": "idea: create a side project",
+      "label": "NOTE"
+    },
+    {
+      "text": "made 5 \u20ac selling bread",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I'm thinking about learning guitar",
+      "label": "NOTE"
+    },
+    {
+      "text": "that article says: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "parent teacher meeting starts on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me pick up dry cleaning",
+      "label": "REMINDER"
+    },
+    {
+      "text": "buy bread and coffee",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remember to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "bought gym membership for 12",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I should learn a new language",
+      "label": "NOTE"
+    },
+    {
+      "text": "observation: need better cable management",
+      "label": "NOTE"
+    },
+    {
+      "text": "yoga class departs next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "umm spent 1250 on phone charger",
+      "label": "BUDGET"
+    },
+    {
+      "text": "read in deep work: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "grit says: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I paid 67.99 $ snacks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from the interview minute 5: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "get beef",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "grab cat food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "random thought: book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "from that podcast about sleep: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need to remember to water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "get me paper towels",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I'm thinking about traveling",
+      "label": "NOTE"
+    },
+    {
+      "text": "feeling worried about improving my health",
+      "label": "NOTE"
+    },
+    {
+      "text": "remind me to send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "my focus is better mornings - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "baby wipes from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "team sync on tuesday 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "random thought: book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "need coffee",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "schedule wedding on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "brainstorm: get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "party wednesday morning 16:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "birthday dinner starts thursday afternoon",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "noted that the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "from youtube video: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "haircut next week 16:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "maybe start a podcast",
+      "label": "NOTE"
+    },
+    {
+      "text": "meeting with my boss on tuesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "thinking learning guitar",
+      "label": "NOTE"
+    },
+    {
+      "text": "read in economist: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I need to buy lettuce",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "atomic habits says: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "pick up olive oil",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from tim ferriss's interview: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "birthday dinner next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "planning to paint the room",
+      "label": "NOTE"
+    },
+    {
+      "text": "birthday dinner next month 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "got paid 500 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I think it was like 500 maybe 1250 euro",
+      "label": "BUDGET"
+    },
+    {
+      "text": "pick up toothpaste and maybe tissues",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need pasta",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "thinking I need to exercise more",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab fish",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent somewhere around 5 eur",
+      "label": "BUDGET"
+    },
+    {
+      "text": "brainstorm: switch to a better app",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy shampoo",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "bought dinner for 23.50",
+      "label": "BUDGET"
+    },
+    {
+      "text": "standup starts next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "gym session starts wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "salary 100 leva deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from start with why chapter 2: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "wish list: better running shoes",
+      "label": "NOTE"
+    },
+    {
+      "text": "from thinking fast and slow page 104: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "grab some oranges",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "chicken from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "umm spent 45 on snacks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "100 euros coffee beans",
+      "label": "BUDGET"
+    },
+    {
+      "text": "set a reminder to cancel the trial",
+      "label": "REMINDER"
+    },
+    {
+      "text": "wish list: noise cancelling headphones",
+      "label": "NOTE"
+    },
+    {
+      "text": "I noticed the fridge light is flickering",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need sugar later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "send the invoice before tomorrow",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from that book about health: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from james clear's podcast: exercise improves mood",
+      "label": "QUOTE"
+    },
+    {
+      "text": "read in sapiens: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "rent 45 lev today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "don't forget check the mail",
+      "label": "REMINDER"
+    },
+    {
+      "text": "quote from youtube video: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "get oats the gluten free kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "salary 5 lev deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get me oranges",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "jot: battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "idea: solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "salary 250 \u20ac deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from bill gates's podcast: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "idea: automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "bought coffee for 500",
+      "label": "BUDGET"
+    },
+    {
+      "text": "movie tickets cost me 23.50 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I should learn a new language",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need pasta later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "practice guitar after work",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me to water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "grab some salt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "buy batteries",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "playdate in june at 14:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I should learn a new language",
+      "label": "NOTE"
+    },
+    {
+      "text": "I think it was like 5 maybe 12 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "schedule haircut on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "vitamins 1250 usd today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "shopping: milk",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "thinking learning guitar",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent 50 and need to buy more",
+      "label": "BUDGET"
+    },
+    {
+      "text": "should probably call mom",
+      "label": "NOTE"
+    },
+    {
+      "text": "webinar next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from grit page 88: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "read in start with why: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "umm spent 1250 on gas",
+      "label": "BUDGET"
+    },
+    {
+      "text": "birthday dinner departs tomorrow",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I paid 100 usd dinner",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy milk before 5pm",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "webinar this saturday 16:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "pick up dry cleaning before 5pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "playdate starts thursday afternoon",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "paid about 12 for vitamins yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "1250 usd at Whole Foods",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I think it was like 23.50 maybe 67.99 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remembered check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "had a thought about better file organization",
+      "label": "NOTE"
+    },
+    {
+      "text": "the lecture says: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "planning home office setup",
+      "label": "NOTE"
+    },
+    {
+      "text": "thinking learning to cook",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy coffee",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "wedding next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need carrots",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "schedule dentist appointment on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "paid 45 euros fro movie tickets",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from james clear's book: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "conference departs on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "books cost me 12 eur",
+      "label": "BUDGET"
+    },
+    {
+      "text": "bonus payment 100 bucks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me renew the subscription",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I paid 100 leva phone charger",
+      "label": "BUDGET"
+    },
+    {
+      "text": "paid 67.99 eur for gym membership",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need olive oil",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need to get chocolate",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "playdate departs wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "grab chicken",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the lecture minute 33: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "call the plumber on tuesday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from tim ferriss's video: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "call thursday afternoon 11am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me renew the subscription",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I noticed traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "dentist appointment this saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "get tissues the cheap kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "wish list: standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "2400 leva at the gas station",
+      "label": "BUDGET"
+    },
+    {
+      "text": "jot: traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "mental note: check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "recurring: parent teacher meeting monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "feeling worried about redecorating teh room",
+      "label": "NOTE"
+    },
+    {
+      "text": "remind me backup my files",
+      "label": "REMINDER"
+    },
+    {
+      "text": "webinar on sunday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "team meeting this saturday 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "earned 500 from tutoring",
+      "label": "BUDGET"
+    },
+    {
+      "text": "income: 250 euro",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need to buy toothpaste",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me reply to that email",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from youtube video: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "thinking improving my health",
+      "label": "NOTE"
+    },
+    {
+      "text": "set a reminder to take out the trash",
+      "label": "REMINDER"
+    },
+    {
+      "text": "coffee at main street is amazing - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "spent somewhere around 2400 dollars",
+      "label": "BUDGET"
+    },
+    {
+      "text": "reminder: pick up dry cleaning",
+      "label": "REMINDER"
+    },
+    {
+      "text": "noted that the fridge light is flickering",
+      "label": "NOTE"
+    },
+    {
+      "text": "from that podcast about learning: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from economist page 32: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "quote from deep work: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "bread cost me 45 euro",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get shampoo",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from bill gates's video: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "feeling excited about switching jobs",
+      "label": "NOTE"
+    },
+    {
+      "text": "make sure to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "salary 23.50 euro deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me practice guitar",
+      "label": "REMINDER"
+    },
+    {
+      "text": "observation: traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "note: battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "remember to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "45 $ cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get me spinach",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "sold coffee beans for 23.50",
+      "label": "BUDGET"
+    },
+    {
+      "text": "youtube video says: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "coffee beans 67.99 bucks today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I paid 250 usd lunch",
+      "label": "BUDGET"
+    },
+    {
+      "text": "considering start a podcast",
+      "label": "NOTE"
+    },
+    {
+      "text": "note: meetings run long without agenda",
+      "label": "NOTE"
+    },
+    {
+      "text": "thinking productivity",
+      "label": "NOTE"
+    },
+    {
+      "text": "schedule playdate on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "12 $ coffee",
+      "label": "BUDGET"
+    },
+    {
+      "text": "random thought: try meditation for 10 days",
+      "label": "NOTE"
+    },
+    {
+      "text": "get cheese",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "jot: battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "sold snacks for 1250",
+      "label": "BUDGET"
+    },
+    {
+      "text": "brainstorm: solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "cat food from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "500 bucks cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need lettuce",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "paid 1250 \u20ac for uber",
+      "label": "BUDGET"
+    },
+    {
+      "text": "meeting at 3pm about the budget",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "get coffee the whole wheat kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent somewhere around 100 euros",
+      "label": "BUDGET"
+    },
+    {
+      "text": "wish list: better running shoes",
+      "label": "NOTE"
+    },
+    {
+      "text": "from tim ferriss's video: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "wedding in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "read in flow: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "parking cost me 1250 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to stretch at 8am",
+      "label": "REMINDER"
+    },
+    {
+      "text": "water the plants later",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from james clear's talk: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "maybe automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "from huberman's interview: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I'm thinking about productivity",
+      "label": "NOTE"
+    },
+    {
+      "text": "set a reminder to renew the subscription",
+      "label": "REMINDER"
+    },
+    {
+      "text": "meetings run long without agenda - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need coffee later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "book the appointment before the weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "idea: solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid 2400 $ for clothes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "5 bucks cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get me olive oil",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "noted that battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "I should save more money",
+      "label": "NOTE"
+    },
+    {
+      "text": "quote from blink: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remembered try meditation for 10 days",
+      "label": "NOTE"
+    },
+    {
+      "text": "from bill gates's talk: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I need eggs later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent somewhere around 67.99 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from that article minute 12: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "paid about 45 for internet yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "income: 100 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "electricity bill cost me 23.50 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "umm spent 12 on coffee",
+      "label": "BUDGET"
+    },
+    {
+      "text": "recurring: dinner tuesday and thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "meeting with john in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "considering organize a team event",
+      "label": "NOTE"
+    },
+    {
+      "text": "meeting with the client in june",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need to get sugar",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "pick up olive oil and maybe tomatoes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "idea: weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "I paid 1250 lev phone charger",
+      "label": "BUDGET"
+    },
+    {
+      "text": "yogurt from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "earned 100 from selling stuff online",
+      "label": "BUDGET"
+    },
+    {
+      "text": "quote from start with why: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "buy nuts and chocolate",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "don't forget to check the mail",
+      "label": "REMINDER"
+    },
+    {
+      "text": "received 45 eur refund",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from blink page 104: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "grab some dish soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "read in start with why: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "coffee from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "appointment in june at 14:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "income: 1250 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "shopping: soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "noted that the fridge light is flickering",
+      "label": "NOTE"
+    },
+    {
+      "text": "note: need better cable management",
+      "label": "NOTE"
+    },
+    {
+      "text": "umm spent 67.99 on lunch",
+      "label": "BUDGET"
+    },
+    {
+      "text": "100 lev haircut",
+      "label": "BUDGET"
+    },
+    {
+      "text": "medicine 100 dollars today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to pick up the kids",
+      "label": "REMINDER"
+    },
+    {
+      "text": "grab soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "dinner in june at 9am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need to get pasta",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "medicine cost me 2400 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "call my boss this weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from that podcast about habits: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "spent somewhere around 1250 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "pick up baby wipes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from that talk about sleep: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "yoga class on thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "bonus payment 12 $",
+      "label": "BUDGET"
+    },
+    {
+      "text": "pick up pasta",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from sapiens page 12: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "parent teacher meeting march 21 at 10:30",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need to get eggs tomorrow",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "pick up apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "planning to reorganize closet",
+      "label": "NOTE"
+    },
+    {
+      "text": "I think it was like 250 maybe 250 usd",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I should improve my skills",
+      "label": "NOTE"
+    },
+    {
+      "text": "buy pasta and tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "playdate tomorrow 3pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "quote from the lean startup: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remember to take out the trash",
+      "label": "REMINDER"
+    },
+    {
+      "text": "buy carrots",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "schedule playdate thursday afternoon",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "don't forget to pay the bill",
+      "label": "REMINDER"
+    },
+    {
+      "text": "umm spent 5 on dinner",
+      "label": "BUDGET"
+    },
+    {
+      "text": "schedule lunch on the 5th",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "recurring: doctor appointment month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "random thought: try meditation for 10 days",
+      "label": "NOTE"
+    },
+    {
+      "text": "from the lecture chapter 2: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "noted that coffee at main street is amazing",
+      "label": "NOTE"
+    },
+    {
+      "text": "wedding july 3 at 8:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "wish list: new sofa",
+      "label": "NOTE"
+    },
+    {
+      "text": "planning home office setup",
+      "label": "NOTE"
+    },
+    {
+      "text": "brainstorm: weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "wish list: new sofa",
+      "label": "NOTE"
+    },
+    {
+      "text": "set a reminder to send the invoice",
+      "label": "REMINDER"
+    },
+    {
+      "text": "paid 12 usd for shoes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remember to backup my files",
+      "label": "REMINDER"
+    },
+    {
+      "text": "team sync starts on tuesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "mental note: learning new skill might be fun",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to send the invoice tomorrow",
+      "label": "REMINDER"
+    },
+    {
+      "text": "quote from new york times: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "read in the study: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "wish list: new sofa",
+      "label": "NOTE"
+    },
+    {
+      "text": "umm spent 12 on taxi",
+      "label": "BUDGET"
+    },
+    {
+      "text": "spent 5 euros on coffee",
+      "label": "BUDGET"
+    },
+    {
+      "text": "don't forget take out the trash",
+      "label": "REMINDER"
+    },
+    {
+      "text": "spent 23.50 usd on electricity bill",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to backup my files at 10:30",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from bill gates's podcast: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "mental note: probably shouldn't overcommit",
+      "label": "NOTE"
+    },
+    {
+      "text": "random thought: learning new skill might be fun",
+      "label": "NOTE"
+    },
+    {
+      "text": "pick up lightbulbs and maybe beef",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "500 leva phone charger",
+      "label": "BUDGET"
+    },
+    {
+      "text": "had a thought about improving my health",
+      "label": "NOTE"
+    },
+    {
+      "text": "reminder: renew the subscription",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from veritasium minute 12: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need spinach",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I need to pay the bill on tuesday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "tomatoes from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "quote from teh lean startup: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I'm thinking about improving my health",
+      "label": "NOTE"
+    },
+    {
+      "text": "from tim ferriss's talk: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I need dog food later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "note: the car is making noise",
+      "label": "NOTE"
+    },
+    {
+      "text": "dinner cost me 45 dollars",
+      "label": "BUDGET"
+    },
+    {
+      "text": "wish list: better running shoes",
+      "label": "NOTE"
+    },
+    {
+      "text": "flight next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "considering create a side project",
+      "label": "NOTE"
+    },
+    {
+      "text": "from lex friedman podcast chapter 2: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "get garlic the canned kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from flow page 104: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "pick up shampoo and maybe milk",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "thinking the project strategy",
+      "label": "NOTE"
+    },
+    {
+      "text": "I noticed meetings run long without agenda",
+      "label": "NOTE"
+    },
+    {
+      "text": "get baby wipes the organic kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "pick up rice",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "standup friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "meeting with lisa next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "mental note: experiment with new recipe",
+      "label": "NOTE"
+    },
+    {
+      "text": "from the lean startup: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "don't forget to water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "the plant needs less water - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "brainstorm: switch to a better app",
+      "label": "NOTE"
+    },
+    {
+      "text": "remind me to pay rent at 6:00",
+      "label": "REMINDER"
+    },
+    {
+      "text": "internet cost me 500 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "noted that my focus is better mornings",
+      "label": "NOTE"
+    },
+    {
+      "text": "meeting with mark tomorrow",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "team sync 12/11 at 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need to remember to cancel the trial",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I think it was like 500 maybe 45 bucks",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from youtube video chapter 2: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "tomorrow",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from that interview about productivity: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "go to the gym before friday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "meeting tomorrow about groceries",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "appointment wednesday morning at 6pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "grab some oranges",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "birthday dinner next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "doctor appointment every saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "mental note: book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to remember to take out the trash",
+      "label": "REMINDER"
+    },
+    {
+      "text": "1250 dollars at DM",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from range chapter 4: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "thinking redecorating the room",
+      "label": "NOTE"
+    },
+    {
+      "text": "wish list: standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "remind me to pick up dry cleaning at 6:00",
+      "label": "REMINDER"
+    },
+    {
+      "text": "pick up milk and maybe eggs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "conference 12/11 at 8:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "noted that my focus is better mornings",
+      "label": "NOTE"
+    },
+    {
+      "text": "webinar friday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "coffee 1st august at 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "don't forget to change the password",
+      "label": "REMINDER"
+    },
+    {
+      "text": "brainstorm: get a standing desk",
+      "label": "NOTE"
+    },
+    {
+      "text": "from lex friedman podcast page 45: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from that book about learning: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "buy a fish",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "call sarah next monday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "feeling worried about getting a new car",
+      "label": "NOTE"
+    },
+    {
+      "text": "the neighbor is loud - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "random thought: look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "read in the interview: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "team sync next week 2:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I need to buy tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from drive minute 33: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "buy chocolate and shampoo",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get butter the small kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "don't forget to go to the gym",
+      "label": "REMINDER"
+    },
+    {
+      "text": "wish list: noise cancelling headphones",
+      "label": "NOTE"
+    },
+    {
+      "text": "idea: solar panels might be good",
+      "label": "NOTE"
+    },
+    {
+      "text": "don't forget pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "paid about 250 for taxi yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "umm spent 12 on dinner",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get toothpaste the canned kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get oats the large kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "book club thursday afternoon at 6pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remembered check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "pick up batteries",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "feeling curious about productivity",
+      "label": "NOTE"
+    },
+    {
+      "text": "pick up olive oil and maybe butter",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "schedule conference next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "clothes cost me 2400 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "maybe automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid about 250 for bread yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "make sure to renew the subscription",
+      "label": "REMINDER"
+    },
+    {
+      "text": "salary 12 euro deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "random thought: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "get pepper the frozen kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "had a thought about getting a new car",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab some bread",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "dentist appointment next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me to submit the report at 5pm",
+      "label": "REMINDER"
+    },
+    {
+      "text": "pick up spinach and maybe garlic",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "1250 eur cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "maybe try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid 23.50 euros for clothes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "my paycheck was 500",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy baby wipes and baby wipes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "random thought: try meditation for 10 days",
+      "label": "NOTE"
+    },
+    {
+      "text": "don't forget to change the password",
+      "label": "REMINDER"
+    },
+    {
+      "text": "1250 euro at the market",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need to send the invoice tomorrow",
+      "label": "REMINDER"
+    },
+    {
+      "text": "buy a soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from youtube video minute 33: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from thinking fast and slow page 45: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "planning to reorganize closet",
+      "label": "NOTE"
+    },
+    {
+      "text": "had a thought about reading more",
+      "label": "NOTE"
+    },
+    {
+      "text": "I think it was like 23.50 maybe 45 $",
+      "label": "BUDGET"
+    },
+    {
+      "text": "got paid 23.50 $",
+      "label": "BUDGET"
+    },
+    {
+      "text": "considering try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "quiet says: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "conference 1st august at 8:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "feeling worried about reading more",
+      "label": "NOTE"
+    },
+    {
+      "text": "had a thought about switching jobs",
+      "label": "NOTE"
+    },
+    {
+      "text": "from that book about productivity: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from bill gates's video: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from james clear's podcast: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remember to pick up dry cleaning",
+      "label": "REMINDER"
+    },
+    {
+      "text": "brainstorm: start a podcast",
+      "label": "NOTE"
+    },
+    {
+      "text": "observation: the fridge light is flickering",
+      "label": "NOTE"
+    },
+    {
+      "text": "read in range: humans cooperate in large numbers",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I'm thinking about improving my health",
+      "label": "NOTE"
+    },
+    {
+      "text": "parking 500 usd today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I need to pay rent later",
+      "label": "REMINDER"
+    },
+    {
+      "text": "pick up olive oil",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "feeling uncertain about the project strategy",
+      "label": "NOTE"
+    },
+    {
+      "text": "from quiet: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "planning home office setup",
+      "label": "NOTE"
+    },
+    {
+      "text": "reply to that email after work",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from the study minute 5: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "project kickoff starts thursday afternoon",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "don't forget feed the cat",
+      "label": "REMINDER"
+    },
+    {
+      "text": "stretch before the end of month",
+      "label": "REMINDER"
+    },
+    {
+      "text": "jot: the fridge light is flickering",
+      "label": "NOTE"
+    },
+    {
+      "text": "bonus payment 45 euros",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy soap and dish soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "need sugar",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "brainstorm: try meal prepping",
+      "label": "NOTE"
+    },
+    {
+      "text": "note: coffee at main street is amazing",
+      "label": "NOTE"
+    },
+    {
+      "text": "feeling curious about reading more",
+      "label": "NOTE"
+    },
+    {
+      "text": "paid 67.99 $ for clothes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "67.99 \u20ac at Lidl",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I paid 2400 dollars coffee beans",
+      "label": "BUDGET"
+    },
+    {
+      "text": "buy diapers and shampoo",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "bonus payment 12 leva",
+      "label": "BUDGET"
+    }
+  ],
+  "test": [
+    {
+      "text": "remind me to practice guitar at 6:00",
+      "label": "REMINDER"
+    },
+    {
+      "text": "sold gym membership for 67.99",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need to get batteries",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "45 lev lunch",
+      "label": "BUDGET"
+    },
+    {
+      "text": "call on wednesday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "feed the cat before the weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "had a thought about learning to cook",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need to buy tissues",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I'm thinking about productivity",
+      "label": "NOTE"
+    },
+    {
+      "text": "from that talk about sleep: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "buy a dish soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from flow page 45: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "mental note: research VPN providers",
+      "label": "NOTE"
+    },
+    {
+      "text": "party every saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "call wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from sam altman's book: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "yoga class in june 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "presentation on tuesday 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from tim ferriss's book: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "spent somewhere around 23.50 dollars",
+      "label": "BUDGET"
+    },
+    {
+      "text": "submit the report next monday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me renew the subscription",
+      "label": "REMINDER"
+    },
+    {
+      "text": "remind me to pick up the kids at noon",
+      "label": "REMINDER"
+    },
+    {
+      "text": "observation: battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab some paper towels",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "recurring: wedding tuesday and thursday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "get diapers teh low fat kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "feeling good about productivity",
+      "label": "NOTE"
+    },
+    {
+      "text": "I need lettuce later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "noted that traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "need to get apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "spent somewhere around 2400 euro",
+      "label": "BUDGET"
+    },
+    {
+      "text": "observation: my focus is better mornings",
+      "label": "NOTE"
+    },
+    {
+      "text": "1250 bucks cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "spent 67.99 euro on movie tickets",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to reply to that email at noon",
+      "label": "REMINDER"
+    },
+    {
+      "text": "paid about 12 for shoes yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "my paycheck was 67.99",
+      "label": "BUDGET"
+    },
+    {
+      "text": "paid 67.99 lev for books",
+      "label": "BUDGET"
+    },
+    {
+      "text": "considering weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "webinar departs next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "500 dollars at Lidl",
+      "label": "BUDGET"
+    },
+    {
+      "text": "parking cost me 2400 euro",
+      "label": "BUDGET"
+    },
+    {
+      "text": "paid about 23.50 for taxi yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "made 2400 $ selling clotehs",
+      "label": "BUDGET"
+    },
+    {
+      "text": "observation: need better cable management",
+      "label": "NOTE"
+    },
+    {
+      "text": "salary 100 usd deposited",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remember to water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "coffee from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get me lightbulbs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "quote from sapiens: breadth can beat specialization",
+      "label": "QUOTE"
+    },
+    {
+      "text": "call every month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "read in the lean startup: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "wish list: noise cancelling headphones",
+      "label": "NOTE"
+    },
+    {
+      "text": "feeling excited about starting a blog",
+      "label": "NOTE"
+    },
+    {
+      "text": "team sync friday at 11am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "meeting with sarah this saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I noticed battery on laptop is dying",
+      "label": "NOTE"
+    },
+    {
+      "text": "I'm thinking about productivity",
+      "label": "NOTE"
+    },
+    {
+      "text": "read in quiet: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "grab soap",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "yoga class next week 10:30",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "jot: the plant needs less water",
+      "label": "NOTE"
+    },
+    {
+      "text": "67.99 bucks at Target",
+      "label": "BUDGET"
+    },
+    {
+      "text": "call departs next monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "make sure to take medication",
+      "label": "REMINDER"
+    },
+    {
+      "text": "from youtube video minute 5: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "my paycheck was 5",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need cat food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me to change the password",
+      "label": "REMINDER"
+    },
+    {
+      "text": "traffic is worse on thursdays - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "I paid 12 usd gas",
+      "label": "BUDGET"
+    },
+    {
+      "text": "oats eggs and onions",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "standup starts next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "2400 euro cashback",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from grit page 32: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "coffee",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get butter the canned kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from that article chapter 4: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "mental note: look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab some onions",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "buy lightbulbs and nuts",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I paid 12 eur rent",
+      "label": "BUDGET"
+    },
+    {
+      "text": "spent 67.99 usd on shoes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from atomic habits: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I think it was like 45 maybe 12 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "need dog food",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "buy milk and call mom",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "schedule haircut this saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I need to buy paper towels",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "paid about 67.99 for lunch yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "sold phone charger for 12",
+      "label": "BUDGET"
+    },
+    {
+      "text": "mental note: probably shouldn't overcommit",
+      "label": "NOTE"
+    },
+    {
+      "text": "mental note: experiment with new recipe",
+      "label": "NOTE"
+    },
+    {
+      "text": "dentist appointment tomorrow",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "pick up coffee",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "movie tickets 250 $ today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "butter onions and toilet paper",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "read in bbc documentary: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "umm spent 2400 on groceries",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from the study chapter 3: caffeine has a 5 hour half life",
+      "label": "QUOTE"
+    },
+    {
+      "text": "get me rice",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "income: 1250 euros",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from huberman lab minute 45: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remembered check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "get bread the whole wheat kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "clothes 5 dollars today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "income: 12 \u20ac",
+      "label": "BUDGET"
+    },
+    {
+      "text": "made 45 $ selling electricity bill",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get lettuce",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "bonus payment 12 euro",
+      "label": "BUDGET"
+    },
+    {
+      "text": "I should learn a new language",
+      "label": "NOTE"
+    },
+    {
+      "text": "doctor appointment on sunday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "get me carrots",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "meeting with sarah tomorrow",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "pick up tea",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "practice guitar before the weekend",
+      "label": "REMINDER"
+    },
+    {
+      "text": "schedule interview wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "remind me to change the password at 10:30",
+      "label": "REMINDER"
+    },
+    {
+      "text": "coffee at main street is amazing - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "remembered check warranty dates",
+      "label": "NOTE"
+    },
+    {
+      "text": "remind me practice guitar",
+      "label": "REMINDER"
+    },
+    {
+      "text": "the fridge light is flickering - worth noting",
+      "label": "NOTE"
+    },
+    {
+      "text": "quiet says: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "form veritasium: you do not rise to goals you fall to systems",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me to go to the gym",
+      "label": "REMINDER"
+    },
+    {
+      "text": "webinar on monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need toothpaste",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "noted that the car is making noise",
+      "label": "NOTE"
+    },
+    {
+      "text": "yoga class every monday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "paid about 500 for shoes yesterday",
+      "label": "BUDGET"
+    },
+    {
+      "text": "quote from youtube video: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "maybe automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "tissues from the store",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "wish list: new laptop",
+      "label": "NOTE"
+    },
+    {
+      "text": "remembered try meditation for 10 days",
+      "label": "NOTE"
+    },
+    {
+      "text": "remembered look into co-working spaces",
+      "label": "NOTE"
+    },
+    {
+      "text": "books 5 \u20ac today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "flight june 12 at 14:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "the mom test says: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "from james clear's interview: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "pick up salt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "reminder: backup my files",
+      "label": "REMINDER"
+    },
+    {
+      "text": "bonus payment 100 leva",
+      "label": "BUDGET"
+    },
+    {
+      "text": "appointment next week at 6pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "meeting with lisa wednesday morning",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "jot: meetings run long without agenda",
+      "label": "NOTE"
+    },
+    {
+      "text": "wish list: comfortable chair",
+      "label": "NOTE"
+    },
+    {
+      "text": "I'm thinking about getting a new car",
+      "label": "NOTE"
+    },
+    {
+      "text": "idea: weekend hackathon",
+      "label": "NOTE"
+    },
+    {
+      "text": "from quiet: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need to get eggs",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get me rice",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "quiet says: reading increases vocabulary",
+      "label": "QUOTE"
+    },
+    {
+      "text": "call my boss tonight",
+      "label": "REMINDER"
+    },
+    {
+      "text": "don't forget submit the report",
+      "label": "REMINDER"
+    },
+    {
+      "text": "don't forget pick up dry cleaning",
+      "label": "REMINDER"
+    },
+    {
+      "text": "get me apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get me oats",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "interview starts next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "paid 23.50 bucks for milk",
+      "label": "BUDGET"
+    },
+    {
+      "text": "considering automate the reports",
+      "label": "NOTE"
+    },
+    {
+      "text": "youtube video says: automation saves time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "gym session june 12 at 6pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "huberman lab says: multitasking reduces productivity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "project kickoff 1st august at 7:30pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "lunch tomorrow 14:00",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "quote from blink: consistency beats intensity",
+      "label": "QUOTE"
+    },
+    {
+      "text": "random thought: book a weekend off",
+      "label": "NOTE"
+    },
+    {
+      "text": "gym membership cost me 500 lev",
+      "label": "BUDGET"
+    },
+    {
+      "text": "don't forget pick up the kids",
+      "label": "REMINDER"
+    },
+    {
+      "text": "check the mail on friday",
+      "label": "REMINDER"
+    },
+    {
+      "text": "schedule team sync this saturday",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "from that podcast about habits: small wins compound over time",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need to get pasta",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the interview chapter 5: persistence beats talent",
+      "label": "QUOTE"
+    },
+    {
+      "text": "playdate july 3 at 11am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "meeting with sarah next week",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "need to remember to pay rent",
+      "label": "REMINDER"
+    },
+    {
+      "text": "blink says: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "observation: the neighbor is loud",
+      "label": "NOTE"
+    },
+    {
+      "text": "brainstorm: create a side project",
+      "label": "NOTE"
+    },
+    {
+      "text": "remembered experiment with new recipe",
+      "label": "NOTE"
+    },
+    {
+      "text": "my paycheck was 1250",
+      "label": "BUDGET"
+    },
+    {
+      "text": "grab some apples",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from the mom test: depth beats shallow work",
+      "label": "QUOTE"
+    },
+    {
+      "text": "I need rice later",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "from quiet chapter 1: focus on why not what",
+      "label": "QUOTE"
+    },
+    {
+      "text": "remind me to check the mail",
+      "label": "REMINDER"
+    },
+    {
+      "text": "I think it was like 5 maybe 45 eur",
+      "label": "BUDGET"
+    },
+    {
+      "text": "from blink chapter 2: sleep impacts memory consolidation",
+      "label": "QUOTE"
+    },
+    {
+      "text": "need to remember to practice guitar",
+      "label": "REMINDER"
+    },
+    {
+      "text": "spent 100 lev on clothes",
+      "label": "BUDGET"
+    },
+    {
+      "text": "get yogurt",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I paid 100 bucks haircut",
+      "label": "BUDGET"
+    },
+    {
+      "text": "bought movie tickets for 1250",
+      "label": "BUDGET"
+    },
+    {
+      "text": "don't forget reply to that email",
+      "label": "REMINDER"
+    },
+    {
+      "text": "make sure to stretch",
+      "label": "REMINDER"
+    },
+    {
+      "text": "observation: traffic is worse on thursdays",
+      "label": "NOTE"
+    },
+    {
+      "text": "get me cheese",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "jot: meetings run long without agenda",
+      "label": "NOTE"
+    },
+    {
+      "text": "grab some shampoo",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "wish list: better running shoes",
+      "label": "NOTE"
+    },
+    {
+      "text": "pick up baby wipes",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "I need to buy batteries",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "67.99 usd lunch",
+      "label": "BUDGET"
+    },
+    {
+      "text": "project kickoff next monday at 6pm",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "I paid 500 lev dinner",
+      "label": "BUDGET"
+    },
+    {
+      "text": "internet 23.50 dollars today",
+      "label": "BUDGET"
+    },
+    {
+      "text": "remind me to take medication at noon",
+      "label": "REMINDER"
+    },
+    {
+      "text": "wish list: new laptop",
+      "label": "NOTE"
+    },
+    {
+      "text": "call thursday afternoon at 11am",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "noted that the car is making noise",
+      "label": "NOTE"
+    },
+    {
+      "text": "my paycheck was 23.50",
+      "label": "BUDGET"
+    },
+    {
+      "text": "don't forget call the dentist",
+      "label": "REMINDER"
+    },
+    {
+      "text": "need onions",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "get tomatoes the large kind",
+      "label": "SHOPPING"
+    },
+    {
+      "text": "remind me water the plants",
+      "label": "REMINDER"
+    },
+    {
+      "text": "feeling uncertain about improving my health",
+      "label": "NOTE"
+    },
+    {
+      "text": "call departs next month",
+      "label": "CALENDAR"
+    },
+    {
+      "text": "feeling confident about getting a new car",
+      "label": "NOTE"
+    }
+  ]
+}
