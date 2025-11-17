@@ -1,3 +1,4 @@
+import Entities
 import Foundation
 import Framework
 
@@ -51,7 +52,7 @@ public struct MockClassifierService: ClassifierServiceProtocol, Sendable {
     public let simulatedDelay: UInt64
 
     public init(
-        predictedCategory: TextCategory = .BUDGET,
+        predictedCategory: TextCategory = .budget,
         confidence: Float = 0.85,
         allScores: [TextCategory: Float] = [:],
         shouldSimulateError: Bool = false,

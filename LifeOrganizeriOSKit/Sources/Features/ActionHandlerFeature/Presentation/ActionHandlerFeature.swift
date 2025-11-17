@@ -3,6 +3,7 @@ import Framework
 import ComposableArchitecture
 import Entities
 import SpeechToTextService
+import ClassifierService
 
 /// TCA reducer for handling user input (text and voice) and processing via backend API.
 ///
@@ -17,6 +18,7 @@ public struct ActionHandlerFeature {
 
     @Dependency(\.speechToTextService) var speechToTextService
     @Dependency(\.actionHandlerRepository) var actionHandlerRepository
+    @Dependency(\.classifierService) var classifierService
 
     @ObservableState
     public struct State: Equatable {
@@ -36,10 +38,10 @@ public struct ActionHandlerFeature {
         case startRecordingButtonTapped
         case stopRecordingButtonTapped
         case recognitionResultReceived(String, isFinal: Bool)
-        case recognitionError(Error)
+        case recognitionError(any Error)
         case recognitionCompleted
         case processingSuccess(ProcessingResponse)
-        case processingFailure(Error)
+        case processingFailure(any Error)
     }
 
     public var body: some ReducerOf<Self> {
@@ -59,9 +61,14 @@ public struct ActionHandlerFeature {
                 let inputText = state.inputText
                 return .run { send in
                     @Dependency(\.actionHandlerRepository) var repository
+                    @Dependency(\.classifierService) var classifier
 
                     do {
-                        let responses = try await repository.processAction(input: inputText)
+                        // Classify input to get category
+                        let classification = try await classifier.classify(inputText)
+                        let category = classification.category
+                        
+                        let responses = try await repository.processAction(input: inputText, category: category)
                         // TODO: Handle multiple responses in UI - for now, show first result
                         // Multi-transaction UI support requires updating State to store [ProcessingResponse]
                         if let firstResponse = responses.first {
@@ -82,7 +89,7 @@ public struct ActionHandlerFeature {
                     @Dependency(\.speechToTextService) var speechService
 
                     do {
-                        let status = await speechService.authorizationStatus()
+                        let status = speechService.authorizationStatus()
                         if status != .authorized {
                             let newStatus = try await speechService.requestAuthorization()
                             guard newStatus == .authorized else {
@@ -105,7 +112,7 @@ public struct ActionHandlerFeature {
                 state.isRecording = false
                 return .cancel(id: "recording")
 
-            case let .recognitionResultReceived(text, isFinal):
+            case let .recognitionResultReceived(text, _):
                 state.inputText = text
                 state.transcribedText = text
                 return .none

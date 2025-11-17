@@ -20,7 +20,7 @@ public struct ClassifierTestFeature {
     public enum Action {
         case inputTextChanged(String)
         case classifyButtonTapped
-        case classificationCompleted(Result<ClassificationResult, Error>)
+        case classificationCompleted(Result<ClassificationResult, any Error>)
     }
 
     @Dependency(\.classifierService) var classifierService

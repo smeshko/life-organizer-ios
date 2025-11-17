@@ -9,9 +9,9 @@ actor ActionHandlerRemoteDataSource: ActionHandlerRemoteDataSourceProtocol {
 
     init() {}
 
-    func processAction(input: String) async throws -> [ProcessingResponse] {
+    func processAction(input: String, category: String?) async throws -> [ProcessingResponse] {
         // Create request DTO
-        let requestDTO = ProcessActionRequestDTO(input: input)
+        let requestDTO = ProcessActionRequestDTO(input: input, category: category)
 
         // Encode DTO to Data
         let encoder = JSONEncoder()

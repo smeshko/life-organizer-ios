@@ -26,7 +26,7 @@ extension ActionHandlerEndpoint: Endpoint {
         }
     }
 
-    public var headers: [String: String]? {
+    public var headers: [String: String] {
         return [
             "Content-Type": "application/json",
             "Accept": "application/json"

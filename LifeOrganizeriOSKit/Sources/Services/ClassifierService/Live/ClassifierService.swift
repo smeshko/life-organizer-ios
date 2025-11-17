@@ -1,4 +1,5 @@
 import CoreML
+import Entities
 import Foundation
 import Framework
 import Tokenizers

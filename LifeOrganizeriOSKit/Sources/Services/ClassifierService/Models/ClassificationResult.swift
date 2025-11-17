@@ -1,3 +1,4 @@
+import Entities
 import Foundation
 
 /// Result of on-device text classification containing predicted category and confidence scores.

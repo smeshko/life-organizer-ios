@@ -5,7 +5,7 @@ import Foundation
 /// ## Design Principles
 ///
 /// The ClassifierService performs on-device text classification to categorize user input
-/// into one of six categories (BUDGET, SHOPPING, REMINDER, CALENDAR, NOTE, QUOTE).
+/// into one of six categories (budget, shopping, reminder, calendar, note, quote).
 /// This reduces backend costs by 5x and improves response time to <100ms for high-confidence
 /// classifications.
 ///
@@ -26,7 +26,7 @@ import Foundation
 /// @Dependency(\.classifierService) var classifier
 ///
 /// let result = try await classifier.classify("spent 50 dollars at whole foods")
-/// print("Category: \(result.category)")  // BUDGET
+/// print("Category: \(result.category)")  // budget
 /// print("Confidence: \(result.confidence)")  // 0.92
 ///
 /// if result.shouldUseFallback {
