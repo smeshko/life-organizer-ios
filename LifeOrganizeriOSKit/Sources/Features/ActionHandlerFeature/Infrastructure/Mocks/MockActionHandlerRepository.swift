@@ -14,6 +14,10 @@ actor MockActionHandlerRepository: ActionHandlerRepositoryProtocol {
     }
 
     func processAction(input: String) async throws -> [ProcessingResponse] {
+        try await processAction(input: input, category: "")
+    }
+    
+    func processAction(input: String, category: String) async throws -> [ProcessingResponse] {
         if let error = mockError {
             throw error
         }

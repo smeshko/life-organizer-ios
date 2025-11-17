@@ -3,6 +3,10 @@ import Entities
 
 struct MockActionHandlerRemoteDataSource: ActionHandlerRemoteDataSourceProtocol {
     func processAction(input: String) async throws -> [ProcessingResponse] {
+        try await processAction(input: input, category: nil)
+    }
+    
+    func processAction(input: String, category: String?) async throws -> [ProcessingResponse] {
         // Return default mock response (single-element array)
         [ProcessingResponse(
             processingResultType: .appActionRequired,

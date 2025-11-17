@@ -3,6 +3,7 @@ import Framework
 import ComposableArchitecture
 import Entities
 import SpeechToTextService
+import ClassifierService
 
 /// TCA reducer for handling user input (text and voice) and processing via backend API.
 ///
@@ -17,6 +18,7 @@ public struct ActionHandlerFeature {
 
     @Dependency(\.speechToTextService) var speechToTextService
     @Dependency(\.actionHandlerRepository) var actionHandlerRepository
+    @Dependency(\.classifierService) var classifierService
 
     @ObservableState
     public struct State: Equatable {
@@ -59,9 +61,14 @@ public struct ActionHandlerFeature {
                 let inputText = state.inputText
                 return .run { send in
                     @Dependency(\.actionHandlerRepository) var repository
+                    @Dependency(\.classifierService) var classifier
 
                     do {
-                        let responses = try await repository.processAction(input: inputText)
+                        // Classify input to get category
+                        let classification = try await classifier.classify(inputText)
+                        let category = classification.category.toBackendCategory
+                        
+                        let responses = try await repository.processAction(input: inputText, category: category)
                         // TODO: Handle multiple responses in UI - for now, show first result
                         // Multi-transaction UI support requires updating State to store [ProcessingResponse]
                         if let firstResponse = responses.first {

@@ -34,4 +34,10 @@ public enum TextCategory: String, CaseIterable, Sendable, Equatable {
     public static func from(index: Int) -> TextCategory? {
         Self.allCases.first { $0.index == index }
     }
+    
+    /// Convert iOS TextCategory to backend API category string format
+    /// Maps: BUDGET->budget, SHOPPING->shopping, REMINDER->reminder, CALENDAR->calendar, NOTE->note, QUOTE->quote
+    public var toBackendCategory: String {
+        return self.rawValue.lowercased()
+    }
 }
