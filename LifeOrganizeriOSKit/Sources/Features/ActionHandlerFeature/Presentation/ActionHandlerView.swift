@@ -88,7 +88,20 @@ public struct ActionHandlerView: View {
                 )
                 .lifeShadowSubtle()
                 .padding(.horizontal, .lifeSpacingMD)
-                
+
+                // Success message display
+                if let successMessage = store.processingResult?.message {
+                    Text(successMessage)
+                        .font(.lifeBody)
+                        .foregroundColor(.green)
+                        .padding(.lifeSpacingSM)
+                        .background(
+                            RoundedRectangle(cornerRadius: .lifeRadiusSM)
+                                .fill(Color.green.opacity(0.1))
+                        )
+                        .padding(.horizontal, .lifeSpacingMD)
+                }
+
                 Spacer()
             }
             
