@@ -7,7 +7,7 @@ actor ActionHandlerRepository: ActionHandlerRepositoryProtocol {
     @Dependency(\.actionHandlerRemoteDataSource) private var remoteDataSource
 
     func processAction(input: String, category: TextCategory) async throws -> [ProcessingResponse] {
-        try await remoteDataSource.processAction(input: input, category: category.rawValue)
+        try await remoteDataSource.processAction(input: input, category: category.rawValue.lowercased())
     }
 }
 
