@@ -10,7 +10,7 @@ public struct ActionHandlerView: View {
     public init(store: StoreOf<ActionHandlerFeature>) {
         self.store = store
     }
-
+    
     public var body: some View {
         ZStack {
             // Background
@@ -89,7 +89,7 @@ public struct ActionHandlerView: View {
                 )
                 .lifeShadowSubtle()
                 .padding(.horizontal, .lifeSpacingMD)
-
+                
                 // Success message display
                 if let successMessage = store.processingResult?.message {
                     Text(successMessage)
@@ -102,46 +102,25 @@ public struct ActionHandlerView: View {
                         )
                         .padding(.horizontal, .lifeSpacingMD)
                 }
-
-                // Activity Log Display
-                if !store.activityLogs.isEmpty {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Activity Log")
-                            .font(.headline)
-                            .padding(.horizontal)
-
-                        ScrollView {
-                            LazyVStack(alignment: .leading, spacing: 4) {
-                                ForEach(store.activityLogs) { entry in
-                                    LogEntryRow(entry: entry)
-                                }
-                            }
-                            .padding(.horizontal)
-                        }
-                        .frame(maxHeight: 300)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(8)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Activity Log")
+                        .font(.headline)
                         .padding(.horizontal)
+                    
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 4) {
+                            ForEach(store.activityLogs) { entry in
+                                LogEntryRow(entry: entry)
+                            }
+                        }
                     }
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .padding(.horizontal)
                 }
-
+                
                 Spacer()
-            }
-            
-            // Error overlay (if needed)
-            if let errorMessage = store.errorMessage {
-                VStack {
-                    Text(errorMessage)
-                        .font(.lifeCaption)
-                        .foregroundColor(.red)
-                        .padding(.lifeSpacingSM)
-                        .background(
-                            RoundedRectangle(cornerRadius: .lifeRadiusSM)
-                                .fill(Color.red.opacity(0.1))
-                        )
-                        .padding(.lifeSpacingMD)
-                    Spacer()
-                }
             }
         }
     }
@@ -151,7 +130,7 @@ public struct ActionHandlerView: View {
 
 private struct LogEntryRow: View {
     let entry: LogEntry
-
+    
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             // Timestamp
@@ -159,26 +138,26 @@ private struct LogEntryRow: View {
                 .font(.caption2)
                 .foregroundColor(.secondary)
                 .frame(width: 50, alignment: .leading)
-
+            
             // Source
             Text(entry.source)
                 .font(.caption)
                 .fontWeight(.medium)
                 .foregroundColor(colorForLevel(entry.level))
                 .frame(width: 100, alignment: .leading)
-
+            
             // Message
             Text(entry.message)
                 .font(.caption)
                 .foregroundColor(.primary)
-                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(.vertical, 4)
         .padding(.horizontal, 8)
         .background(colorForLevel(entry.level).opacity(0.1))
         .cornerRadius(4)
     }
-
+    
     private func colorForLevel(_ level: LogLevel) -> Color {
         switch level {
         case .info:
@@ -208,20 +187,6 @@ private struct LogEntryRow: View {
                 var state = ActionHandlerFeature.State()
                 state.inputText = "Test message"
                 state.isLoading = true
-                return state
-            }()
-        ) {
-            ActionHandlerFeature()
-        }
-    )
-}
-
-#Preview("Error State") {
-    ActionHandlerView(
-        store: Store(
-            initialState: {
-                var state = ActionHandlerFeature.State()
-                state.errorMessage = "Network error occurred"
                 return state
             }()
         ) {
