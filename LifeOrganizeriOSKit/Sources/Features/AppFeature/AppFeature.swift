@@ -3,6 +3,7 @@ import Framework
 import ComposableArchitecture
 import CoreUI
 import ActionHandlerFeature
+import LogViewerFeature
 
 /// The root TCA reducer that coordinates the entire application.
 ///
@@ -32,6 +33,7 @@ public struct AppFeature {
         public var backendConnectionError: String?
         public var showConnectionIndicator: Bool = false
         @Presents public var classifierTest: ClassifierTestFeature.State?
+        @Presents public var logViewer: LogViewerFeature.State?
 
         public init() {
             self.actionHandler = ActionHandlerFeature.State()
@@ -46,6 +48,8 @@ public struct AppFeature {
         case hideConnectionIndicator
         case showClassifierTest
         case classifierTest(PresentationAction<ClassifierTestFeature.Action>)
+        case showLogViewer
+        case logViewer(PresentationAction<LogViewerFeature.Action>)
     }
 
     public var body: some ReducerOf<Self> {
@@ -98,6 +102,13 @@ public struct AppFeature {
             case .classifierTest:
                 return .none
 
+            case .showLogViewer:
+                state.logViewer = LogViewerFeature.State()
+                return .none
+
+            case .logViewer:
+                return .none
+
             case .actionHandler:
                 return .none
             }
@@ -109,6 +120,9 @@ public struct AppFeature {
 
         .ifLet(\.$classifierTest, action: \.classifierTest) {
             ClassifierTestFeature()
+        }
+        .ifLet(\.$logViewer, action: \.logViewer) {
+            LogViewerFeature()
         }
     }
 }

@@ -162,9 +162,11 @@ let package = Package(
         .library(name: "NetworkService", targets: ["NetworkService"]),
         .library(name: "SpeechToTextService", targets: ["SpeechToTextService"]),
         .library(name: "ClassifierService", targets: ["ClassifierService"]),
+        .library(name: "LoggingService", targets: ["LoggingService"]),
 
         // Features
         .library(name: "ActionHandlerFeature", targets: ["ActionHandlerFeature"]),
+        .library(name: "LogViewerFeature", targets: ["LogViewerFeature"]),
 
         // Add your features and services here as you create them
         // Example:
@@ -194,8 +196,9 @@ let package = Package(
         ),
 
         // MARK: - Features
-        .feature("AppFeature", dependencies: ["ActionHandlerFeature", "ClassifierService"]),
-        .feature("ActionHandlerFeature", dependencies: ["NetworkService", "Entities", "SpeechToTextService"]),
+        .feature("AppFeature", dependencies: ["ActionHandlerFeature", "ClassifierService", "LogViewerFeature"]),
+        .feature("ActionHandlerFeature", dependencies: ["NetworkService", "Entities", "SpeechToTextService", "LoggingService", "ClassifierService"]),
+        .feature("LogViewerFeature", dependencies: ["Entities"]),
 
         // MARK: - Services
         .service("NetworkService"),
@@ -207,6 +210,7 @@ let package = Package(
                 .product(name: "Transformers", package: "swift-transformers"),
             ]
         ),
+        .service("LoggingService", dependencies: ["Entities"]),
 
         // MARK: - Add Your Services Here
         // Example:

@@ -1,6 +1,7 @@
 import SwiftUI
 import ComposableArchitecture
 import CoreUI
+import Entities
 
 /// SwiftUI view for ActionHandlerFeature that displays input field with voice and text input.
 public struct ActionHandlerView: View {
@@ -102,6 +103,28 @@ public struct ActionHandlerView: View {
                         .padding(.horizontal, .lifeSpacingMD)
                 }
 
+                // Activity Log Display
+                if !store.activityLogs.isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Activity Log")
+                            .font(.headline)
+                            .padding(.horizontal)
+
+                        ScrollView {
+                            LazyVStack(alignment: .leading, spacing: 4) {
+                                ForEach(store.activityLogs) { entry in
+                                    LogEntryRow(entry: entry)
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                        .frame(maxHeight: 300)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+                    }
+                }
+
                 Spacer()
             }
             
@@ -123,6 +146,52 @@ public struct ActionHandlerView: View {
         }
     }
 }
+
+// MARK: - Log Entry Row
+
+private struct LogEntryRow: View {
+    let entry: LogEntry
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 8) {
+            // Timestamp
+            Text(entry.timestamp, style: .time)
+                .font(.caption2)
+                .foregroundColor(.secondary)
+                .frame(width: 50, alignment: .leading)
+
+            // Source
+            Text(entry.source)
+                .font(.caption)
+                .fontWeight(.medium)
+                .foregroundColor(colorForLevel(entry.level))
+                .frame(width: 100, alignment: .leading)
+
+            // Message
+            Text(entry.message)
+                .font(.caption)
+                .foregroundColor(.primary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(.vertical, 4)
+        .padding(.horizontal, 8)
+        .background(colorForLevel(entry.level).opacity(0.1))
+        .cornerRadius(4)
+    }
+
+    private func colorForLevel(_ level: LogLevel) -> Color {
+        switch level {
+        case .info:
+            return .blue
+        case .success:
+            return .green
+        case .error:
+            return .red
+        }
+    }
+}
+
+// MARK: - Previews
 
 #Preview {
     ActionHandlerView(
@@ -167,6 +236,47 @@ public struct ActionHandlerView: View {
             initialState: {
                 var state = ActionHandlerFeature.State()
                 state.isRecording = true
+                return state
+            }()
+        ) {
+            ActionHandlerFeature()
+        }
+    )
+}
+
+#Preview("With Activity Logs") {
+    ActionHandlerView(
+        store: Store(
+            initialState: {
+                var state = ActionHandlerFeature.State()
+                state.activityLogs = [
+                    LogEntry(level: .info, source: "ActionHandler", message: "Processing text request"),
+                    LogEntry(level: .info, source: "Classifier", message: "Classifying text: 'Add groceries to shopping list'"),
+                    LogEntry(level: .success, source: "Classifier", message: "Category: todo (confidence: 0.95)"),
+                    LogEntry(level: .info, source: "Network", message: "Sending request to backend"),
+                    LogEntry(level: .success, source: "Network", message: "Response received: 200 OK"),
+                    LogEntry(level: .success, source: "ActionHandler", message: "Request completed successfully")
+                ]
+                return state
+            }()
+        ) {
+            ActionHandlerFeature()
+        }
+    )
+}
+
+#Preview("With Error Log") {
+    ActionHandlerView(
+        store: Store(
+            initialState: {
+                var state = ActionHandlerFeature.State()
+                state.activityLogs = [
+                    LogEntry(level: .info, source: "ActionHandler", message: "Processing voice request"),
+                    LogEntry(level: .info, source: "Speech", message: "Recording started"),
+                    LogEntry(level: .info, source: "Speech", message: "Transcribed: 'Buy milk and eggs'"),
+                    LogEntry(level: .error, source: "Network", message: "Connection timeout - please try again")
+                ]
+                state.errorMessage = "Network connection failed"
                 return state
             }()
         ) {
