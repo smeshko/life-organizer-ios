@@ -243,3 +243,44 @@ private struct LogEntryRow: View {
         }
     )
 }
+
+#Preview("With Activity Logs") {
+    ActionHandlerView(
+        store: Store(
+            initialState: {
+                var state = ActionHandlerFeature.State()
+                state.activityLogs = [
+                    LogEntry(level: .info, source: "ActionHandler", message: "Processing text request"),
+                    LogEntry(level: .info, source: "Classifier", message: "Classifying text: 'Add groceries to shopping list'"),
+                    LogEntry(level: .success, source: "Classifier", message: "Category: todo (confidence: 0.95)"),
+                    LogEntry(level: .info, source: "Network", message: "Sending request to backend"),
+                    LogEntry(level: .success, source: "Network", message: "Response received: 200 OK"),
+                    LogEntry(level: .success, source: "ActionHandler", message: "Request completed successfully")
+                ]
+                return state
+            }()
+        ) {
+            ActionHandlerFeature()
+        }
+    )
+}
+
+#Preview("With Error Log") {
+    ActionHandlerView(
+        store: Store(
+            initialState: {
+                var state = ActionHandlerFeature.State()
+                state.activityLogs = [
+                    LogEntry(level: .info, source: "ActionHandler", message: "Processing voice request"),
+                    LogEntry(level: .info, source: "Speech", message: "Recording started"),
+                    LogEntry(level: .info, source: "Speech", message: "Transcribed: 'Buy milk and eggs'"),
+                    LogEntry(level: .error, source: "Network", message: "Connection timeout - please try again")
+                ]
+                state.errorMessage = "Network connection failed"
+                return state
+            }()
+        ) {
+            ActionHandlerFeature()
+        }
+    )
+}
