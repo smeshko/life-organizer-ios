@@ -2,6 +2,7 @@ import SwiftUI
 import ComposableArchitecture
 import CoreUI
 import ActionHandlerFeature
+import LogViewerFeature
 
 /// The root view of the application.
 public struct AppView: View {
@@ -18,10 +19,23 @@ public struct AppView: View {
                     store: store.scope(state: \.actionHandler, action: \.actionHandler)
                 )
 
-                // Test button - positioned at top right
+                // Navigation buttons - positioned at top right
                 VStack {
                     HStack {
                         Spacer()
+                        Button {
+                            store.send(.showLogViewer)
+                        } label: {
+                            Text("View Logs")
+                                .font(.lifeCaption)
+                                .foregroundColor(.lifePrimary)
+                                .padding(.horizontal, .lifeSpacingMD)
+                                .padding(.vertical, .lifeSpacingSM)
+                                .background(
+                                    Capsule()
+                                        .fill(Color.lifePrimary.opacity(0.1))
+                                )
+                        }
                         Button {
                             store.send(.showClassifierTest)
                         } label: {
@@ -90,6 +104,11 @@ public struct AppView: View {
                 item: $store.scope(state: \.classifierTest, action: \.classifierTest)
             ) { store in
                 ClassifierTestView(store: store)
+            }
+            .navigationDestination(
+                item: $store.scope(state: \.logViewer, action: \.logViewer)
+            ) { store in
+                LogViewerView(store: store)
             }
         }
         .animation(.lifeSpring, value: store.showConnectionIndicator)

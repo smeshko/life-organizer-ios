@@ -166,6 +166,7 @@ let package = Package(
 
         // Features
         .library(name: "ActionHandlerFeature", targets: ["ActionHandlerFeature"]),
+        .library(name: "LogViewerFeature", targets: ["LogViewerFeature"]),
 
         // Add your features and services here as you create them
         // Example:
@@ -195,8 +196,9 @@ let package = Package(
         ),
 
         // MARK: - Features
-        .feature("AppFeature", dependencies: ["ActionHandlerFeature", "ClassifierService"]),
+        .feature("AppFeature", dependencies: ["ActionHandlerFeature", "ClassifierService", "LogViewerFeature"]),
         .feature("ActionHandlerFeature", dependencies: ["NetworkService", "Entities", "SpeechToTextService", "LoggingService", "ClassifierService"]),
+        .feature("LogViewerFeature", dependencies: ["Entities"]),
 
         // MARK: - Services
         .service("NetworkService"),
