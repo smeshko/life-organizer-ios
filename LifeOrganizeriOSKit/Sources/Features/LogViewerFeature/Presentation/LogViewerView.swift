@@ -172,10 +172,93 @@ private struct LogEntryRow: View {
     }
 }
 
-#Preview {
+// MARK: - Preview Helpers
+
+extension LogEntry {
+    static func preview(
+        level: LogLevel,
+        source: String,
+        message: String,
+        secondsAgo: TimeInterval = 0
+    ) -> LogEntry {
+        LogEntry(
+            timestamp: Date().addingTimeInterval(-secondsAgo),
+            level: level,
+            source: source,
+            message: message
+        )
+    }
+}
+
+extension LogSession {
+    static var previewSessions: [LogSession] {
+        [
+            LogSession(
+                timestamp: Date().addingTimeInterval(-300),
+                entries: [
+                    .preview(level: .info, source: "ActionHandler", message: "Processing text request", secondsAgo: 305),
+                    .preview(level: .info, source: "Classifier", message: "Classifying text: 'Add groceries to shopping list'", secondsAgo: 304),
+                    .preview(level: .success, source: "Classifier", message: "Category: todo (confidence: 0.95)", secondsAgo: 303),
+                    .preview(level: .info, source: "Network", message: "Sending request to backend", secondsAgo: 302),
+                    .preview(level: .success, source: "Network", message: "Response received: 200 OK", secondsAgo: 300),
+                    .preview(level: .success, source: "ActionHandler", message: "Request completed successfully", secondsAgo: 299)
+                ],
+                requestType: "text"
+            ),
+            LogSession(
+                timestamp: Date().addingTimeInterval(-3600),
+                entries: [
+                    .preview(level: .info, source: "ActionHandler", message: "Starting voice recording", secondsAgo: 3605),
+                    .preview(level: .info, source: "Speech", message: "Recording started", secondsAgo: 3604),
+                    .preview(level: .info, source: "Speech", message: "Transcribed: 'Buy milk and eggs'", secondsAgo: 3602),
+                    .preview(level: .error, source: "Network", message: "Connection timeout", secondsAgo: 3600)
+                ],
+                requestType: "voice"
+            ),
+            LogSession(
+                timestamp: Date().addingTimeInterval(-86400),
+                entries: [
+                    .preview(level: .info, source: "ActionHandler", message: "Processing budget request", secondsAgo: 86405),
+                    .preview(level: .success, source: "ActionHandler", message: "Budget updated: +$50.00", secondsAgo: 86400)
+                ],
+                requestType: "text"
+            )
+        ]
+    }
+}
+
+#Preview("Session List") {
+    LogViewerView(
+        store: Store(
+            initialState: LogViewerFeature.State(
+                sessions: LogSession.previewSessions
+            )
+        ) {
+            LogViewerFeature()
+        }
+    )
+}
+
+#Preview("Empty State") {
     LogViewerView(
         store: Store(initialState: LogViewerFeature.State()) {
             LogViewerFeature()
         }
     )
+}
+
+#Preview("Loading State") {
+    LogViewerView(
+        store: Store(
+            initialState: LogViewerFeature.State(isLoading: true)
+        ) {
+            LogViewerFeature()
+        }
+    )
+}
+
+#Preview("Session Detail") {
+    NavigationStack {
+        LogSessionDetailView(session: LogSession.previewSessions[0])
+    }
 }

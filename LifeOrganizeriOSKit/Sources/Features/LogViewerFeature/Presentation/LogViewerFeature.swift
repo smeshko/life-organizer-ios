@@ -6,12 +6,22 @@ import Foundation
 public struct LogViewerFeature {
     @ObservableState
     public struct State: Equatable {
-        public var sessions: [LogSession] = []
+        public var sessions: [LogSession]
         public var selectedSession: LogSession?
-        public var isLoading: Bool = false
+        public var isLoading: Bool
         public var errorMessage: String?
 
-        public init() {}
+        public init(
+            sessions: [LogSession] = [],
+            selectedSession: LogSession? = nil,
+            isLoading: Bool = false,
+            errorMessage: String? = nil
+        ) {
+            self.sessions = sessions
+            self.selectedSession = selectedSession
+            self.isLoading = isLoading
+            self.errorMessage = errorMessage
+        }
     }
 
     public enum Action: Equatable {
