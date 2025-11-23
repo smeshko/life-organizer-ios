@@ -1,5 +1,6 @@
 import ComposableArchitecture
 import Entities
+import Framework
 import SwiftUI
 
 public struct LogViewerView: View {
@@ -229,12 +230,10 @@ extension LogSession {
 
 #Preview("Session List") {
     LogViewerView(
-        store: Store(
-            initialState: LogViewerFeature.State(
-                sessions: LogSession.previewSessions
-            )
-        ) {
+        store: Store(initialState: LogViewerFeature.State()) {
             LogViewerFeature()
+        } withDependencies: {
+            $0.logViewerRepository = PreviewLogViewerRepository(sessions: LogSession.previewSessions)
         }
     )
 }
@@ -243,6 +242,8 @@ extension LogSession {
     LogViewerView(
         store: Store(initialState: LogViewerFeature.State()) {
             LogViewerFeature()
+        } withDependencies: {
+            $0.logViewerRepository = PreviewLogViewerRepository(sessions: [])
         }
     )
 }
@@ -253,6 +254,9 @@ extension LogSession {
             initialState: LogViewerFeature.State(isLoading: true)
         ) {
             LogViewerFeature()
+        } withDependencies: {
+            // Simulate slow loading
+            $0.logViewerRepository = PreviewLogViewerRepository(sessions: [], delay: 10)
         }
     )
 }
@@ -260,5 +264,31 @@ extension LogSession {
 #Preview("Session Detail") {
     NavigationStack {
         LogSessionDetailView(session: LogSession.previewSessions[0])
+    }
+}
+
+// MARK: - Preview Repository
+
+private struct PreviewLogViewerRepository: LogViewerRepositoryProtocol {
+    let sessions: [LogSession]
+    let delay: UInt64
+
+    init(sessions: [LogSession], delay: UInt64 = 0) {
+        self.sessions = sessions
+        self.delay = delay
+    }
+
+    func listSessions() async throws -> [LogSession] {
+        if delay > 0 {
+            try await Task.sleep(for: .seconds(delay))
+        }
+        return sessions.sorted { $0.timestamp > $1.timestamp }
+    }
+
+    func loadSession(id: UUID) async throws -> LogSession {
+        guard let session = sessions.first(where: { $0.id == id }) else {
+            throw AppError.persistence(.loadFailed("Session not found"))
+        }
+        return session
     }
 }
