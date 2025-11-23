@@ -28,7 +28,6 @@ public struct ActionHandlerFeature {
         public var isRecording: Bool = false
         public var isLoading: Bool = false
         public var transcribedText: String = ""
-        public var errorMessage: String?
         public var processingResult: ProcessingResponse?
         public var activityLogs: [LogEntry] = []
 
@@ -60,7 +59,6 @@ public struct ActionHandlerFeature {
             case .sendButtonTapped:
                 guard !state.inputText.isEmpty else { return .none }
                 state.isLoading = true
-                state.errorMessage = nil
                 state.processingResult = nil
 
                 // Log start of text processing
@@ -97,7 +95,6 @@ public struct ActionHandlerFeature {
 
             case .startRecordingButtonTapped:
                 state.isRecording = true
-                state.errorMessage = nil
                 state.transcribedText = ""
 
                 // Log start of voice recording
@@ -151,7 +148,6 @@ public struct ActionHandlerFeature {
 
             case let .recognitionError(error):
                 state.isRecording = false
-                state.errorMessage = "Error: \(error.localizedDescription)"
                 return .none
 
             case .processingSuccess(let response):
@@ -159,9 +155,21 @@ public struct ActionHandlerFeature {
                 state.isLoading = false
                 state.processingResult = response
 
-                // Log success
+                // Build response data string for logging
+                var responseDetails = "Type: \(response.processingResultType.rawValue)"
+                responseDetails += "\nMessage: \(response.message)"
+                if let action = response.action {
+                    responseDetails += "\nAction: \(action)"
+                }
+
+                // Log success with backend response
                 state.activityLogs.append(
-                    LogEntry(level: .success, source: "ActionHandler", message: "Request completed successfully")
+                    LogEntry(
+                        level: .success,
+                        source: "ActionHandler",
+                        message: "Request completed successfully",
+                        responseData: responseDetails
+                    )
                 )
 
                 // Save session to file
@@ -184,11 +192,18 @@ public struct ActionHandlerFeature {
 
             case .processingFailure(let error):
                 state.isLoading = false
-                state.errorMessage = "Error: \(error.localizedDescription)"
 
-                // Log error
+                // Build error details for logging
+                let errorDetails = "Error: \(error.localizedDescription)\nType: \(type(of: error))"
+
+                // Log error with details
                 state.activityLogs.append(
-                    LogEntry(level: .error, source: "ActionHandler", message: error.localizedDescription)
+                    LogEntry(
+                        level: .error,
+                        source: "ActionHandler",
+                        message: error.localizedDescription,
+                        responseData: errorDetails
+                    )
                 )
 
                 // Save session with error logs
