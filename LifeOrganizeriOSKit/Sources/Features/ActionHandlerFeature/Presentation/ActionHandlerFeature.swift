@@ -5,6 +5,7 @@ import Entities
 import SpeechToTextService
 import ClassifierService
 import LoggingService
+import ReminderService
 
 /// TCA reducer for handling user input (text and voice) and processing via backend API.
 ///
@@ -21,6 +22,7 @@ public struct ActionHandlerFeature {
     @Dependency(\.actionHandlerRepository) var actionHandlerRepository
     @Dependency(\.classifierService) var classifierService
     @Dependency(\.loggingService) var loggingService
+    @Dependency(\.reminderService) var reminderService
 
     @ObservableState
     public struct State: Equatable {
@@ -172,6 +174,9 @@ public struct ActionHandlerFeature {
                     )
                 )
 
+                // Handle app-side actions
+                let actionToExecute = response.action
+
                 // Save session to file
                 let session = LogSession(
                     timestamp: Date(),
@@ -181,6 +186,34 @@ public struct ActionHandlerFeature {
 
                 return .run { send in
                     @Dependency(\.loggingService) var loggingService
+                    @Dependency(\.reminderService) var reminderService
+
+                    // Execute action if present
+                    if let action = actionToExecute {
+                        switch action {
+                        case .budget:
+                            // Budget actions handled elsewhere (or not yet)
+                            break
+
+                        case .reminder(let reminderAction):
+                            do {
+                                try await reminderService.createReminder(reminderAction)
+                                await send(.logActivity(LogEntry(
+                                    level: .success,
+                                    source: "ReminderService",
+                                    message: "Reminder created: \(reminderAction.title)"
+                                )))
+                            } catch {
+                                await send(.logActivity(LogEntry(
+                                    level: .error,
+                                    source: "ReminderService",
+                                    message: "Failed to create reminder: \(error.localizedDescription)"
+                                )))
+                            }
+                        }
+                    }
+
+                    // Save session
                     do {
                         try await loggingService.saveSession(session)
                         await send(.clearLogs)

@@ -11,6 +11,10 @@ struct ActionMapper {
             let budgetAction = try BudgetActionMapper.toDomain(budgetDTO)
             return .budget(budgetAction)
 
+        case .reminder(let reminderDTO):
+            let reminderAction = ReminderActionMapper.toDomain(reminderDTO)
+            return .reminder(reminderAction)
+
         case .unknown(let type):
             // Unknown action types are not supported
             throw AppError.actionHandler(.handlerNotFound("Unknown action type: '\(type)'"))

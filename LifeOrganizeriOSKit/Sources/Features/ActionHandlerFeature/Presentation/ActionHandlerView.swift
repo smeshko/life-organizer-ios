@@ -241,7 +241,6 @@ private struct LogEntryRow: View {
                     LogEntry(level: .info, source: "Speech", message: "Transcribed: 'Buy milk and eggs'"),
                     LogEntry(level: .error, source: "Network", message: "Connection timeout - please try again")
                 ]
-                state.errorMessage = "Network connection failed"
                 return state
             }()
         ) {

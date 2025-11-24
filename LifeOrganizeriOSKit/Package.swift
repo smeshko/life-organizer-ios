@@ -163,6 +163,7 @@ let package = Package(
         .library(name: "SpeechToTextService", targets: ["SpeechToTextService"]),
         .library(name: "ClassifierService", targets: ["ClassifierService"]),
         .library(name: "LoggingService", targets: ["LoggingService"]),
+        .library(name: "ReminderService", targets: ["ReminderService"]),
 
         // Features
         .library(name: "ActionHandlerFeature", targets: ["ActionHandlerFeature"]),
@@ -197,7 +198,7 @@ let package = Package(
 
         // MARK: - Features
         .feature("AppFeature", dependencies: ["ActionHandlerFeature", "ClassifierService", "LogViewerFeature"]),
-        .feature("ActionHandlerFeature", dependencies: ["NetworkService", "Entities", "SpeechToTextService", "LoggingService", "ClassifierService"]),
+        .feature("ActionHandlerFeature", dependencies: ["NetworkService", "Entities", "SpeechToTextService", "LoggingService", "ClassifierService", "ReminderService"]),
         .feature("LogViewerFeature", dependencies: ["Entities"]),
 
         // MARK: - Services
@@ -211,6 +212,7 @@ let package = Package(
             ]
         ),
         .service("LoggingService", dependencies: ["Entities"]),
+        .service("ReminderService", dependencies: ["Entities"]),
 
         // MARK: - Add Your Services Here
         // Example:

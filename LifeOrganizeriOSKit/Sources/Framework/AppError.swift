@@ -57,8 +57,7 @@ public enum AppError: Error, Equatable {
     case speechRecognition(SpeechRecognitionError)
     case actionHandler(ActionHandlerError)
     case classifier(ClassifierError)
-    // Add your custom service errors here
-    // case yourService(YourServiceError)
+    case reminder(ReminderError)
 
     case unknown(String)
 }
@@ -162,6 +161,23 @@ extension SpeechRecognitionError: LocalizedError {
     }
 }
 
+// MARK: - Reminder Errors
+public enum ReminderError: Error, Equatable {
+    case permissionDenied
+    case saveFailed(String)
+}
+
+extension ReminderError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .permissionDenied:
+            return "Reminders permission denied"
+        case .saveFailed(let message):
+            return "Failed to save reminder: \(message)"
+        }
+    }
+}
+
 // MARK: - LocalizedError Conformance
 extension AppError: LocalizedError {
     public var errorDescription: String? {
@@ -175,6 +191,8 @@ extension AppError: LocalizedError {
         case .actionHandler(let error):
             return error.errorDescription
         case .classifier(let error):
+            return error.errorDescription
+        case .reminder(let error):
             return error.errorDescription
         case .unknown(let message):
             return "Unknown error: \(message)"
