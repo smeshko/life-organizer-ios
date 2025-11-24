@@ -87,8 +87,9 @@ public struct ActionHandlerFeature {
                         // Classify input to get category
                         let classification = try await classifier.classify(inputText)
                         let category = classification.category
+                        let confidencePercent = Int(classification.confidence * 100)
 
-                        await send(.logActivity(LogEntry(level: .info, source: "Classifier", message: "Category: \(category.rawValue)")))
+                        await send(.logActivity(LogEntry(level: .info, source: "Classifier", message: "Category: \(category.rawValue) (\(confidencePercent)% confidence)")))
 
                         let responses = try await repository.processAction(input: inputText, category: category)
                         // TODO: Handle multiple responses in UI - for now, show first result
