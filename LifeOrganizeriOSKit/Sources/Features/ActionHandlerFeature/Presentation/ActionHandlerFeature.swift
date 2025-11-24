@@ -5,6 +5,7 @@ import Entities
 import SpeechToTextService
 import ClassifierService
 import LoggingService
+import ReminderService
 
 /// TCA reducer for handling user input (text and voice) and processing via backend API.
 ///
@@ -21,6 +22,7 @@ public struct ActionHandlerFeature {
     @Dependency(\.actionHandlerRepository) var actionHandlerRepository
     @Dependency(\.classifierService) var classifierService
     @Dependency(\.loggingService) var loggingService
+    @Dependency(\.reminderService) var reminderService
 
     @ObservableState
     public struct State: Equatable {
@@ -61,6 +63,13 @@ public struct ActionHandlerFeature {
                 state.isLoading = true
                 state.processingResult = nil
 
+                // Add separator if there are existing logs
+                if !state.activityLogs.isEmpty {
+                    state.activityLogs.append(
+                        LogEntry(level: .separator, source: "", message: "")
+                    )
+                }
+
                 // Log start of text processing
                 state.activityLogs.append(
                     LogEntry(level: .info, source: "ActionHandler", message: "Starting text request processing")
@@ -78,8 +87,9 @@ public struct ActionHandlerFeature {
                         // Classify input to get category
                         let classification = try await classifier.classify(inputText)
                         let category = classification.category
+                        let confidencePercent = Int(classification.confidence * 100)
 
-                        await send(.logActivity(LogEntry(level: .info, source: "Classifier", message: "Category: \(category.rawValue)")))
+                        await send(.logActivity(LogEntry(level: .info, source: "Classifier", message: "Category: \(category.rawValue) (\(confidencePercent)% confidence)")))
 
                         let responses = try await repository.processAction(input: inputText, category: category)
                         // TODO: Handle multiple responses in UI - for now, show first result
@@ -96,6 +106,13 @@ public struct ActionHandlerFeature {
             case .startRecordingButtonTapped:
                 state.isRecording = true
                 state.transcribedText = ""
+
+                // Add separator if there are existing logs
+                if !state.activityLogs.isEmpty {
+                    state.activityLogs.append(
+                        LogEntry(level: .separator, source: "", message: "")
+                    )
+                }
 
                 // Log start of voice recording
                 state.activityLogs.append(
@@ -172,6 +189,9 @@ public struct ActionHandlerFeature {
                     )
                 )
 
+                // Handle app-side actions
+                let actionToExecute = response.action
+
                 // Save session to file
                 let session = LogSession(
                     timestamp: Date(),
@@ -181,9 +201,36 @@ public struct ActionHandlerFeature {
 
                 return .run { send in
                     @Dependency(\.loggingService) var loggingService
+                    @Dependency(\.reminderService) var reminderService
+
+                    // Execute action if present
+                    if let action = actionToExecute {
+                        switch action {
+                        case .budget:
+                            // Budget actions handled elsewhere (or not yet)
+                            break
+
+                        case .reminder(let reminderAction):
+                            do {
+                                try await reminderService.createReminder(reminderAction)
+                                await send(.logActivity(LogEntry(
+                                    level: .success,
+                                    source: "ReminderService",
+                                    message: "Reminder created: \(reminderAction.title)"
+                                )))
+                            } catch {
+                                await send(.logActivity(LogEntry(
+                                    level: .error,
+                                    source: "ReminderService",
+                                    message: "Failed to create reminder: \(error.localizedDescription)"
+                                )))
+                            }
+                        }
+                    }
+
+                    // Save session
                     do {
                         try await loggingService.saveSession(session)
-                        await send(.clearLogs)
                     } catch {
                         // Silently fail - don't interrupt user flow
                         print("Failed to save log session: \(error)")
@@ -213,11 +260,10 @@ public struct ActionHandlerFeature {
                     requestType: state.isRecording || state.transcribedText.isEmpty == false ? "voice" : "text"
                 )
 
-                return .run { send in
+                return .run { _ in
                     @Dependency(\.loggingService) var loggingService
                     do {
                         try await loggingService.saveSession(session)
-                        await send(.clearLogs)
                     } catch {
                         // Silently fail - don't interrupt user flow
                         print("Failed to save log session: \(error)")

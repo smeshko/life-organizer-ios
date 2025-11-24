@@ -135,30 +135,54 @@ private struct LogEntryRow: View {
     let entry: LogEntry
 
     var body: some View {
-        HStack(alignment: .top, spacing: 8) {
-            // Timestamp
-            Text(entry.timestamp, style: .time)
-                .font(.caption2)
-                .foregroundColor(.secondary)
-                .frame(width: 50, alignment: .leading)
+        if entry.level == .separator {
+            // Separator row
+            HStack {
+                VStack { Divider() }
+                Text("New Request")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                VStack { Divider() }
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 8)
+        } else {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(alignment: .top, spacing: 8) {
+                    // Timestamp
+                    Text(entry.timestamp, style: .time)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                        .frame(width: 50, alignment: .leading)
 
-            // Source
-            Text(entry.source)
-                .font(.caption)
-                .fontWeight(.medium)
-                .foregroundColor(colorForLevel(entry.level))
-                .frame(width: 100, alignment: .leading)
+                    // Source
+                    Text(entry.source)
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .foregroundColor(colorForLevel(entry.level))
+                        .frame(width: 100, alignment: .leading)
 
-            // Message
-            Text(entry.message)
-                .font(.caption)
-                .foregroundColor(.primary)
-                .fixedSize(horizontal: false, vertical: true)
+                    // Message
+                    Text(entry.message)
+                        .font(.caption)
+                        .foregroundColor(.primary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                // Response data (if available)
+                if let responseData = entry.responseData {
+                    Text(responseData)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                        .padding(.leading, 158) // Align with message column
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            .padding(.vertical, 4)
+            .padding(.horizontal, 8)
+            .background(colorForLevel(entry.level).opacity(0.1))
+            .cornerRadius(4)
         }
-        .padding(.vertical, 4)
-        .padding(.horizontal, 8)
-        .background(colorForLevel(entry.level).opacity(0.1))
-        .cornerRadius(4)
     }
 
     private func colorForLevel(_ level: LogLevel) -> Color {
@@ -169,6 +193,8 @@ private struct LogEntryRow: View {
             return .green
         case .error:
             return .red
+        case .separator:
+            return .clear
         }
     }
 }
