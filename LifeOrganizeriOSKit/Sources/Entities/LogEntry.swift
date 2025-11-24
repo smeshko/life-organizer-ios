@@ -5,6 +5,7 @@ public enum LogLevel: String, Codable, Sendable, Equatable {
     case info
     case success
     case error
+    case separator
 }
 
 /// Represents a single log entry in the activity log

@@ -89,25 +89,26 @@ public struct ActionHandlerView: View {
                 )
                 .lifeShadowSubtle()
                 .padding(.horizontal, .lifeSpacingMD)
-                
-                // Success message display
-                if let successMessage = store.processingResult?.message {
-                    Text(successMessage)
-                        .font(.lifeBody)
-                        .foregroundColor(.green)
-                        .padding(.lifeSpacingSM)
-                        .background(
-                            RoundedRectangle(cornerRadius: .lifeRadiusSM)
-                                .fill(Color.green.opacity(0.1))
-                        )
-                        .padding(.horizontal, .lifeSpacingMD)
-                }
-                
+
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Activity Log")
-                        .font(.headline)
-                        .padding(.horizontal)
-                    
+                    HStack {
+                        Text("Activity Log")
+                            .font(.headline)
+
+                        Spacer()
+
+                        if !store.activityLogs.isEmpty {
+                            Button {
+                                store.send(.clearLogs)
+                            } label: {
+                                Text("Clear")
+                                    .font(.caption)
+                                    .foregroundColor(.lifePrimary)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+
                     ScrollView {
                         LazyVStack(alignment: .leading, spacing: 4) {
                             ForEach(store.activityLogs) { entry in
@@ -130,34 +131,58 @@ public struct ActionHandlerView: View {
 
 private struct LogEntryRow: View {
     let entry: LogEntry
-    
+
     var body: some View {
-        HStack(alignment: .top, spacing: 8) {
-            // Timestamp
-            Text(entry.timestamp, style: .time)
-                .font(.caption2)
-                .foregroundColor(.secondary)
-                .frame(width: 50, alignment: .leading)
-            
-            // Source
-            Text(entry.source)
-                .font(.caption)
-                .fontWeight(.medium)
-                .foregroundColor(colorForLevel(entry.level))
-                .frame(width: 100, alignment: .leading)
-            
-            // Message
-            Text(entry.message)
-                .font(.caption)
-                .foregroundColor(.primary)
-                .frame(maxWidth: .infinity, alignment: .leading)
+        if entry.level == .separator {
+            // Separator row
+            HStack {
+                VStack { Divider() }
+                Text("New Request")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                VStack { Divider() }
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 8)
+        } else {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(alignment: .top, spacing: 8) {
+                    // Timestamp
+                    Text(entry.timestamp, style: .time)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                        .frame(width: 50, alignment: .leading)
+
+                    // Source
+                    Text(entry.source)
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .foregroundColor(colorForLevel(entry.level))
+                        .frame(width: 100, alignment: .leading)
+
+                    // Message
+                    Text(entry.message)
+                        .font(.caption)
+                        .foregroundColor(.primary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
+                // Response data (if available)
+                if let responseData = entry.responseData {
+                    Text(responseData)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                        .padding(.leading, 158) // Align with message column
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            .padding(.vertical, 4)
+            .padding(.horizontal, 8)
+            .background(colorForLevel(entry.level).opacity(0.1))
+            .cornerRadius(4)
         }
-        .padding(.vertical, 4)
-        .padding(.horizontal, 8)
-        .background(colorForLevel(entry.level).opacity(0.1))
-        .cornerRadius(4)
     }
-    
+
     private func colorForLevel(_ level: LogLevel) -> Color {
         switch level {
         case .info:
@@ -166,6 +191,8 @@ private struct LogEntryRow: View {
             return .green
         case .error:
             return .red
+        case .separator:
+            return .clear
         }
     }
 }

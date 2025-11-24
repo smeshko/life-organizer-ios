@@ -63,6 +63,13 @@ public struct ActionHandlerFeature {
                 state.isLoading = true
                 state.processingResult = nil
 
+                // Add separator if there are existing logs
+                if !state.activityLogs.isEmpty {
+                    state.activityLogs.append(
+                        LogEntry(level: .separator, source: "", message: "")
+                    )
+                }
+
                 // Log start of text processing
                 state.activityLogs.append(
                     LogEntry(level: .info, source: "ActionHandler", message: "Starting text request processing")
@@ -98,6 +105,13 @@ public struct ActionHandlerFeature {
             case .startRecordingButtonTapped:
                 state.isRecording = true
                 state.transcribedText = ""
+
+                // Add separator if there are existing logs
+                if !state.activityLogs.isEmpty {
+                    state.activityLogs.append(
+                        LogEntry(level: .separator, source: "", message: "")
+                    )
+                }
 
                 // Log start of voice recording
                 state.activityLogs.append(
@@ -216,7 +230,6 @@ public struct ActionHandlerFeature {
                     // Save session
                     do {
                         try await loggingService.saveSession(session)
-                        await send(.clearLogs)
                     } catch {
                         // Silently fail - don't interrupt user flow
                         print("Failed to save log session: \(error)")
@@ -246,11 +259,10 @@ public struct ActionHandlerFeature {
                     requestType: state.isRecording || state.transcribedText.isEmpty == false ? "voice" : "text"
                 )
 
-                return .run { send in
+                return .run { _ in
                     @Dependency(\.loggingService) var loggingService
                     do {
                         try await loggingService.saveSession(session)
-                        await send(.clearLogs)
                     } catch {
                         // Silently fail - don't interrupt user flow
                         print("Failed to save log session: \(error)")

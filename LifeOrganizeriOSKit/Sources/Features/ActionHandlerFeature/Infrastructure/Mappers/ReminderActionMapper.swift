@@ -7,15 +7,7 @@ struct ReminderActionMapper {
         // Parse optional ISO 8601 date string
         var dueDate: Date? = nil
         if let dueDateString = dto.dueDate {
-            let formatter = ISO8601DateFormatter()
-            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-            dueDate = formatter.date(from: dueDateString)
-
-            // Try without fractional seconds if first attempt fails
-            if dueDate == nil {
-                formatter.formatOptions = [.withInternetDateTime]
-                dueDate = formatter.date(from: dueDateString)
-            }
+            dueDate = parseDate(dueDateString)
         }
 
         return ReminderAction(
@@ -23,5 +15,32 @@ struct ReminderActionMapper {
             dueDate: dueDate,
             notes: dto.notes
         )
+    }
+
+    /// Parses ISO 8601 date strings with various formats
+    private static func parseDate(_ dateString: String) -> Date? {
+        // Try with timezone and fractional seconds: "2025-11-25T17:00:00.000Z"
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        if let date = isoFormatter.date(from: dateString) {
+            return date
+        }
+
+        // Try with timezone only: "2025-11-25T17:00:00Z"
+        isoFormatter.formatOptions = [.withInternetDateTime]
+        if let date = isoFormatter.date(from: dateString) {
+            return date
+        }
+
+        // Try without timezone (backend format): "2025-11-25T17:00:00"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone.current
+        if let date = dateFormatter.date(from: dateString) {
+            return date
+        }
+
+        return nil
     }
 }
