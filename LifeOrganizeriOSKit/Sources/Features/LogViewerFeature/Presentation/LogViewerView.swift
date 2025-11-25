@@ -32,7 +32,9 @@ public struct LogViewerView: View {
                 }
             }
             .navigationTitle("Activity Logs")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.large)
+            #endif
             .onAppear {
                 store.send(.onAppear)
             }
@@ -115,7 +117,11 @@ public struct LogSessionDetailView: View {
                 }
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
+                #if os(iOS)
                 .background(Color(.systemGray6))
+                #else
+                .background(Color.gray.opacity(0.1))
+                #endif
                 .cornerRadius(8)
 
                 // Log entries
@@ -126,7 +132,9 @@ public struct LogSessionDetailView: View {
             .padding()
         }
         .navigationTitle("Log Session")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 

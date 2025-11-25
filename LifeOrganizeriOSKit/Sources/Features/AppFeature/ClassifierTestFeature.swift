@@ -4,7 +4,7 @@ import ClassifierService
 
 /// TCA feature for testing the ClassifierService
 @Reducer
-public struct ClassifierTestFeature {
+public struct ClassifierTestFeature: Sendable {
     public init() {}
 
     @ObservableState

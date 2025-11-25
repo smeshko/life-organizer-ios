@@ -3,7 +3,7 @@ import Entities
 import Foundation
 
 @Reducer
-public struct LogViewerFeature {
+public struct LogViewerFeature: Sendable {
     @ObservableState
     public struct State: Equatable {
         public var sessions: [LogSession]

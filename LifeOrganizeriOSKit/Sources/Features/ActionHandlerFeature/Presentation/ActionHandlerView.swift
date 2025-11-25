@@ -116,7 +116,11 @@ public struct ActionHandlerView: View {
                             }
                         }
                     }
+                    #if os(iOS)
                     .background(Color(.systemGray6))
+                    #else
+                    .background(Color.gray.opacity(0.1))
+                    #endif
                     .cornerRadius(8)
                     .padding(.horizontal)
                 }
