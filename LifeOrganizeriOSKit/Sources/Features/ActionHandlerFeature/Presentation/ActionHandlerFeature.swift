@@ -98,8 +98,28 @@ public struct ActionHandlerFeature {
                         await send(.logActivity(LogEntry(level: .info, source: "Classifier", message: "Category: \(category.rawValue) (\(confidencePercent)% confidence)")))
 
                         let responses = try await repository.processAction(input: inputText, category: category)
-                        // TODO: Handle multiple responses in UI - for now, show first result
-                        // Multi-transaction UI support requires updating State to store [ProcessingResponse]
+
+                        // Log all responses individually
+                        for response in responses {
+                            // Build response data string for logging
+                            var responseDetails = "Type: \(response.processingResultType.rawValue)"
+                            responseDetails += "\nMessage: \(response.message)"
+                            if let action = response.action {
+                                responseDetails += "\nAction: \(action)"
+                            }
+
+                            // Log each response as individual success entry
+                            await send(.logActivity(
+                                LogEntry(
+                                    level: .success,
+                                    source: "ActionHandler",
+                                    message: "Request completed successfully",
+                                    responseData: responseDetails
+                                )
+                            ))
+                        }
+
+                        // Process app-side actions from first response (if exists) for backwards compatibility
                         if let firstResponse = responses.first {
                             await send(.processingSuccess(firstResponse))
                         }
@@ -184,22 +204,8 @@ public struct ActionHandlerFeature {
                 state.isLoading = false
                 state.processingResult = response
 
-                // Build response data string for logging
-                var responseDetails = "Type: \(response.processingResultType.rawValue)"
-                responseDetails += "\nMessage: \(response.message)"
-                if let action = response.action {
-                    responseDetails += "\nAction: \(action)"
-                }
-
-                // Log success with backend response
-                state.activityLogs.append(
-                    LogEntry(
-                        level: .success,
-                        source: "ActionHandler",
-                        message: "Request completed successfully",
-                        responseData: responseDetails
-                    )
-                )
+                // Note: Response is already logged in the iteration loop above
+                // This action only handles app-side action execution
 
                 // Handle app-side actions
                 let actionToExecute = response.action
