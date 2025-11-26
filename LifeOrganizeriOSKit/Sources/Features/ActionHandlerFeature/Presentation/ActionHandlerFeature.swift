@@ -70,6 +70,12 @@ public struct ActionHandlerFeature {
                     )
                 }
 
+                // Log user input as first entry
+                let userInput = state.inputText
+                state.activityLogs.append(
+                    LogEntry(level: .info, source: "User", message: userInput)
+                )
+
                 // Log start of text processing
                 state.activityLogs.append(
                     LogEntry(level: .info, source: "ActionHandler", message: "Starting text request processing")
