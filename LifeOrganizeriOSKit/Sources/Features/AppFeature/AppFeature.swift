@@ -2,8 +2,7 @@ import Foundation
 import Framework
 import ComposableArchitecture
 import CoreUI
-import ActionHandlerFeature
-import LogViewerFeature
+import MainNavigationFeature
 
 /// The root TCA reducer that coordinates the entire application.
 ///
@@ -28,35 +27,35 @@ public struct AppFeature {
     /// The root application state.
     @ObservableState
     public struct State: Equatable {
-        public var actionHandler: ActionHandlerFeature.State
+        public var mainNavigation: MainNavigationFeature.State
         public var isConnectedToBackend: Bool = false
         public var backendConnectionError: String?
         public var showConnectionIndicator: Bool = false
-        @Presents public var classifierTest: ClassifierTestFeature.State?
-        @Presents public var logViewer: LogViewerFeature.State?
+        public var hasCheckedConnection: Bool = false
 
         public init() {
-            self.actionHandler = ActionHandlerFeature.State()
+            self.mainNavigation = MainNavigationFeature.State()
         }
     }
 
     /// The actions that can be performed in the app.
     public enum Action {
-        case actionHandler(ActionHandlerFeature.Action)
+        case mainNavigation(MainNavigationFeature.Action)
         case onAppear
         case statusCheckCompleted(Result<StatusResponseDTO, any Error>)
         case hideConnectionIndicator
-        case showClassifierTest
-        case classifierTest(PresentationAction<ClassifierTestFeature.Action>)
-        case showLogViewer
-        case logViewer(PresentationAction<LogViewerFeature.Action>)
     }
 
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                // Check backend connection status at app startup
+                // Only check backend connection once
+                guard !state.hasCheckedConnection else {
+                    return .none
+                }
+                state.hasCheckedConnection = true
+
                 return .run { send in
                     @Dependency(\.statusCheckRepository) var repository
                     do {
@@ -95,34 +94,13 @@ public struct AppFeature {
                 state.showConnectionIndicator = false
                 return .none
 
-            case .showClassifierTest:
-                state.classifierTest = ClassifierTestFeature.State()
-                return .none
-
-            case .classifierTest:
-                return .none
-
-            case .showLogViewer:
-                state.logViewer = LogViewerFeature.State()
-                return .none
-
-            case .logViewer:
-                return .none
-
-            case .actionHandler:
+            case .mainNavigation:
                 return .none
             }
         }
 
-        Scope(state: \.actionHandler, action: \.actionHandler) {
-            ActionHandlerFeature()
-        }
-
-        .ifLet(\.$classifierTest, action: \.classifierTest) {
-            ClassifierTestFeature()
-        }
-        .ifLet(\.$logViewer, action: \.logViewer) {
-            LogViewerFeature()
+        Scope(state: \.mainNavigation, action: \.mainNavigation) {
+            MainNavigationFeature()
         }
     }
 }

@@ -149,7 +149,6 @@ public struct ClassifierTestView: View {
             }
             .padding(.lifeSpacingLG)
         }
-        .background(Color.lifeBackground)
         .navigationTitle("Classifier Test")
     }
 }

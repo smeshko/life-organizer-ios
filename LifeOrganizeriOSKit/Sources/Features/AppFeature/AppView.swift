@@ -1,8 +1,7 @@
 import SwiftUI
 import ComposableArchitecture
 import CoreUI
-import ActionHandlerFeature
-import LogViewerFeature
+import MainNavigationFeature
 
 /// The root view of the application.
 public struct AppView: View {
@@ -13,102 +12,52 @@ public struct AppView: View {
     }
 
     public var body: some View {
-        NavigationStack {
-            ZStack(alignment: .top) {
-                ActionHandlerView(
-                    store: store.scope(state: \.actionHandler, action: \.actionHandler)
-                )
+        ZStack(alignment: .top) {
+            
+            // Main navigation content
+            MainNavigationView(
+                store: store.scope(state: \.mainNavigation, action: \.mainNavigation)
+            )
 
-                // Navigation buttons - positioned at top right
-                VStack {
-                    HStack {
-                        Spacer()
-                        Button {
-                            store.send(.showLogViewer)
-                        } label: {
-                            Text("View Logs")
-                                .font(.lifeCaption)
-                                .foregroundColor(.lifePrimary)
-                                .padding(.horizontal, .lifeSpacingMD)
-                                .padding(.vertical, .lifeSpacingSM)
-                                .background(
-                                    Capsule()
-                                        .fill(Color.lifePrimary.opacity(0.1))
-                                )
-                        }
-                        Button {
-                            store.send(.showClassifierTest)
-                        } label: {
-                            Text("Test Classifier")
-                                .font(.lifeCaption)
-                                .foregroundColor(.lifePrimary)
-                                .padding(.horizontal, .lifeSpacingMD)
-                                .padding(.vertical, .lifeSpacingSM)
-                                .background(
-                                    Capsule()
-                                        .fill(Color.lifePrimary.opacity(0.1))
-                                )
-                        }
-                        .padding(.top, .lifeSpacingSM)
-                        .padding(.trailing, .lifeSpacingMD)
+            // Connection status indicator at top
+            if store.showConnectionIndicator {
+                if store.isConnectedToBackend {
+                    // Success indicator
+                    HStack(spacing: .lifeSpacingSM) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.lifeSuccess)
+                            .font(.lifeIconMD)
+
+                        Text("Connected")
+                            .font(.lifeCaption)
+                            .foregroundColor(.lifeSuccess)
                     }
-                    Spacer()
-                }
-
-                // Connection status indicator - centered below safe area
-                if store.showConnectionIndicator {
-                    VStack {
-                        if store.isConnectedToBackend {
-                            // Success indicator
-                            HStack(spacing: .lifeSpacingSM) {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.lifeSuccess)
-                                    .font(.lifeIconMD)
-
-                                Text("Connected")
-                                    .font(.lifeCaption)
-                                    .foregroundColor(.lifeSuccess)
-                            }
-                            .padding(.horizontal, .lifeSpacingMD)
-                            .padding(.vertical, .lifeSpacingSM)
-                            .background(
-                                Capsule()
-                                    .fill(Color.lifeSuccess.opacity(0.15))
-                            )
-                        } else {
-                            // Error indicator
-                            HStack(spacing: .lifeSpacingSM) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.lifeError)
-                                    .font(.lifeIconMD)
-
-                                Text("Connection Failed")
-                                    .font(.lifeCaption)
-                                    .foregroundColor(.lifeError)
-                            }
-                            .padding(.horizontal, .lifeSpacingMD)
-                            .padding(.vertical, .lifeSpacingSM)
-                            .background(
-                                Capsule()
-                                    .fill(Color.lifeError.opacity(0.15))
-                            )
-                        }
-
-                        Spacer()
-                    }
+                    .padding(.horizontal, .lifeSpacingMD)
+                    .padding(.vertical, .lifeSpacingSM)
+                    .background(
+                        Capsule()
+                            .fill(Color.lifeSuccess.opacity(0.15))
+                    )
                     .padding(.top, .lifeSpacingSM)
-                    .transition(.move(edge: .top).combined(with: .opacity))
+                } else {
+                    // Error indicator
+                    HStack(spacing: .lifeSpacingSM) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.lifeError)
+                            .font(.lifeIconMD)
+
+                        Text("Connection Failed")
+                            .font(.lifeCaption)
+                            .foregroundColor(.lifeError)
+                    }
+                    .padding(.horizontal, .lifeSpacingMD)
+                    .padding(.vertical, .lifeSpacingSM)
+                    .background(
+                        Capsule()
+                            .fill(Color.lifeError.opacity(0.15))
+                    )
+                    .padding(.top, .lifeSpacingSM)
                 }
-            }
-            .navigationDestination(
-                item: $store.scope(state: \.classifierTest, action: \.classifierTest)
-            ) { store in
-                ClassifierTestView(store: store)
-            }
-            .navigationDestination(
-                item: $store.scope(state: \.logViewer, action: \.logViewer)
-            ) { store in
-                LogViewerView(store: store)
             }
         }
         .animation(.lifeSpring, value: store.showConnectionIndicator)

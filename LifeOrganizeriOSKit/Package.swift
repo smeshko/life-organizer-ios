@@ -168,10 +168,8 @@ let package = Package(
         // Features
         .library(name: "ActionHandlerFeature", targets: ["ActionHandlerFeature"]),
         .library(name: "LogViewerFeature", targets: ["LogViewerFeature"]),
-
-        // Add your features and services here as you create them
-        // Example:
-        // .library(name: "SettingsFeature", targets: ["SettingsFeature"]),
+        .library(name: "DebugFeature", targets: ["DebugFeature"]),
+        .library(name: "MainNavigationFeature", targets: ["MainNavigationFeature"]),
     ],
     dependencies: [
         .package(url: PackageURL.tca, from: PackageVersion.tca),
@@ -197,9 +195,11 @@ let package = Package(
         ),
 
         // MARK: - Features
-        .feature("AppFeature", dependencies: ["ActionHandlerFeature", "ClassifierService", "LogViewerFeature"]),
+        .feature("AppFeature", dependencies: ["MainNavigationFeature"]),
         .feature("ActionHandlerFeature", dependencies: ["NetworkService", "Entities", "SpeechToTextService", "LoggingService", "ClassifierService", "ReminderService"]),
         .feature("LogViewerFeature", dependencies: ["Entities"]),
+        .feature("DebugFeature", dependencies: ["LogViewerFeature", "ClassifierService"]),
+        .feature("MainNavigationFeature", dependencies: ["ActionHandlerFeature", "DebugFeature"]),
 
         // MARK: - Services
         .service("NetworkService"),

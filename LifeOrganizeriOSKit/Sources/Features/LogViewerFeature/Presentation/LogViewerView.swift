@@ -1,4 +1,5 @@
 import ComposableArchitecture
+import CoreUI
 import Entities
 import Framework
 import SwiftUI
@@ -57,38 +58,38 @@ private struct SessionRow: View {
     let session: LogSession
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: .lifeSpacingXS) {
             // Timestamp
             Text(session.timestamp, style: .date)
-                .font(.headline)
+                .font(.lifeCallout)
             Text(session.timestamp, style: .time)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+                .font(.lifeBody)
+                .foregroundColor(.lifeTextSecondary)
 
             // Summary
-            HStack {
+            HStack(spacing: .lifeSpacingXS) {
                 Text("\(session.entries.count) logs")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    .font(.lifeCaption)
+                    .foregroundColor(.lifeTextSecondary)
 
                 Text("•")
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.lifeTextSecondary)
 
                 Text(session.metadata.requestType)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    .font(.lifeCaption)
+                    .foregroundColor(.lifeTextSecondary)
             }
 
             // First entry preview
             if let firstEntry = session.entries.first {
                 Text(firstEntry.message)
-                    .font(.caption)
-                    .foregroundColor(.primary)
+                    .font(.lifeCaption)
+                    .foregroundColor(.lifeTextPrimary)
                     .lineLimit(2)
-                    .padding(.top, 4)
+                    .padding(.top, .lifeSpacingXS)
             }
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, .lifeSpacingXS)
     }
 }
 
@@ -98,32 +99,32 @@ public struct LogSessionDetailView: View {
 
     public var body: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 8) {
+            LazyVStack(alignment: .leading, spacing: .lifeSpacingSM) {
                 // Session metadata header
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: .lifeSpacingXS) {
                     Text("Session Details")
-                        .font(.headline)
+                        .font(.lifeCallout)
                     Text(session.timestamp, style: .date)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .font(.lifeBody)
+                        .foregroundColor(.lifeTextSecondary)
                     Text(session.timestamp, style: .time)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .font(.lifeBody)
+                        .foregroundColor(.lifeTextSecondary)
                     Text("\(session.entries.count) entries • \(session.metadata.requestType)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.lifeCaption)
+                        .foregroundColor(.lifeTextSecondary)
                 }
-                .padding()
+                .padding(.lifeSpacingMD)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
+                .background(Color.lifeSurface)
+                .cornerRadius(.lifeRadiusMD)
 
                 // Log entries
                 ForEach(session.entries) { entry in
                     LogEntryRow(entry: entry)
                 }
             }
-            .padding()
+            .padding(.lifeSpacingMD)
         }
         .navigationTitle("Log Session")
         .navigationBarTitleDisplayMode(.inline)
@@ -137,51 +138,51 @@ private struct LogEntryRow: View {
     var body: some View {
         if entry.level == .separator {
             // Separator row
-            HStack {
+            HStack(spacing: .lifeSpacingSM) {
                 VStack { Divider() }
                 Text("New Request")
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
+                    .font(.lifeCaption)
+                    .foregroundColor(.lifeTextSecondary)
                 VStack { Divider() }
             }
-            .padding(.vertical, 8)
-            .padding(.horizontal, 8)
+            .padding(.vertical, .lifeSpacingSM)
+            .padding(.horizontal, .lifeSpacingSM)
         } else {
-            VStack(alignment: .leading, spacing: 4) {
-                HStack(alignment: .top, spacing: 8) {
+            VStack(alignment: .leading, spacing: .lifeSpacingXS) {
+                HStack(alignment: .top, spacing: .lifeSpacingSM) {
                     // Timestamp
                     Text(entry.timestamp, style: .time)
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
+                        .font(.lifeCaption)
+                        .foregroundColor(.lifeTextSecondary)
                         .frame(width: 50, alignment: .leading)
 
                     // Source
                     Text(entry.source)
-                        .font(.caption)
+                        .font(.lifeCaption)
                         .fontWeight(.medium)
                         .foregroundColor(colorForLevel(entry.level))
                         .frame(width: 100, alignment: .leading)
 
                     // Message
                     Text(entry.message)
-                        .font(.caption)
-                        .foregroundColor(.primary)
+                        .font(.lifeCaption)
+                        .foregroundColor(.lifeTextPrimary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
                 // Response data (if available)
                 if let responseData = entry.responseData {
                     Text(responseData)
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
+                        .font(.lifeCaption)
+                        .foregroundColor(.lifeTextSecondary)
                         .padding(.leading, 158) // Align with message column
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
-            .padding(.vertical, 4)
-            .padding(.horizontal, 8)
+            .padding(.vertical, .lifeSpacingXS)
+            .padding(.horizontal, .lifeSpacingSM)
             .background(colorForLevel(entry.level).opacity(0.1))
-            .cornerRadius(4)
+            .cornerRadius(.lifeRadiusSM)
         }
     }
 
@@ -190,9 +191,9 @@ private struct LogEntryRow: View {
         case .info:
             return .blue
         case .success:
-            return .green
+            return .lifeSuccess
         case .error:
-            return .red
+            return .lifeError
         case .separator:
             return .clear
         }
