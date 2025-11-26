@@ -1,5 +1,5 @@
 import ComposableArchitecture
-import AppFeature
+import ActionHandlerFeature
 import DebugFeature
 
 @Reducer
@@ -13,7 +13,7 @@ public struct MainNavigationFeature {
         }
 
         public var selectedTab: Tab = .main
-        public var app = AppFeature.State()
+        public var actionHandler = ActionHandlerFeature.State()
         public var debug = DebugFeature.State()
 
         public init() {}
@@ -21,7 +21,7 @@ public struct MainNavigationFeature {
 
     public enum Action {
         case tabSelected(State.Tab)
-        case app(AppFeature.Action)
+        case actionHandler(ActionHandlerFeature.Action)
         case debug(DebugFeature.Action)
     }
 
@@ -33,13 +33,13 @@ public struct MainNavigationFeature {
             case let .tabSelected(tab):
                 state.selectedTab = tab
                 return .none
-            case .app, .debug:
+            case .actionHandler, .debug:
                 return .none
             }
         }
 
-        Scope(state: \.app, action: \.app) {
-            AppFeature()
+        Scope(state: \.actionHandler, action: \.actionHandler) {
+            ActionHandlerFeature()
         }
 
         Scope(state: \.debug, action: \.debug) {

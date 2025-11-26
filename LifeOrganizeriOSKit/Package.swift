@@ -195,11 +195,11 @@ let package = Package(
         ),
 
         // MARK: - Features
-        .feature("AppFeature", dependencies: ["ActionHandlerFeature", "ClassifierService", "LogViewerFeature"]),
+        .feature("AppFeature", dependencies: ["MainNavigationFeature"]),
         .feature("ActionHandlerFeature", dependencies: ["NetworkService", "Entities", "SpeechToTextService", "LoggingService", "ClassifierService", "ReminderService"]),
         .feature("LogViewerFeature", dependencies: ["Entities"]),
-        .feature("DebugFeature", dependencies: ["AppFeature", "LogViewerFeature"]),
-        .feature("MainNavigationFeature", dependencies: ["AppFeature", "DebugFeature"]),
+        .feature("DebugFeature", dependencies: ["LogViewerFeature", "ClassifierService"]),
+        .feature("MainNavigationFeature", dependencies: ["ActionHandlerFeature", "DebugFeature"]),
 
         // MARK: - Services
         .service("NetworkService"),

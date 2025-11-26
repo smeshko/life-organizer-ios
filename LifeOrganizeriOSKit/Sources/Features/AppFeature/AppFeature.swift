@@ -2,7 +2,7 @@ import Foundation
 import Framework
 import ComposableArchitecture
 import CoreUI
-import ActionHandlerFeature
+import MainNavigationFeature
 
 /// The root TCA reducer that coordinates the entire application.
 ///
@@ -27,19 +27,20 @@ public struct AppFeature {
     /// The root application state.
     @ObservableState
     public struct State: Equatable {
-        public var actionHandler: ActionHandlerFeature.State
+        public var mainNavigation: MainNavigationFeature.State
         public var isConnectedToBackend: Bool = false
         public var backendConnectionError: String?
         public var showConnectionIndicator: Bool = false
+        public var hasCheckedConnection: Bool = false
 
         public init() {
-            self.actionHandler = ActionHandlerFeature.State()
+            self.mainNavigation = MainNavigationFeature.State()
         }
     }
 
     /// The actions that can be performed in the app.
     public enum Action {
-        case actionHandler(ActionHandlerFeature.Action)
+        case mainNavigation(MainNavigationFeature.Action)
         case onAppear
         case statusCheckCompleted(Result<StatusResponseDTO, any Error>)
         case hideConnectionIndicator
@@ -49,7 +50,12 @@ public struct AppFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                // Check backend connection status at app startup
+                // Only check backend connection once
+                guard !state.hasCheckedConnection else {
+                    return .none
+                }
+                state.hasCheckedConnection = true
+
                 return .run { send in
                     @Dependency(\.statusCheckRepository) var repository
                     do {
@@ -88,13 +94,13 @@ public struct AppFeature {
                 state.showConnectionIndicator = false
                 return .none
 
-            case .actionHandler:
+            case .mainNavigation:
                 return .none
             }
         }
 
-        Scope(state: \.actionHandler, action: \.actionHandler) {
-            ActionHandlerFeature()
+        Scope(state: \.mainNavigation, action: \.mainNavigation) {
+            MainNavigationFeature()
         }
     }
 }

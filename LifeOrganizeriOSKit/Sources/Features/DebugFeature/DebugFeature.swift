@@ -1,5 +1,4 @@
 import ComposableArchitecture
-import AppFeature
 import LogViewerFeature
 
 @Reducer

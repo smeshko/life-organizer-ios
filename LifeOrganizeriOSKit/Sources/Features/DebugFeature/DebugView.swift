@@ -1,6 +1,6 @@
 import ComposableArchitecture
 import SwiftUI
-import AppFeature
+import CoreUI
 import LogViewerFeature
 
 public struct DebugView: View {
@@ -13,29 +13,8 @@ public struct DebugView: View {
     public var body: some View {
         NavigationStack {
             List {
-                Button {
-                    store.send(.classifierTestTapped)
-                } label: {
-                    HStack {
-                        Label("Test Classifier", systemImage: "brain")
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundStyle(.secondary)
-                    }
-                }
-                .foregroundStyle(.primary)
-
-                Button {
-                    store.send(.logViewerTapped)
-                } label: {
-                    HStack {
-                        Label("View Logs", systemImage: "doc.text")
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundStyle(.secondary)
-                    }
-                }
-                .foregroundStyle(.primary)
+                classifierTestButton
+                logViewerButton
             }
             .navigationTitle("Debug")
             .navigationDestination(
@@ -47,6 +26,46 @@ public struct DebugView: View {
                 item: $store.scope(state: \.destination?.logViewer, action: \.destination.logViewer)
             ) { store in
                 LogViewerView(store: store)
+            }
+        }
+    }
+
+    private var classifierTestButton: some View {
+        Button {
+            store.send(.classifierTestTapped)
+        } label: {
+            HStack {
+                Label {
+                    Text("Test Classifier")
+                        .foregroundStyle(Color.lifeTextPrimary)
+                        .font(.lifeBody)
+                } icon: {
+                    Image(systemName: "brain")
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(Color.lifeTextSecondary)
+                    .font(.lifeIconSM)
+            }
+        }
+    }
+
+    private var logViewerButton: some View {
+        Button {
+            store.send(.logViewerTapped)
+        } label: {
+            HStack {
+                Label {
+                    Text("View Logs")
+                        .foregroundStyle(Color.lifeTextPrimary)
+                        .font(.lifeBody)
+                } icon: {
+                    Image(systemName: "doc.text")
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(Color.lifeTextSecondary)
+                    .font(.lifeIconSM)
             }
         }
     }

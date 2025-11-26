@@ -1,7 +1,7 @@
 import SwiftUI
 import ComposableArchitecture
 import CoreUI
-import ActionHandlerFeature
+import MainNavigationFeature
 
 /// The root view of the application.
 public struct AppView: View {
@@ -12,55 +12,52 @@ public struct AppView: View {
     }
 
     public var body: some View {
-        ZStack(alignment: .top) {
-            ActionHandlerView(
-                store: store.scope(state: \.actionHandler, action: \.actionHandler)
-            )
-
-            // Connection status indicator - centered below safe area
+        VStack(spacing: 0) {
+            // Connection status indicator at top
             if store.showConnectionIndicator {
-                VStack {
-                    if store.isConnectedToBackend {
-                        // Success indicator
-                        HStack(spacing: .lifeSpacingSM) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.lifeSuccess)
-                                .font(.lifeIconMD)
+                if store.isConnectedToBackend {
+                    // Success indicator
+                    HStack(spacing: .lifeSpacingSM) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.lifeSuccess)
+                            .font(.lifeIconMD)
 
-                            Text("Connected")
-                                .font(.lifeCaption)
-                                .foregroundColor(.lifeSuccess)
-                        }
-                        .padding(.horizontal, .lifeSpacingMD)
-                        .padding(.vertical, .lifeSpacingSM)
-                        .background(
-                            Capsule()
-                                .fill(Color.lifeSuccess.opacity(0.15))
-                        )
-                    } else {
-                        // Error indicator
-                        HStack(spacing: .lifeSpacingSM) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.lifeError)
-                                .font(.lifeIconMD)
-
-                            Text("Connection Failed")
-                                .font(.lifeCaption)
-                                .foregroundColor(.lifeError)
-                        }
-                        .padding(.horizontal, .lifeSpacingMD)
-                        .padding(.vertical, .lifeSpacingSM)
-                        .background(
-                            Capsule()
-                                .fill(Color.lifeError.opacity(0.15))
-                        )
+                        Text("Connected")
+                            .font(.lifeCaption)
+                            .foregroundColor(.lifeSuccess)
                     }
+                    .padding(.horizontal, .lifeSpacingMD)
+                    .padding(.vertical, .lifeSpacingSM)
+                    .background(
+                        Capsule()
+                            .fill(Color.lifeSuccess.opacity(0.15))
+                    )
+                    .padding(.top, .lifeSpacingSM)
+                } else {
+                    // Error indicator
+                    HStack(spacing: .lifeSpacingSM) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.lifeError)
+                            .font(.lifeIconMD)
 
-                    Spacer()
+                        Text("Connection Failed")
+                            .font(.lifeCaption)
+                            .foregroundColor(.lifeError)
+                    }
+                    .padding(.horizontal, .lifeSpacingMD)
+                    .padding(.vertical, .lifeSpacingSM)
+                    .background(
+                        Capsule()
+                            .fill(Color.lifeError.opacity(0.15))
+                    )
+                    .padding(.top, .lifeSpacingSM)
                 }
-                .padding(.top, .lifeSpacingSM)
-                .transition(.move(edge: .top).combined(with: .opacity))
             }
+
+            // Main navigation content
+            MainNavigationView(
+                store: store.scope(state: \.mainNavigation, action: \.mainNavigation)
+            )
         }
         .animation(.lifeSpring, value: store.showConnectionIndicator)
         .onAppear {

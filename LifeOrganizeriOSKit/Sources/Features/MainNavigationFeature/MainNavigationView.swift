@@ -1,6 +1,6 @@
 import ComposableArchitecture
 import SwiftUI
-import AppFeature
+import ActionHandlerFeature
 import DebugFeature
 
 public struct MainNavigationView: View {
@@ -12,8 +12,8 @@ public struct MainNavigationView: View {
 
     public var body: some View {
         TabView(selection: $store.selectedTab.sending(\.tabSelected)) {
-            AppView(
-                store: store.scope(state: \.app, action: \.app)
+            ActionHandlerView(
+                store: store.scope(state: \.actionHandler, action: \.actionHandler)
             )
             .tabItem {
                 Label("Main", systemImage: "house")
