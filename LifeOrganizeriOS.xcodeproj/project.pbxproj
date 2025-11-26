@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		49160C212AD74369B18554A0 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A660EC53801E438DA5CDBA9A /* AppFeature */; };
-		B7C4D3E12BF54A72C3E9F5D8 /* MainNavigationFeature in Frameworks */ = {isa = PBXBuildFile; productRef = F8A2B6D93CE14D85A7F3C9B1 /* MainNavigationFeature */; };
 		DFDCD29000BC4E768F8A04D1 /* CONTRIBUTING.md in Resources */ = {isa = PBXBuildFile; fileRef = 91AAEA7AACF049908920FB6D /* CONTRIBUTING.md */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +32,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				49160C212AD74369B18554A0 /* AppFeature in Frameworks */,
-				B7C4D3E12BF54A72C3E9F5D8 /* MainNavigationFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +86,6 @@
 			name = LifeOrganizeriOS;
 			packageProductDependencies = (
 				A660EC53801E438DA5CDBA9A /* AppFeature */,
-				F8A2B6D93CE14D85A7F3C9B1 /* MainNavigationFeature */,
 			);
 			productName = LifeOrganizeriOS;
 			productReference = 56AB3C2776344B769272A135 /* LifeOrganizeriOS.app */;
@@ -372,11 +369,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D6D186E8878F453EBD2383ED /* XCLocalSwiftPackageReference "LifeOrganizeriOSKit" */;
 			productName = AppFeature;
-		};
-		F8A2B6D93CE14D85A7F3C9B1 /* MainNavigationFeature */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D6D186E8878F453EBD2383ED /* XCLocalSwiftPackageReference "LifeOrganizeriOSKit" */;
-			productName = MainNavigationFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

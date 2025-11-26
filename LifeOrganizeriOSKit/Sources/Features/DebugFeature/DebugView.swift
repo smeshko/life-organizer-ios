@@ -13,8 +13,17 @@ public struct DebugView: View {
     public var body: some View {
         NavigationStack {
             List {
-                classifierTestButton
-                logViewerButton
+                DebugNavigationButton(
+                    title: "Test Classifier",
+                    icon: "brain",
+                    action: { store.send(.classifierTestTapped) }
+                )
+
+                DebugNavigationButton(
+                    title: "View Logs",
+                    icon: "doc.text",
+                    action: { store.send(.logViewerTapped) }
+                )
             }
             .navigationTitle("Debug")
             .navigationDestination(
@@ -29,38 +38,25 @@ public struct DebugView: View {
             }
         }
     }
+}
 
-    private var classifierTestButton: some View {
-        Button {
-            store.send(.classifierTestTapped)
-        } label: {
+// MARK: - Private Components
+
+/// Reusable navigation button for debug menu items
+private struct DebugNavigationButton: View {
+    let title: String
+    let icon: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
             HStack {
                 Label {
-                    Text("Test Classifier")
+                    Text(title)
                         .foregroundStyle(Color.lifeTextPrimary)
                         .font(.lifeBody)
                 } icon: {
-                    Image(systemName: "brain")
-                }
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundStyle(Color.lifeTextSecondary)
-                    .font(.lifeIconSM)
-            }
-        }
-    }
-
-    private var logViewerButton: some View {
-        Button {
-            store.send(.logViewerTapped)
-        } label: {
-            HStack {
-                Label {
-                    Text("View Logs")
-                        .foregroundStyle(Color.lifeTextPrimary)
-                        .font(.lifeBody)
-                } icon: {
-                    Image(systemName: "doc.text")
+                    Image(systemName: icon)
                 }
                 Spacer()
                 Image(systemName: "chevron.right")
