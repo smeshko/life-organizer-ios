@@ -158,6 +158,12 @@ public struct ActionHandlerFeature {
 
                 // Log transcription (only final results to avoid spam)
                 if isFinal {
+                    // Log user input (voice transcription)
+                    state.activityLogs.append(
+                        LogEntry(level: .info, source: "User", message: text)
+                    )
+
+                    // Log transcription confirmation
                     state.activityLogs.append(
                         LogEntry(level: .info, source: "SpeechToText", message: "Transcription: \(text)")
                     )
