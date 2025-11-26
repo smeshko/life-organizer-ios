@@ -12,7 +12,13 @@ public struct AppView: View {
     }
 
     public var body: some View {
-        VStack(spacing: 0) {
+        ZStack(alignment: .top) {
+            
+            // Main navigation content
+            MainNavigationView(
+                store: store.scope(state: \.mainNavigation, action: \.mainNavigation)
+            )
+
             // Connection status indicator at top
             if store.showConnectionIndicator {
                 if store.isConnectedToBackend {
@@ -53,11 +59,6 @@ public struct AppView: View {
                     .padding(.top, .lifeSpacingSM)
                 }
             }
-
-            // Main navigation content
-            MainNavigationView(
-                store: store.scope(state: \.mainNavigation, action: \.mainNavigation)
-            )
         }
         .animation(.lifeSpring, value: store.showConnectionIndicator)
         .onAppear {

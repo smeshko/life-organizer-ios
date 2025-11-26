@@ -12,117 +12,111 @@ public struct ActionHandlerView: View {
     }
     
     public var body: some View {
-        ZStack {
-            // Background
-            Color.lifeBackground
-                .ignoresSafeArea()
+        VStack(spacing: .lifeSpacingLG) {
+            Spacer()
             
-            VStack(spacing: .lifeSpacingLG) {
-                Spacer()
+            // Greeting headline
+            Text("How can I help you today?")
+                .font(.lifeTitle1)
+                .foregroundColor(.lifeTextPrimary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, .lifeSpacingXL)
+            
+            // Input field container
+            HStack(alignment: .center, spacing: .lifeSpacingSM) {
+                TextField(
+                    "Message",
+                    text: Binding(
+                        get: { store.inputText },
+                        set: { store.send(.inputTextChanged($0)) }
+                    ),
+                    axis: .vertical
+                )
+                .lineLimit(1...4)
+                .font(.lifeBody)
+                .foregroundColor(.lifeTextPrimary)
+                .background(Color.clear)
                 
-                // Greeting headline
-                Text("How can I help you today?")
-                    .font(.lifeTitle1)
-                    .foregroundColor(.lifeTextPrimary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, .lifeSpacingXL)
-                
-                // Input field container
-                HStack(alignment: .center, spacing: .lifeSpacingSM) {
-                    TextField(
-                        "Message",
-                        text: Binding(
-                            get: { store.inputText },
-                            set: { store.send(.inputTextChanged($0)) }
-                        ),
-                        axis: .vertical
-                    )
-                    .lineLimit(1...4)
-                    .font(.lifeBody)
-                    .foregroundColor(.lifeTextPrimary)
-                    .background(Color.clear)
-                    
-                    // Show loading spinner, send button, or mic button
-                    if store.isLoading {
-                        // Loading spinner
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                            .tint(.lifePrimary)
+                // Show loading spinner, send button, or mic button
+                if store.isLoading {
+                    // Loading spinner
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .tint(.lifePrimary)
+                        .frame(width: 40, height: 40)
+                        .padding(.trailing, .lifeSpacingXS)
+                } else if !store.inputText.isEmpty {
+                    // Send button
+                    Button {
+                        store.send(.sendButtonTapped)
+                    } label: {
+                        Image(systemName: "arrow.up.circle.fill")
+                            .font(.system(size: 32, weight: .medium))
+                            .foregroundColor(.lifePrimary)
+                    }
+                    .padding(.trailing, .lifeSpacingXS)
+                } else {
+                    // Microphone button
+                    Button {
+                        if store.isRecording {
+                            store.send(.stopRecordingButtonTapped)
+                        } else {
+                            store.send(.startRecordingButtonTapped)
+                        }
+                    } label: {
+                        Image(systemName: "mic.fill")
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundColor(store.isRecording ? .white : .lifeIconDefault)
                             .frame(width: 40, height: 40)
-                            .padding(.trailing, .lifeSpacingXS)
-                    } else if !store.inputText.isEmpty {
-                        // Send button
+                            .background(
+                                Circle()
+                                    .fill(store.isRecording ? Color.lifePrimary : Color.lifeSurface)
+                            )
+                    }
+                    .padding(.trailing, .lifeSpacingXS)
+                }
+            }
+            .padding(.vertical, .lifeSpacingSM)
+            .padding(.leading, .lifeSpacingMD)
+            .background(
+                RoundedRectangle(cornerRadius: .lifeRadiusXL)
+                    .fill(Color.lifeSurface)
+            )
+            .lifeShadowSubtle()
+            .padding(.horizontal, .lifeSpacingMD)
+            
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Text("Activity Log")
+                        .font(.headline)
+                    
+                    Spacer()
+                    
+                    if !store.activityLogs.isEmpty {
                         Button {
-                            store.send(.sendButtonTapped)
+                            store.send(.clearLogs)
                         } label: {
-                            Image(systemName: "arrow.up.circle.fill")
-                                .font(.system(size: 32, weight: .medium))
+                            Text("Clear")
+                                .font(.caption)
                                 .foregroundColor(.lifePrimary)
                         }
-                        .padding(.trailing, .lifeSpacingXS)
-                    } else {
-                        // Microphone button
-                        Button {
-                            if store.isRecording {
-                                store.send(.stopRecordingButtonTapped)
-                            } else {
-                                store.send(.startRecordingButtonTapped)
-                            }
-                        } label: {
-                            Image(systemName: "mic.fill")
-                                .font(.system(size: 20, weight: .medium))
-                                .foregroundColor(store.isRecording ? .white : .lifeIconDefault)
-                                .frame(width: 40, height: 40)
-                                .background(
-                                    Circle()
-                                        .fill(store.isRecording ? Color.lifePrimary : Color.lifeSurface)
-                                )
-                        }
-                        .padding(.trailing, .lifeSpacingXS)
                     }
                 }
-                .padding(.vertical, .lifeSpacingSM)
-                .padding(.leading, .lifeSpacingMD)
-                .background(
-                    RoundedRectangle(cornerRadius: .lifeRadiusXL)
-                        .fill(Color.lifeSurface)
-                )
-                .lifeShadowSubtle()
-                .padding(.horizontal, .lifeSpacingMD)
-
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Text("Activity Log")
-                            .font(.headline)
-
-                        Spacer()
-
-                        if !store.activityLogs.isEmpty {
-                            Button {
-                                store.send(.clearLogs)
-                            } label: {
-                                Text("Clear")
-                                    .font(.caption)
-                                    .foregroundColor(.lifePrimary)
-                            }
-                        }
-                    }
-                    .padding(.horizontal)
-
-                    ScrollView {
-                        LazyVStack(alignment: .leading, spacing: 4) {
-                            ForEach(store.activityLogs) { entry in
-                                LogEntryRow(entry: entry)
-                            }
-                        }
-                    }
-                    .background(Color.lifeSurface)
-                    .cornerRadius(.lifeRadiusMD)
-                    .padding(.horizontal)
-                }
+                .padding(.horizontal)
                 
-                Spacer()
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 4) {
+                        ForEach(store.activityLogs) { entry in
+                            LogEntryRow(entry: entry)
+                        }
+                    }
+                }
+                .background(Color.lifeSurface)
+                .cornerRadius(.lifeRadiusMD)
+                .padding(.horizontal)
             }
+            
+            Spacer()
         }
     }
 }
@@ -131,7 +125,7 @@ public struct ActionHandlerView: View {
 
 private struct LogEntryRow: View {
     let entry: LogEntry
-
+    
     var body: some View {
         if entry.level == .separator {
             // Separator row
@@ -152,21 +146,21 @@ private struct LogEntryRow: View {
                         .font(.caption2)
                         .foregroundColor(.secondary)
                         .frame(width: 50, alignment: .leading)
-
+                    
                     // Source
                     Text(entry.source)
                         .font(.caption)
                         .fontWeight(.medium)
                         .foregroundColor(colorForLevel(entry.level))
                         .frame(width: 100, alignment: .leading)
-
+                    
                     // Message
                     Text(entry.message)
                         .font(.caption)
                         .foregroundColor(.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-
+                
                 // Response data (if available)
                 if let responseData = entry.responseData {
                     Text(responseData)
@@ -182,7 +176,7 @@ private struct LogEntryRow: View {
             .cornerRadius(4)
         }
     }
-
+    
     private func colorForLevel(_ level: LogLevel) -> Color {
         switch level {
         case .info:
