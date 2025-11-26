@@ -10,10 +10,12 @@ public struct LogSession: Identifiable, Equatable, Codable, Sendable {
     public struct SessionMetadata: Equatable, Codable, Sendable {
         public let requestType: String
         public let entryCount: Int
+        public let userInput: String?
 
-        public init(requestType: String, entryCount: Int) {
+        public init(requestType: String, entryCount: Int, userInput: String? = nil) {
             self.requestType = requestType
             self.entryCount = entryCount
+            self.userInput = userInput
         }
     }
 
@@ -21,14 +23,16 @@ public struct LogSession: Identifiable, Equatable, Codable, Sendable {
         id: UUID = UUID(),
         timestamp: Date = Date(),
         entries: [LogEntry],
-        requestType: String
+        requestType: String,
+        userInput: String? = nil
     ) {
         self.id = id
         self.timestamp = timestamp
         self.entries = entries
         self.metadata = SessionMetadata(
             requestType: requestType,
-            entryCount: entries.count
+            entryCount: entries.count,
+            userInput: userInput
         )
     }
 }
