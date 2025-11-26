@@ -211,10 +211,12 @@ public struct ActionHandlerFeature {
                 let actionToExecute = response.action
 
                 // Save session to file
+                let userInput = state.transcribedText.isEmpty == false ? state.transcribedText : state.inputText
                 let session = LogSession(
                     timestamp: Date(),
                     entries: state.activityLogs,
-                    requestType: state.isRecording || state.transcribedText.isEmpty == false ? "voice" : "text"
+                    requestType: state.isRecording || state.transcribedText.isEmpty == false ? "voice" : "text",
+                    userInput: userInput
                 )
 
                 return .run { send in
@@ -272,10 +274,12 @@ public struct ActionHandlerFeature {
                 )
 
                 // Save session with error logs
+                let userInput = state.transcribedText.isEmpty == false ? state.transcribedText : state.inputText
                 let session = LogSession(
                     timestamp: Date(),
                     entries: state.activityLogs,
-                    requestType: state.isRecording || state.transcribedText.isEmpty == false ? "voice" : "text"
+                    requestType: state.isRecording || state.transcribedText.isEmpty == false ? "voice" : "text",
+                    userInput: userInput
                 )
 
                 return .run { _ in
