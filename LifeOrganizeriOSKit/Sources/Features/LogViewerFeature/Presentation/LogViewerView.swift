@@ -110,6 +110,16 @@ public struct LogSessionDetailView: View {
                     Text(session.timestamp, style: .time)
                         .font(.lifeBody)
                         .foregroundColor(.lifeTextSecondary)
+
+                    // Display user input if available
+                    if let userInput = session.metadata.userInput {
+                        Text("User asked: \(userInput)")
+                            .font(.lifeBody)
+                            .foregroundColor(.lifeTextPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.top, .lifeSpacingXS)
+                    }
+
                     Text("\(session.entries.count) entries • \(session.metadata.requestType)")
                         .font(.lifeCaption)
                         .foregroundColor(.lifeTextSecondary)
